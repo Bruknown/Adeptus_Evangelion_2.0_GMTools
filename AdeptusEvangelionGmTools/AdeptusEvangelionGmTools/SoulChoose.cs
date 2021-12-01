@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace AdeptusEvangelionGmTools
 {
-    public partial class FormMain : Form
+    public partial class SoulChoose : Form
     {
-        public FormMain()
+        public SoulChoose()
         {
             InitializeComponent();
-        }
-
-        private void ContentGenerator_Click(object sender, EventArgs e)
-        {
-            ContentGen CG = new ContentGen();
-            CG.Show();
         }
     }
 }

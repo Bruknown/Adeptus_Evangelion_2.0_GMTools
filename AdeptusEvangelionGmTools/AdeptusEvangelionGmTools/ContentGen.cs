@@ -10,17 +10,17 @@ using System.Windows.Forms;
 
 namespace AdeptusEvangelionGmTools
 {
-    public partial class FormMain : Form
+    public partial class ContentGen : Form
     {
-        public FormMain()
+        public ContentGen()
         {
             InitializeComponent();
         }
 
-        private void ContentGenerator_Click(object sender, EventArgs e)
+        private void EvaGen_Click(object sender, EventArgs e)
         {
-            ContentGen CG = new ContentGen();
-            CG.Show();
+            EvangelionGenerator EG = new EvangelionGenerator();
+            EG.Show();
         }
     }
 }
