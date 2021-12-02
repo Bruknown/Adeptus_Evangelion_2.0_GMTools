@@ -19,6 +19,10 @@ namespace AdeptusEvangelionGmTools
         public Mutation selectedMutation { get; set; }
         public Construction selectedConstruction { get; set; }
         public History selectedHistory { get; set; }
+        public String selectedColor1 { get; set; }
+        public String selectedColor2 { get; set; }
+        public String selectedColorDescription1 { get; set; }
+        public String selectedColorDescription2 { get; set; }
         public Evangelion eva;
 
         #endregion
@@ -32,9 +36,14 @@ namespace AdeptusEvangelionGmTools
         private void RandomSoul_CheckedChanged(object sender, EventArgs e)
         {
             if (RandomSoul.Checked)
+            {
+                SoulSelect.SelectedItem = null;
                 SoulSelect.Enabled = false;
+            }
             else
+            {
                 SoulSelect.Enabled = true;
+            }
         }
 
         private void RandMutation_CheckedChanged(object sender, EventArgs e)
@@ -42,23 +51,36 @@ namespace AdeptusEvangelionGmTools
             if (RandMutation.Checked)
                 MutationSelect.Enabled = false;
             else
+            {
+                MutationSelect.SelectedItem = null;
                 MutationSelect.Enabled = true;
+            }
         }
 
         private void RandConstruction_CheckedChanged(object sender, EventArgs e)
         {
             if (RandConstruction.Checked)
+            {
                 ConstructionSelect.Enabled = false;
+                ConstructionSelect.SelectedItem = null;
+            }
             else
+            {
                 ConstructionSelect.Enabled = true;
+            }
         }
 
         private void RandHistory_CheckedChanged(object sender, EventArgs e)
         {
             if (RandHistory.Checked)
+            {
                 HistorySelect.Enabled = false;
+                HistorySelect.SelectedItem = null;
+            }
             else
+            {
                 HistorySelect.Enabled = true;
+            }
         }
 
         private void RandColor_CheckedChanged(object sender, EventArgs e)
@@ -69,6 +91,10 @@ namespace AdeptusEvangelionGmTools
                 MColor2Select.Enabled = false;
                 SColor1Select.Enabled = false;
                 SColor2Select.Enabled = false;
+                MColor1Select.SelectedItem = null;
+                MColor2Select.SelectedItem = null;
+                SColor1Select.SelectedItem = null;
+                SColor2Select.SelectedItem = null;
             }
             else
             {
@@ -82,25 +108,53 @@ namespace AdeptusEvangelionGmTools
         private void SoulSelect_TextChanged(object sender, EventArgs e)
         {
             eva = new Evangelion();
-            selectedSoul = eva.SoulList.Where(x => x.Name.Equals(SoulSelect.SelectedItem.ToString())).FirstOrDefault();
+            if (SoulSelect.SelectedItem != null)
+                selectedSoul = eva.SoulList.Where(x => x.Name.Equals(SoulSelect.SelectedItem.ToString())).FirstOrDefault();
         }
 
         private void MutationSelect_TextChanged(object sender, EventArgs e)
         {
             eva = new Evangelion();
-            selectedMutation = eva.MutationList.Where(x => x.Name.Equals(MutationSelect.SelectedItem.ToString())).FirstOrDefault();
+            if (MutationSelect.SelectedItem != null)
+                selectedMutation = eva.MutationList.Where(x => x.Name.Equals(MutationSelect.SelectedItem.ToString())).FirstOrDefault();
         }
 
         private void ConstructionSelect_TextChanged(object sender, EventArgs e)
         {
             eva = new Evangelion();
-            selectedConstruction = eva.ConstructionList.Where(x => x.Name.Equals(ConstructionSelect.SelectedItem.ToString())).FirstOrDefault();
+            if (ConstructionSelect.SelectedItem != null)
+                selectedConstruction = eva.ConstructionList.Where(x => x.Name.Equals(ConstructionSelect.SelectedItem.ToString())).FirstOrDefault();
         }
 
         private void HistorySelect_TextChanged(object sender, EventArgs e)
         {
             eva = new Evangelion();
-            selectedHistory = eva.HistoryList.Where(x => x.Name.Equals(HistorySelect.SelectedItem.ToString())).FirstOrDefault();
+            if (HistorySelect.SelectedItem != null)
+                selectedHistory = eva.HistoryList.Where(x => x.Name.Equals(HistorySelect.SelectedItem.ToString())).FirstOrDefault();
+        }
+
+        private void MColor1Select_TextChanged(object sender, EventArgs e)
+        {
+            if (MColor1Select.SelectedItem != null)
+                selectedColorDescription1 = MColor1Select.Text;
+        }
+
+        private void MColor2Select_TextChanged(object sender, EventArgs e)
+        {
+            if (MColor1Select.SelectedItem != null)
+                selectedColor1 = MColor2Select.Text;
+        }
+
+        private void SColor1Select_TextChanged(object sender, EventArgs e)
+        {
+            if (SColor1Select.SelectedItem != null)
+                selectedColorDescription2 = SColor1Select.Text;
+        }
+
+        private void SColor2Select_TextChanged(object sender, EventArgs e)
+        {
+            if (SColor1Select.SelectedItem != null)
+                selectedColor2 = SColor2Select.Text;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -109,7 +163,10 @@ namespace AdeptusEvangelionGmTools
             if ((selectedConstruction == null && !RandConstruction.Checked) ||
                 (selectedHistory == null && !RandHistory.Checked) ||
                 (selectedMutation == null && !RandMutation.Checked) ||
-                (selectedSoul == null && !RandomSoul.Checked))
+                (selectedSoul == null && !RandomSoul.Checked) ||
+                (selectedColor1 == null || selectedColor2 == null ||
+                selectedColorDescription1 == null || selectedColorDescription2 == null)
+                && !RandColor.Checked)
             {
                 string message = "Custom generated fields are not selected";
                 string caption = "Error Detected in Evangelion Generation";
@@ -120,15 +177,12 @@ namespace AdeptusEvangelionGmTools
             }
 
             Evangelion evangelion = new Evangelion(
-                RandomSoul.Checked, 
-                RandMutation.Checked, 
-                RandConstruction.Checked, 
-                RandHistory.Checked,
-                RandColor.Checked,
                 selectedSoul,
                 selectedMutation,
                 selectedConstruction,
-                selectedHistory
+                selectedHistory,
+                selectedColorDescription1 + selectedColor1,
+                selectedColorDescription2 + selectedColor2
                 );
 
             EvangelionOutput.Text = 
@@ -137,8 +191,8 @@ namespace AdeptusEvangelionGmTools
                 "Mutation(s): " + String.Join(", ", evangelion.Mutations.ToArray()) + Environment.NewLine +
                 "Construction: " + String.Join(", ", evangelion.Construction.ToArray()) + Environment.NewLine +
                 "History: " + evangelion.History + Environment.NewLine +
-                "Primary Color: " + evangelion.PrimaryColor + Environment.NewLine +
-                "Secondary Color: " + evangelion.SecondaryColor + Environment.NewLine +
+                "Primary Color: " + evangelion.primaryColor + Environment.NewLine +
+                "Secondary Color: " + evangelion.secondaryColor + Environment.NewLine +
                 "Strength: " + evangelion.Strength + Environment.NewLine +
                 "Toughness: " + evangelion.Toughness + Environment.NewLine +
                 "Agility: " + evangelion.Agility + Environment.NewLine +
@@ -175,6 +229,16 @@ namespace AdeptusEvangelionGmTools
             foreach (History history in evangelion.HistoryList)
             {
                 HistorySelect.Items.Add(history.Name);
+            }
+            foreach(String colorDescription in evangelion.ColorDescription)
+            {
+                MColor1Select.Items.Add(colorDescription);
+                SColor1Select.Items.Add(colorDescription);
+            }
+            foreach(String mainColor in evangelion.MainColor)
+            {
+                MColor2Select.Items.Add(mainColor);
+                SColor2Select.Items.Add(mainColor);
             }
         }
 

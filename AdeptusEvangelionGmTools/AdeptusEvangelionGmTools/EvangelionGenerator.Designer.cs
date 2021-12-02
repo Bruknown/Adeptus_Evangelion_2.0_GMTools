@@ -170,6 +170,7 @@ namespace AdeptusEvangelionGmTools
             this.SColor2Select.Name = "SColor2Select";
             this.SColor2Select.Size = new System.Drawing.Size(121, 24);
             this.SColor2Select.TabIndex = 14;
+            this.SColor2Select.TextChanged += new System.EventHandler(this.SColor2Select_TextChanged);
             // 
             // SColor1Select
             // 
@@ -179,6 +180,7 @@ namespace AdeptusEvangelionGmTools
             this.SColor1Select.Name = "SColor1Select";
             this.SColor1Select.Size = new System.Drawing.Size(121, 24);
             this.SColor1Select.TabIndex = 13;
+            this.SColor1Select.TextChanged += new System.EventHandler(this.SColor1Select_TextChanged);
             // 
             // MColor2Select
             // 
@@ -188,6 +190,7 @@ namespace AdeptusEvangelionGmTools
             this.MColor2Select.Name = "MColor2Select";
             this.MColor2Select.Size = new System.Drawing.Size(121, 24);
             this.MColor2Select.TabIndex = 12;
+            this.MColor2Select.TextChanged += new System.EventHandler(this.MColor2Select_TextChanged);
             // 
             // MColor1Select
             // 
@@ -197,6 +200,7 @@ namespace AdeptusEvangelionGmTools
             this.MColor1Select.Name = "MColor1Select";
             this.MColor1Select.Size = new System.Drawing.Size(121, 24);
             this.MColor1Select.TabIndex = 11;
+            this.MColor1Select.TextChanged += new System.EventHandler(this.MColor1Select_TextChanged);
             // 
             // HistorySelect
             // 
