@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace AdeptusEvangelionGmTools.Objects.BodyParts
 {
-    class Torso
+    public class Torso
     {
         #region Properties
-        int Wounds { get; set; }
-        int Armor { get; set; }
-        int CriticalWounds { get; set; }
-        Boolean Destroyed { get; set; }
+        public int Wounds { get; set; }
+        public int Armor { get; set; }
+        public int CriticalWounds { get; set; }
+        public Boolean Destroyed { get; set; }
         #endregion
         #region Constructor
         public Torso()

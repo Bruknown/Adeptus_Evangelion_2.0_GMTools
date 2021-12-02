@@ -35,11 +35,16 @@ namespace AdeptusEvangelionGmTools
             this.RandHistory = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
             this.EvaSheet = new System.Windows.Forms.GroupBox();
+            this.RandColor = new System.Windows.Forms.CheckBox();
+            this.EvangelionOutput = new System.Windows.Forms.RichTextBox();
+            this.EvaSheet.SuspendLayout();
             this.SuspendLayout();
             // 
             // RandomSoul
             // 
             this.RandomSoul.AutoSize = true;
+            this.RandomSoul.Checked = true;
+            this.RandomSoul.CheckState = System.Windows.Forms.CheckState.Checked;
             this.RandomSoul.Location = new System.Drawing.Point(51, 117);
             this.RandomSoul.Name = "RandomSoul";
             this.RandomSoul.Size = new System.Drawing.Size(115, 21);
@@ -50,6 +55,8 @@ namespace AdeptusEvangelionGmTools
             // RandMutation
             // 
             this.RandMutation.AutoSize = true;
+            this.RandMutation.Checked = true;
+            this.RandMutation.CheckState = System.Windows.Forms.CheckState.Checked;
             this.RandMutation.Location = new System.Drawing.Point(51, 144);
             this.RandMutation.Name = "RandMutation";
             this.RandMutation.Size = new System.Drawing.Size(141, 21);
@@ -60,6 +67,8 @@ namespace AdeptusEvangelionGmTools
             // RandConstruction
             // 
             this.RandConstruction.AutoSize = true;
+            this.RandConstruction.Checked = true;
+            this.RandConstruction.CheckState = System.Windows.Forms.CheckState.Checked;
             this.RandConstruction.Location = new System.Drawing.Point(51, 171);
             this.RandConstruction.Name = "RandConstruction";
             this.RandConstruction.Size = new System.Drawing.Size(166, 21);
@@ -70,6 +79,8 @@ namespace AdeptusEvangelionGmTools
             // RandHistory
             // 
             this.RandHistory.AutoSize = true;
+            this.RandHistory.Checked = true;
+            this.RandHistory.CheckState = System.Windows.Forms.CheckState.Checked;
             this.RandHistory.Location = new System.Drawing.Point(51, 198);
             this.RandHistory.Name = "RandHistory";
             this.RandHistory.Size = new System.Drawing.Size(131, 21);
@@ -79,7 +90,7 @@ namespace AdeptusEvangelionGmTools
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(38, 247);
+            this.button1.Location = new System.Drawing.Point(38, 252);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(179, 54);
             this.button1.TabIndex = 4;
@@ -89,18 +100,41 @@ namespace AdeptusEvangelionGmTools
             // 
             // EvaSheet
             // 
+            this.EvaSheet.Controls.Add(this.EvangelionOutput);
             this.EvaSheet.Location = new System.Drawing.Point(276, 42);
             this.EvaSheet.Name = "EvaSheet";
-            this.EvaSheet.Size = new System.Drawing.Size(277, 396);
+            this.EvaSheet.Size = new System.Drawing.Size(512, 396);
             this.EvaSheet.TabIndex = 5;
             this.EvaSheet.TabStop = false;
             this.EvaSheet.Text = "Evangelion Unit:";
+            // 
+            // RandColor
+            // 
+            this.RandColor.AutoSize = true;
+            this.RandColor.Checked = true;
+            this.RandColor.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.RandColor.Location = new System.Drawing.Point(51, 225);
+            this.RandColor.Name = "RandColor";
+            this.RandColor.Size = new System.Drawing.Size(120, 21);
+            this.RandColor.TabIndex = 6;
+            this.RandColor.Text = "Random Color";
+            this.RandColor.UseVisualStyleBackColor = true;
+            // 
+            // EvangelionOutput
+            // 
+            this.EvangelionOutput.Location = new System.Drawing.Point(7, 22);
+            this.EvangelionOutput.Name = "EvangelionOutput";
+            this.EvangelionOutput.ReadOnly = true;
+            this.EvangelionOutput.Size = new System.Drawing.Size(499, 368);
+            this.EvangelionOutput.TabIndex = 0;
+            this.EvangelionOutput.Text = "";
             // 
             // EvangelionGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.RandColor);
             this.Controls.Add(this.EvaSheet);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.RandHistory);
@@ -109,6 +143,7 @@ namespace AdeptusEvangelionGmTools
             this.Controls.Add(this.RandomSoul);
             this.Name = "EvangelionGenerator";
             this.Text = "EvangelionGenerator";
+            this.EvaSheet.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,5 +157,7 @@ namespace AdeptusEvangelionGmTools
         private System.Windows.Forms.CheckBox RandHistory;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox EvaSheet;
+        private System.Windows.Forms.CheckBox RandColor;
+        private System.Windows.Forms.RichTextBox EvangelionOutput;
     }
 }

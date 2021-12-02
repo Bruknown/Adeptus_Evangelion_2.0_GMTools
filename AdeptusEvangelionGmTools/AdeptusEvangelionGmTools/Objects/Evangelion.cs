@@ -10,33 +10,44 @@ namespace AdeptusEvangelionGmTools.Objects
     {
         #region Properties
         Random rnd = new Random();
-        private String Soul { get; set; }
-        private List<String> Mutations { get; set; }
-        private List<String> Construction { get; set; }
-        private String History { get; set; }
-        private String PrimaryColor { get; set; }
-        private String SecondaryColor { get; set; }
+        public String Soul { get; set; }
+        public List<String> Mutations { get; set; }
+        public List<String> Construction { get; set; }
+        public String History { get; set; }
+        public String PrimaryColor { get; set; }
+        public String SecondaryColor { get; set; }
         public int Strength { get; set; }
         public int Toughness { get; set; }
+        public int Agility { get; set; }
         public int WeaponSkill { get; set; }
         public int BallisticSkill { get; set; }
+        public int OperationalTime { get; set; }
         public Body Body { get; set; }
 
         #endregion
         #region Constructors
-        public Evangelion()
+        public Evangelion(bool RandomSoul, bool RandomMutation, bool RandomConstruction, bool RandomHistory, bool RandomColor)
         {
-            Soul = randomSoul();
-            Mutations = randomMutation();
-            Construction = randomConstruction();
-            History = randomHistory();
-            PrimaryColor = randomColor();
-            SecondaryColor = randomColor();
-            Strength = 30;
-            Toughness = 30;
-            WeaponSkill = 15;
-            BallisticSkill = 15;
+            Strength += 30;
+            Toughness += 30;
+            Agility += 0;
+            WeaponSkill += 15;
+            BallisticSkill += 15;
+            OperationalTime = 5;
             Body = new Body(Toughness, "Evangelion");
+            if (RandomSoul)
+                Soul = randomSoul();
+            if (RandomMutation)
+                Mutations = randomMutation();
+            if (RandomConstruction)
+                Construction = randomConstruction();
+            if (RandomConstruction)
+                History = randomHistory();
+            if (RandomColor)
+            {
+                PrimaryColor = randomColor();
+                SecondaryColor = randomColor();
+            }
         }
         public Evangelion(String soul, List<String> mutation, List<String> construction, String history, String primaryColor, String secondaryColor)
         {
@@ -107,13 +118,29 @@ namespace AdeptusEvangelionGmTools.Objects
             else if (mutation >= 21 && mutation <= 25)
                 return "Cyclopean";
             else if (mutation >= 26 && mutation <= 35)
+            {
+                Strength = +3;
+                Toughness = +3;
+                Agility = -3;
                 return "Hulking Frame";
+            }
             else if (mutation >= 36 && mutation <= 45)
+            {
+                Body.Head.Wounds += 1;
+                Body.Torso.Wounds += 1;
+                Body.LeftArm.Wounds += 1;
+                Body.LeftLeg.Wounds += 1;
+                Body.RightArm.Wounds += 1;
+                Body.RightLeg.Wounds += 1;
                 return "Redundant Organs";
+            }
             else if (mutation >= 46 && mutation <= 50)
                 return "Regenerative";
             else if (mutation >= 51 && mutation <= 60)
+            {
+                OperationalTime += 1;
                 return "Photosynthetic";
+            }
             else if (mutation >= 61 && mutation <= 70)
                 return "Angelsense";
             else if (mutation >= 71 && mutation <= 75)
@@ -121,9 +148,16 @@ namespace AdeptusEvangelionGmTools.Objects
             else if (mutation >= 76 && mutation <= 85)
                 return "Unrestrained Jaw";
             else if (mutation >= 86 && mutation <= 90)
+            {
+                WeaponSkill += 3;
+                Strength += 3;
                 return "Predatory";
+            }
             else if (mutation >= 91 && mutation <= 99)
+            {
+                BallisticSkill += 3;
                 return "Extra Eyes";
+            }
 
             return "Pressurized Blood";
         }
@@ -134,12 +168,12 @@ namespace AdeptusEvangelionGmTools.Objects
 
             if (randomConstruction == 100)
             {
-                constructions.Add(mutation(rnd.Next(1, 100)));
-                constructions.Add(mutation(rnd.Next(1, 100)));
+                constructions.Add(construction(rnd.Next(1, 100)));
+                constructions.Add(construction(rnd.Next(1, 100)));
             }
             else
             {
-                constructions.Add(mutation(randomConstruction));
+                constructions.Add(construction(randomConstruction));
             }
 
             return constructions;
@@ -155,11 +189,32 @@ namespace AdeptusEvangelionGmTools.Objects
             else if (construction >= 31 && construction <= 40)
                 return "Feedback Suppressor";
             else if (construction >= 41 && construction <= 50)
+            {
+                Agility += 3;
                 return "Odd Limbs";
+            }
             else if (construction >= 51 && construction <= 60)
+            {
+                Body.Head.Armor -= 1;
+                Body.Torso.Armor -= 1;
+                Body.LeftArm.Armor -= 1;
+                Body.LeftLeg.Armor -= 1;
+                Body.RightArm.Armor -= 1;
+                Body.RightLeg.Armor -= 1;
+                Agility += 5;
                 return "Lightweight Chassis";
+            }
             else if (construction >= 61 && construction <= 70)
+            {
+                Body.Head.Armor += 1;
+                Body.Torso.Armor += 1;
+                Body.LeftArm.Armor += 1;
+                Body.LeftLeg.Armor += 1;
+                Body.RightArm.Armor += 1;
+                Body.RightLeg.Armor += 1;
+                Agility -= 5;
                 return "Heavy Armor";
+            }
             else if (construction >= 71 && construction <= 75)
                 return "Stabilizers";
             else if (construction >= 76 && construction <= 80)
@@ -167,7 +222,10 @@ namespace AdeptusEvangelionGmTools.Objects
             else if (construction >= 81 && construction <= 85)
                 return "Leg Pistons";
             else if (construction >= 86 && construction <= 90)
+            {
+                OperationalTime += 1;
                 return "Advanced Battery";
+            }
             else if (construction >= 91 && construction <= 99)
                 return "Weapon Rack";
 
