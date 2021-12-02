@@ -65,6 +65,8 @@ namespace AdeptusEvangelionGmTools.Objects
                 PrimaryColor = randomColor(rnd.Next(1, 101), rnd.Next(1, 101));
                 SecondaryColor = randomColor(rnd.Next(1, 101), rnd.Next(1, 101));
             }
+            CalculateMutation(Mutations);
+            CalculateConstruction(Construction);
         }
         public Evangelion(String soul, List<String> mutation, List<String> construction, String history, String primaryColor, String secondaryColor)
         {
@@ -81,6 +83,71 @@ namespace AdeptusEvangelionGmTools.Objects
         }
         #endregion
         #region Private Methods
+        private void CalculateMutation(List<String> mutations)
+        {
+            foreach(String mutation in mutations)
+            {
+                switch (mutation)
+                {
+                    case "Hulking Frame":
+                        Strength = +3;
+                        Toughness = +3;
+                        Agility = -3;
+                        break;
+                    case "Redundant Organs":
+                        Body.Head.Wounds += 1;
+                        Body.Torso.Wounds += 1;
+                        Body.LeftArm.Wounds += 1;
+                        Body.LeftLeg.Wounds += 1;
+                        Body.RightArm.Wounds += 1;
+                        Body.RightLeg.Wounds += 1;
+                        break;
+                    case "Photosynthetic":
+                        OperationalTime += 1;
+                        break;
+                    case "Predatory":
+                        WeaponSkill += 3;
+                        Strength += 3;
+                        break;
+                    case "Extra Eyes":
+                        BallisticSkill += 3;
+                        break;
+                }
+            }
+        }
+        private void CalculateConstruction(List<String> constructions)
+        {
+            foreach(String construction in constructions)
+            {
+                switch (construction)
+                {
+                    case "Odd Limbs":
+                        Agility += 3;
+                        break;
+                    case "Lightweight Chassis":
+                        Body.Head.Armor -= 1;
+                        Body.Torso.Armor -= 1;
+                        Body.LeftArm.Armor -= 1;
+                        Body.LeftLeg.Armor -= 1;
+                        Body.RightArm.Armor -= 1;
+                        Body.RightLeg.Armor -= 1;
+                        Agility += 5;
+                        break;
+                    case "Heavy Armor":
+                        Body.Head.Armor += 1;
+                        Body.Torso.Armor += 1;
+                        Body.LeftArm.Armor += 1;
+                        Body.LeftLeg.Armor += 1;
+                        Body.RightArm.Armor += 1;
+                        Body.RightLeg.Armor += 1;
+                        Agility -= 5;
+                        break;
+                    case "Advanced Battery":
+                        OperationalTime += 1;
+                        break;
+                }
+            }
+        }
         private void InitiateComponents()
         {
             SoulList = InitiateSouls();
@@ -212,29 +279,13 @@ namespace AdeptusEvangelionGmTools.Objects
             else if (mutation >= 21 && mutation <= 25)
                 return MutationList[2].Name;
             else if (mutation >= 26 && mutation <= 35)
-            {
-                Strength = +3;
-                Toughness = +3;
-                Agility = -3;
                 return MutationList[3].Name;
-            }
             else if (mutation >= 36 && mutation <= 45)
-            {
-                Body.Head.Wounds += 1;
-                Body.Torso.Wounds += 1;
-                Body.LeftArm.Wounds += 1;
-                Body.LeftLeg.Wounds += 1;
-                Body.RightArm.Wounds += 1;
-                Body.RightLeg.Wounds += 1;
                 return MutationList[4].Name;
-            }
             else if (mutation >= 46 && mutation <= 50)
                 return MutationList[5].Name;
             else if (mutation >= 51 && mutation <= 60)
-            {
-                OperationalTime += 1;
                 return MutationList[6].Name;
-            }
             else if (mutation >= 61 && mutation <= 70)
                 return MutationList[7].Name;
             else if (mutation >= 71 && mutation <= 75)
@@ -242,16 +293,9 @@ namespace AdeptusEvangelionGmTools.Objects
             else if (mutation >= 76 && mutation <= 85)
                 return MutationList[9].Name;
             else if (mutation >= 86 && mutation <= 90)
-            {
-                WeaponSkill += 3;
-                Strength += 3;
                 return MutationList[10].Name;
-            }
             else if (mutation >= 91 && mutation <= 99)
-            {
-                BallisticSkill += 3;
                 return MutationList[11].Name;
-            }
 
             return MutationList[rnd.Next(1,12)].Name;
         }
@@ -282,32 +326,11 @@ namespace AdeptusEvangelionGmTools.Objects
             else if (construction >= 31 && construction <= 40)
                 return ConstructionList[3].Name;
             else if (construction >= 41 && construction <= 50)
-            {
-                Agility += 3;
                 return ConstructionList[4].Name;
-            }
             else if (construction >= 51 && construction <= 60)
-            {
-                Body.Head.Armor -= 1;
-                Body.Torso.Armor -= 1;
-                Body.LeftArm.Armor -= 1;
-                Body.LeftLeg.Armor -= 1;
-                Body.RightArm.Armor -= 1;
-                Body.RightLeg.Armor -= 1;
-                Agility += 5;
                 return ConstructionList[5].Name;
-            }
             else if (construction >= 61 && construction <= 70)
-            {
-                Body.Head.Armor += 1;
-                Body.Torso.Armor += 1;
-                Body.LeftArm.Armor += 1;
-                Body.LeftLeg.Armor += 1;
-                Body.RightArm.Armor += 1;
-                Body.RightLeg.Armor += 1;
-                Agility -= 5;
                 return ConstructionList[6].Name;
-            }
             else if (construction >= 71 && construction <= 75)
                 return ConstructionList[7].Name;
             else if (construction >= 76 && construction <= 80)
@@ -315,10 +338,7 @@ namespace AdeptusEvangelionGmTools.Objects
             else if (construction >= 81 && construction <= 85)
                 return ConstructionList[9].Name;
             else if (construction >= 86 && construction <= 90)
-            {
-                OperationalTime += 1;
                 return ConstructionList[10].Name;
-            }
             else if (construction >= 91 && construction <= 99)
                 return ConstructionList[11].Name;
 

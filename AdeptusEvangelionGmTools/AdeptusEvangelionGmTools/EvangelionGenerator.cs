@@ -106,6 +106,19 @@ namespace AdeptusEvangelionGmTools
         private void button1_Click(object sender, EventArgs e)
         {
             Random rand = new Random();
+            if ((selectedConstruction == null && !RandConstruction.Checked) ||
+                (selectedHistory == null && !RandHistory.Checked) ||
+                (selectedMutation == null && !RandMutation.Checked) ||
+                (selectedSoul == null && !RandomSoul.Checked))
+            {
+                string message = "Custom generated fields are not selected";
+                string caption = "Error Detected in Evangelion Generation";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                MessageBox.Show(message, caption, buttons);
+                return;
+            }
+
             Evangelion evangelion = new Evangelion(
                 RandomSoul.Checked, 
                 RandMutation.Checked, 
