@@ -91,6 +91,10 @@
     <Compile Include="Objects\BodyParts\RightArm.cs" />
     <Compile Include="Objects\BodyParts\RightLeg.cs" />
     <Compile Include="Objects\BodyParts\Torso.cs" />
+    <Compile Include="Objects\EvaProperties\Construction.cs" />
+    <Compile Include="Objects\EvaProperties\History.cs" />
+    <Compile Include="Objects\EvaProperties\Mutation.cs" />
+    <Compile Include="Objects\EvaProperties\Soul.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoulChoose.cs">

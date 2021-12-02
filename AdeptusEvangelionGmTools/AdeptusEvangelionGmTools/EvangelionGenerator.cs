@@ -8,18 +8,99 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AdeptusEvangelionGmTools.Objects.EvaProperties;
 
 namespace AdeptusEvangelionGmTools
 {
     public partial class EvangelionGenerator : Form
     {
         #region Properties
+        public Soul selectedSoul { get; set; }
+        public Mutation selectedMutation { get; set; }
+        public Construction selectedConstruction { get; set; }
+        public History selectedHistory { get; set; }
+        public Evangelion eva;
+
         #endregion
 
         #region Events
         public EvangelionGenerator()
         {
             InitializeComponent();
+            initiateComboBox();
+        }
+        private void RandomSoul_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RandomSoul.Checked)
+                SoulSelect.Enabled = false;
+            else
+                SoulSelect.Enabled = true;
+        }
+
+        private void RandMutation_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RandMutation.Checked)
+                MutationSelect.Enabled = false;
+            else
+                MutationSelect.Enabled = true;
+        }
+
+        private void RandConstruction_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RandConstruction.Checked)
+                ConstructionSelect.Enabled = false;
+            else
+                ConstructionSelect.Enabled = true;
+        }
+
+        private void RandHistory_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RandHistory.Checked)
+                HistorySelect.Enabled = false;
+            else
+                HistorySelect.Enabled = true;
+        }
+
+        private void RandColor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (RandColor.Checked)
+            {
+                MColor1Select.Enabled = false;
+                MColor2Select.Enabled = false;
+                SColor1Select.Enabled = false;
+                SColor2Select.Enabled = false;
+            }
+            else
+            {
+                MColor1Select.Enabled = true;
+                MColor2Select.Enabled = true;
+                SColor1Select.Enabled = true;
+                SColor2Select.Enabled = true;
+            }
+        }
+
+        private void SoulSelect_TextChanged(object sender, EventArgs e)
+        {
+            eva = new Evangelion();
+            selectedSoul = eva.SoulList.Where(x => x.Name.Equals(SoulSelect.SelectedItem.ToString())).FirstOrDefault();
+        }
+
+        private void MutationSelect_TextChanged(object sender, EventArgs e)
+        {
+            eva = new Evangelion();
+            selectedMutation = eva.MutationList.Where(x => x.Name.Equals(MutationSelect.SelectedItem.ToString())).FirstOrDefault();
+        }
+
+        private void ConstructionSelect_TextChanged(object sender, EventArgs e)
+        {
+            eva = new Evangelion();
+            selectedConstruction = eva.ConstructionList.Where(x => x.Name.Equals(ConstructionSelect.SelectedItem.ToString())).FirstOrDefault();
+        }
+
+        private void HistorySelect_TextChanged(object sender, EventArgs e)
+        {
+            eva = new Evangelion();
+            selectedHistory = eva.HistoryList.Where(x => x.Name.Equals(HistorySelect.SelectedItem.ToString())).FirstOrDefault();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,7 +111,12 @@ namespace AdeptusEvangelionGmTools
                 RandMutation.Checked, 
                 RandConstruction.Checked, 
                 RandHistory.Checked,
-                RandColor.Checked);
+                RandColor.Checked,
+                selectedSoul,
+                selectedMutation,
+                selectedConstruction,
+                selectedHistory
+                );
 
             EvangelionOutput.Text = 
                 "Evangelion Unit " + rand.Next(0, 101) + Environment.NewLine +
@@ -58,10 +144,28 @@ namespace AdeptusEvangelionGmTools
         #endregion
 
         #region PrivateMethods
-        private void verifyRandoms()
+        private void initiateComboBox()
         {
-
+            Evangelion evangelion = new Evangelion();
+            foreach (Soul soul in evangelion.SoulList)
+            {
+                SoulSelect.Items.Add(soul.Name);
+            }
+            foreach (Mutation mutation in evangelion.MutationList)
+            {
+                MutationSelect.Items.Add(mutation.Name);
+            }
+            foreach (Construction construction in evangelion.ConstructionList)
+            {
+                ConstructionSelect.Items.Add(construction.Name);
+            }
+            foreach (History history in evangelion.HistoryList)
+            {
+                HistorySelect.Items.Add(history.Name);
+            }
         }
+
         #endregion
+
     }
 }
