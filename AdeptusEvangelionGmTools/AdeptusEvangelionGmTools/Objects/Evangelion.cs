@@ -17,10 +17,10 @@ namespace AdeptusEvangelionGmTools.Objects
         public List<History> HistoryList = new List<History>();
         public List<String> MainColor = new List<String>();
         public List<String> ColorDescription = new List<String>();
-        public String Soul { get; set; }
-        public List<String> Mutations { get; set; }
-        public List<String> Construction { get; set; }
-        public String History { get; set; }
+        public Soul Soul { get; set; }
+        public List<Mutation> Mutations { get; set; }
+        public List<Construction> Construction { get; set; }
+        public History History { get; set; }
         public int Strength { get; set; }
         public int Toughness { get; set; }
         public int Agility { get; set; }
@@ -49,19 +49,19 @@ namespace AdeptusEvangelionGmTools.Objects
             if (soul == null)
                 Soul = randomSoul(rnd.Next(1, 101));
             else
-                Soul = soul.Name;
+                Soul = soul;
             if (mutation == null)
                 Mutations = randomMutations(rnd.Next(1, 101));
             else
-                Mutations = new List<String> { mutation.Name };
+                Mutations = new List<Mutation> { mutation };
             if (construction == null)
-                Construction = randomConstruction(rnd.Next(1, 101));
+                Construction = RandomConstruction(rnd.Next(1, 101));
             else
-                Construction = new List<String> { construction.Name };
-            if (history == null || history.Name == "")
+                Construction = new List<Construction> { construction };
+            if (history == null)
                 History = randomHistory(rnd.Next(1, 101));
             else
-                History = history.Name;
+                History = history;
             if (selectedMainColor.Equals(null) || SelectedSecondColor.Equals(null))
             {
                 primaryColor = randomColor(rnd.Next(1, 101), rnd.Next(1, 101));
@@ -73,8 +73,16 @@ namespace AdeptusEvangelionGmTools.Objects
                 secondaryColor = SelectedSecondColor;
             }
             CalculateEffects(Mutations, Construction, History);
+            if (Body.BaseToughness > Toughness)
+            {
+                Body.woundIncrease("Evangelion", -1);
+            }
+            if (Body.BaseToughness < Toughness)
+            {
+                Body.woundIncrease("Evangelion", 1);
+            }
         }
-        public Evangelion(String soul, List<String> mutation, List<String> construction, String history, String priColor, String secColor)
+        public Evangelion(Soul soul, List<Mutation> mutation, List<Construction> construction, History history, String priColor, String secColor)
         {
             Soul = soul;
             Mutations = mutation;
@@ -89,11 +97,21 @@ namespace AdeptusEvangelionGmTools.Objects
         }
         #endregion
         #region Private Methods
-        private void CalculateEffects(List<String> mutations, List<String> constructions, String history)
+        private void CalculateEffects(List<Mutation> mutations, List<Construction> constructions, History history)
         {
-            foreach(String mutation in mutations)
+            switch (history.Name)
             {
-                switch (mutation)
+                case "Prototype":
+                    Body.armorIncrease("Evangelion", -1);
+                    Mutations.AddRange(randomMutations(rnd.Next(1, 101)));
+                    break;
+                case "Patchwork":
+                    Toughness -= 10;
+                    break;
+            }
+            foreach (Mutation mutation in mutations)
+            {
+                switch (mutation.Name)
                 {
                     case "Hulking Frame":
                         Strength += 3;
@@ -101,12 +119,7 @@ namespace AdeptusEvangelionGmTools.Objects
                         Agility -= 3;
                         break;
                     case "Redundant Organs":
-                        Body.Head.Wounds += 1;
-                        Body.Torso.Wounds += 1;
-                        Body.LeftArm.Wounds += 1;
-                        Body.LeftLeg.Wounds += 1;
-                        Body.RightArm.Wounds += 1;
-                        Body.RightLeg.Wounds += 1;
+                        Body.woundIncrease("Evangelion", 1);
                         break;
                     case "Photosynthetic":
                         OperationalTime += 1;
@@ -122,54 +135,32 @@ namespace AdeptusEvangelionGmTools.Objects
                         BallisticSkill += 3;
                         break;
                 }
-                foreach (String construction in constructions)
+            }
+            foreach (Construction construction in constructions)
+            {
+                switch (construction.Name)
                 {
-                    switch (construction)
-                    {
-                        case "Odd Limbs":
-                            Agility += 3;
-                            break;
-                        case "Lightweight Chassis":
-                            Body.Head.Armor -= 1;
-                            Body.Torso.Armor -= 1;
-                            Body.LeftArm.Armor -= 1;
-                            Body.LeftLeg.Armor -= 1;
-                            Body.RightArm.Armor -= 1;
-                            Body.RightLeg.Armor -= 1;
-                            Agility += 5;
-                            break;
-                        case "Heavy Armor":
-                            Body.Head.Armor += 1;
-                            Body.Torso.Armor += 1;
-                            Body.LeftArm.Armor += 1;
-                            Body.LeftLeg.Armor += 1;
-                            Body.RightArm.Armor += 1;
-                            Body.RightLeg.Armor += 1;
-                            Agility -= 5;
-                            break;
-                        case "Advanced Battery":
-                            OperationalTime += 1;
-                            break;
-                    }
-                }
-                switch (history)
-                {
-                    case "Prototype":
-                        Body.Head.Armor -= 1;
-                        Body.Torso.Armor -= 1;
-                        Body.LeftArm.Armor -= 1;
-                        Body.LeftLeg.Armor -= 1;
-                        Body.RightArm.Armor -= 1;
-                        Body.RightLeg.Armor -= 1;
-                        randomMutations(rnd.Next(1, 101));
+                    case "Odd Limbs":
+                        Agility += 3;
+                        break;
+                    case "Lightweight Chassis":
+                        Body.armorIncrease("Evangelion", -1);
+                        Agility += 5;
+                        break;
+                    case "Heavy Armor":
+                        Body.armorIncrease("Evangelion", 1);
+                        Agility -= 5;
+                        break;
+                    case "Advanced Battery":
+                        OperationalTime += 1;
                         break;
                 }
             }
         }
         private void InitiateComponents()
         {
-            Construction = new List<String>();
-            Mutations = new List<String>();
+            Construction = new List<Construction>();
+            Mutations = new List<Mutation>();
             SoulList = new List<Soul>
             {
                  new Soul("Fractured Mind", 1, "Whenever the pilot rolls initiative, also roll a Synch  Ratio Test. On a failure, the Eva becomes Frenzied. It spends 1 round flailing around and attacking the environment before engaging the enemy"),
@@ -217,7 +208,7 @@ namespace AdeptusEvangelionGmTools.Objects
             HistoryList = new List<History>
             {
                 new History("Badly Financed", 1, ""),
-                new History("Patchwork", 2, ""),
+                new History("Patchwork", 2, "The Evangelion is made from a patchwork of failed prototypes, dummy bodies, and duct tape. It works, if reluctantly, but its Toughness is reduced by 10.However, it has a wealth of spare parts on hand, and no additional collateral damage is gained when this Eva loses a limb."),
                 new History("Prototype", 3, "The Evangelion was built as a test unit rather than a combat model. It has an additional mutation, but its body isn't built to the same specs as a combat unit, and has a -1 penalty to armor on all body parts."),
                 new History("Haunted", 4, "The rumor is that the first person to try piloting the Eva was absorbed into it. The pilot can always feel something watching them, giving them a -20 penalty to Perception Tests in the plug. However, when the Evangelion goes Berserk, it is 30% less likely to attack another Evangelion."),
                 new History("Concept Model", 5, "Built using only the best, newest, most expensive tech. It's like a sports car compared to the other Evas. The Evangelion begins play with 1 free SUP and 1 free WUP, but each battle it automatically incurs an extra 2 points of collateral damage as high maintenance parts must constantly be replaced."),
@@ -245,36 +236,36 @@ namespace AdeptusEvangelionGmTools.Objects
                 "Neon "
             };
         }
-        private String randomSoul(int soul)
+        private Soul randomSoul(int soul)
         {
             if      (soul >= 1 && soul <= 5)
-                return SoulList[0].Name;
+                return SoulList[0];
             else if (soul >= 6 && soul <= 10)
-                return SoulList[1].Name;
+                return SoulList[1];
             else if (soul >= 11 && soul <= 15)
-                return SoulList[2].Name;
+                return SoulList[2];
             else if (soul >= 16 && soul <= 25)
-                return SoulList[3].Name;
+                return SoulList[3];
             else if (soul >= 26 && soul <= 35)
-                return SoulList[4].Name;
+                return SoulList[4];
             else if (soul >= 36 && soul <= 45)
-                return SoulList[5].Name;
+                return SoulList[5];
             else if (soul >= 46 && soul <= 60)
-                return SoulList[6].Name;
+                return SoulList[6];
             else if (soul >= 61 && soul <= 70)
-                return SoulList[7].Name;
+                return SoulList[7];
             else if (soul >= 71 && soul <= 80)
-                return SoulList[8].Name;
+                return SoulList[8];
             else if (soul >= 81 && soul <= 90)
-                return SoulList[9].Name;
+                return SoulList[9];
             else if (soul >= 91 && soul <= 100)
-                return SoulList[10].Name;
+                return SoulList[10];
 
-            return SoulList[rnd.Next(1,11)].Name;
+            return SoulList[rnd.Next(1,11)];
         }
-        private List<String> randomMutations(int randomMutation)
+        private List<Mutation> randomMutations(int randomMutation)
         {
-            List<String> mutations = new List<String>();
+            List<Mutation> mutations = new List<Mutation>();
 
             if (randomMutation == 100)
             {
@@ -288,101 +279,100 @@ namespace AdeptusEvangelionGmTools.Objects
 
             return mutations;
         }
-        private string mutationGen(int mutation)
+        private Mutation mutationGen(int mutation)
         {
-            if (mutation >= 1 && mutation <= 10 && !Mutations.Contains(MutationList[0].Name))
-                return MutationList[0].Name;
-            else if (mutation >= 11 && mutation <= 20 && !Mutations.Contains(MutationList[1].Name))
-                return MutationList[1].Name;
-            else if (mutation >= 21 && mutation <= 25 && !Mutations.Contains(MutationList[2].Name))
-                return MutationList[2].Name;
-            else if (mutation >= 26 && mutation <= 35 && !Mutations.Contains(MutationList[3].Name))
-                return MutationList[3].Name;
-            else if (mutation >= 36 && mutation <= 45 && !Mutations.Contains(MutationList[4].Name))
-                return MutationList[4].Name;
-            else if (mutation >= 46 && mutation <= 50 && !Mutations.Contains(MutationList[5].Name))
-                return MutationList[5].Name;
-            else if (mutation >= 51 && mutation <= 60 && !Mutations.Contains(MutationList[6].Name))
-                return MutationList[6].Name;
-            else if (mutation >= 61 && mutation <= 70 && !Mutations.Contains(MutationList[7].Name))
-                return MutationList[7].Name;
-            else if (mutation >= 71 && mutation <= 75 && !Mutations.Contains(MutationList[8].Name))
-                return MutationList[8].Name;
-            else if (mutation >= 76 && mutation <= 85 && !Mutations.Contains(MutationList[9].Name))
-                return MutationList[9].Name;
-            else if (mutation >= 86 && mutation <= 90 && !Mutations.Contains(MutationList[10].Name))
-                return MutationList[10].Name;
-            else if (mutation >= 91 && mutation <= 99 && !Mutations.Contains(MutationList[11].Name))
-                return MutationList[11].Name;
+            if (mutation >= 1 && mutation <= 10 && !Mutations.Contains(MutationList[0]))
+                return MutationList[0];
+            else if (mutation >= 11 && mutation <= 20 && !Mutations.Contains(MutationList[1]))
+                return MutationList[1];
+            else if (mutation >= 21 && mutation <= 25 && !Mutations.Contains(MutationList[2]))
+                return MutationList[2];
+            else if (mutation >= 26 && mutation <= 35 && !Mutations.Contains(MutationList[3]))
+                return MutationList[3];
+            else if (mutation >= 36 && mutation <= 45 && !Mutations.Contains(MutationList[4]))
+                return MutationList[4];
+            else if (mutation >= 46 && mutation <= 50 && !Mutations.Contains(MutationList[5]))
+                return MutationList[5];
+            else if (mutation >= 51 && mutation <= 60 && !Mutations.Contains(MutationList[6]))
+                return MutationList[6];
+            else if (mutation >= 61 && mutation <= 70 && !Mutations.Contains(MutationList[7]))
+                return MutationList[7];
+            else if (mutation >= 71 && mutation <= 75 && !Mutations.Contains(MutationList[8]))
+                return MutationList[8];
+            else if (mutation >= 76 && mutation <= 85 && !Mutations.Contains(MutationList[9]))
+                return MutationList[9];
+            else if (mutation >= 86 && mutation <= 90 && !Mutations.Contains(MutationList[10]))
+                return MutationList[10];
+            else if (mutation >= 91 && mutation <= 99 && !Mutations.Contains(MutationList[11]))
+                return MutationList[11];
 
             return mutationGen(rnd.Next(1, 100));
         }
-        private List<String> randomConstruction(int randomConstruction)
+        private List<Construction> RandomConstruction(int randomConstruction)
         {
-            List<String> constructions = new List<String>();
+            List<Construction> constructions = new List<Construction>();
 
             if (randomConstruction == 100)
             {
-                constructions.Add(construction(rnd.Next(1, 100)));
-                constructions.Add(construction(rnd.Next(1, 100)));
+                constructions.AddRange(RandomConstruction(rnd.Next(1, 101)));
+                constructions.AddRange(RandomConstruction(rnd.Next(1, 101)));
             }
             else
             {
-                constructions.Add(construction(randomConstruction));
+                constructions.Add(constructionGen(randomConstruction));
             }
-
             return constructions;
         }
-        private string construction(int construction)
+        private Construction constructionGen(int construction)
         {
             if (construction >= 1 && construction <= 15)
-                return ConstructionList[0].Name;
+                return ConstructionList[0];
             else if (construction >= 16 && construction <= 20)
-                return ConstructionList[1].Name;
+                return ConstructionList[1];
             else if (construction >= 21 && construction <= 30)
-                return ConstructionList[2].Name;
+                return ConstructionList[2];
             else if (construction >= 31 && construction <= 40)
-                return ConstructionList[3].Name;
+                return ConstructionList[3];
             else if (construction >= 41 && construction <= 50)
-                return ConstructionList[4].Name;
+                return ConstructionList[4];
             else if (construction >= 51 && construction <= 60)
-                return ConstructionList[5].Name;
+                return ConstructionList[5];
             else if (construction >= 61 && construction <= 70)
-                return ConstructionList[6].Name;
+                return ConstructionList[6];
             else if (construction >= 71 && construction <= 75)
-                return ConstructionList[7].Name;
+                return ConstructionList[7];
             else if (construction >= 76 && construction <= 80)
-                return ConstructionList[8].Name;
+                return ConstructionList[8];
             else if (construction >= 81 && construction <= 85)
-                return ConstructionList[9].Name;
+                return ConstructionList[9];
             else if (construction >= 86 && construction <= 90)
-                return ConstructionList[10].Name;
+                return ConstructionList[10];
             else if (construction >= 91 && construction <= 99)
-                return ConstructionList[11].Name;
+                return ConstructionList[11];
 
-            return ConstructionList[rnd.Next(1,12)].Name;
+            return constructionGen(rnd.Next(1,100));
         }
-        private String randomHistory(int history)
+        private History randomHistory(int history)
         {
 
             if (history >= 1 && history <= 9)
-                return HistoryList[0].Name;
+                return HistoryList[0];
             else if (history >= 10 && history <= 25)
-                return HistoryList[1].Name;
+                return HistoryList[1];
             else if (history >= 26 && history <= 36)
-                return HistoryList[2].Name;
+                return HistoryList[2];
             else if (history >= 37 && history <= 45)
-                return HistoryList[3].Name;
+                return HistoryList[3];
             else if (history >= 46 && history <= 54)
-                return HistoryList[4].Name;
+                return HistoryList[4];
             else if (history >= 55 && history <= 63)
-                return HistoryList[5].Name;
+                return HistoryList[5];
             else if (history >= 64 && history <= 72)
-                return HistoryList[6].Name;
+                return HistoryList[6];
             else if (history >= 73 && history <= 100)
-                return HistoryList[7].Name;
+                return HistoryList[7];
 
-            return HistoryList[rnd.Next(1,8)].Name;
+            return HistoryList[rnd.Next(1,8)];
         }
         private String randomColor(int part1, int part2)
         {

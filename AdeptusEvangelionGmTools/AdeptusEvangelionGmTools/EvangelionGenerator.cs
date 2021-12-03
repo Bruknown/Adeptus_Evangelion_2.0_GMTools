@@ -24,6 +24,7 @@ namespace AdeptusEvangelionGmTools
         public String selectedColorDescription1 { get; set; }
         public String selectedColorDescription2 { get; set; }
         public Evangelion eva;
+        Random rand = new Random();
 
         #endregion
 
@@ -39,6 +40,7 @@ namespace AdeptusEvangelionGmTools
             {
                 SoulSelect.SelectedItem = null;
                 SoulSelect.Enabled = false;
+                selectedSoul = null;
             }
             else
             {
@@ -49,10 +51,13 @@ namespace AdeptusEvangelionGmTools
         private void RandMutation_CheckedChanged(object sender, EventArgs e)
         {
             if (RandMutation.Checked)
+            {
                 MutationSelect.Enabled = false;
+                MutationSelect.SelectedItem = null;
+                selectedMutation = null;
+            }
             else
             {
-                MutationSelect.SelectedItem = null;
                 MutationSelect.Enabled = true;
             }
         }
@@ -63,6 +68,7 @@ namespace AdeptusEvangelionGmTools
             {
                 ConstructionSelect.Enabled = false;
                 ConstructionSelect.SelectedItem = null;
+                selectedConstruction = null;
             }
             else
             {
@@ -76,6 +82,7 @@ namespace AdeptusEvangelionGmTools
             {
                 HistorySelect.Enabled = false;
                 HistorySelect.SelectedItem = null;
+                selectedHistory = null;
             }
             else
             {
@@ -159,7 +166,23 @@ namespace AdeptusEvangelionGmTools
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Random rand = new Random();
+            verifyEmptyComboBoxes();
+
+            Evangelion evangelion = new Evangelion(
+                selectedSoul,
+                selectedMutation,
+                selectedConstruction,
+                selectedHistory,
+                selectedColorDescription1 + selectedColor1,
+                selectedColorDescription2 + selectedColor2
+                );
+            displayText(evangelion);
+        }
+        #endregion
+
+        #region PrivateMethods
+        private void verifyEmptyComboBoxes()
+        {
             if ((selectedConstruction == null && !RandConstruction.Checked) ||
                 (selectedHistory == null && !RandHistory.Checked) ||
                 (selectedMutation == null && !RandMutation.Checked) ||
@@ -175,22 +198,25 @@ namespace AdeptusEvangelionGmTools
                 MessageBox.Show(message, caption, buttons);
                 return;
             }
-
-            Evangelion evangelion = new Evangelion(
-                selectedSoul,
-                selectedMutation,
-                selectedConstruction,
-                selectedHistory,
-                selectedColorDescription1 + selectedColor1,
-                selectedColorDescription2 + selectedColor2
-                );
-
-            EvangelionOutput.Text = 
+        }
+        private void displayText(Evangelion evangelion)
+        {
+            String mutationOutput = "";
+            String constructionOutput = "";
+            foreach(Mutation mutation in evangelion.Mutations)
+            {
+                mutationOutput += mutation.Name + ", ";
+            }
+            foreach (Construction construction in evangelion.Construction)
+            {
+                constructionOutput += construction.Name + ", ";
+            }
+            EvangelionOutput.Text =
                 "Evangelion Unit " + rand.Next(0, 101) + Environment.NewLine +
-                "Soul: " + evangelion.Soul + Environment.NewLine +
-                "Mutation(s): " + String.Join(", ", evangelion.Mutations.ToArray()) + Environment.NewLine +
-                "Construction: " + String.Join(", ", evangelion.Construction.ToArray()) + Environment.NewLine +
-                "History: " + evangelion.History + Environment.NewLine +
+                "Soul: " + evangelion.Soul.Name + Environment.NewLine +
+                "Mutation(s): " + mutationOutput + Environment.NewLine +
+                "Construction: " + constructionOutput + Environment.NewLine +
+                "History: " + evangelion.History.Name + Environment.NewLine +
                 "Primary Color: " + evangelion.primaryColor + Environment.NewLine +
                 "Secondary Color: " + evangelion.secondaryColor + Environment.NewLine +
                 "Strength: " + evangelion.Strength + Environment.NewLine +
@@ -204,13 +230,35 @@ namespace AdeptusEvangelionGmTools
                 "     L.Arm:     " + evangelion.Body.LeftArm.Wounds + "       |   " + evangelion.Body.LeftArm.Armor + Environment.NewLine +
                 "     R.Arm:     " + evangelion.Body.RightArm.Wounds + "       |   " + evangelion.Body.RightArm.Armor + Environment.NewLine +
                 "     L.Leg:     " + evangelion.Body.LeftLeg.Wounds + "       |   " + evangelion.Body.LeftLeg.Armor + Environment.NewLine +
-                "     R.Leg:     " + evangelion.Body.RightLeg.Wounds + "       |   " + evangelion.Body.RightLeg.Armor;
-                
+                "     R.Leg:     " + evangelion.Body.RightLeg.Wounds + "       |   " + evangelion.Body.RightLeg.Armor + Environment.NewLine +
+                "---------Soul Effects----------" + Environment.NewLine +
+                "Soul Name: " + evangelion.Soul.Name + Environment.NewLine +
+                "Soul Effect: " + evangelion.Soul.Effect  + Environment.NewLine +
+                "--------Mutation Effects-------" + Environment.NewLine;
+            foreach (Mutation mutation in evangelion.Mutations)
+            {
+                EvangelionOutput.Text +=
+                    "Mutation Name: " + mutation.Name + Environment.NewLine +
+                    "Mutation Effect: " + Environment.NewLine +
+                    mutation.Effect + Environment.NewLine +
+                    "-------------------------------" + Environment.NewLine;
+            }
+            EvangelionOutput.Text += 
+                "-----Construction Effects------" + Environment.NewLine;
+            foreach (Construction construction in evangelion.Construction)
+            {
+                EvangelionOutput.Text +=
+                    "Mutation Name: " + construction.Name + Environment.NewLine +
+                    "Mutation Effect: " + Environment.NewLine +
+                    construction.Effect + Environment.NewLine +
+                    "-------------------------------" + Environment.NewLine;
+            }
+            EvangelionOutput.Text +=
+              "---------History Effects--------" + Environment.NewLine +
+                "History Name: " + evangelion.History.Name + Environment.NewLine +
+                "History Effect: " + evangelion.History.Effect + Environment.NewLine;
 
         }
-        #endregion
-
-        #region PrivateMethods
         private void initiateComboBox()
         {
             Evangelion evangelion = new Evangelion();

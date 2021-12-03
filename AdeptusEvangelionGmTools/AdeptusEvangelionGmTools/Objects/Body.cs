@@ -17,12 +17,16 @@ namespace AdeptusEvangelionGmTools.Objects
         public LeftLeg LeftLeg;
         public RightLeg RightLeg;
         public Core Core;
+        public int BaseToughness;
+        public String BodyType;
         #endregion
 
         #region Constructor
         public Body(int Toughness, String bodyType)
         {
-            switch (bodyType)
+            BaseToughness = Toughness;
+            BodyType = bodyType;
+            switch (BodyType)
             {
                 case "Evangelion":
                     Head = new Head(Toughness / 10, 2, 0);
@@ -31,6 +35,44 @@ namespace AdeptusEvangelionGmTools.Objects
                     RightArm = new RightArm((Toughness / 10) + 2, 2, 0);
                     LeftLeg = new LeftLeg((Toughness / 10) + 2, 2, 0);
                     RightLeg = new RightLeg((Toughness / 10) + 2, 2, 0);
+                    break;
+                case "Angel":
+                    break;
+                case "Pilot":
+                    break;
+            }
+        }
+        #endregion
+        #region public methods
+        public void woundIncrease(String BodyType, int mod)
+        {
+            switch (BodyType)
+            {
+                case "Evangelion":
+                    Head.Wounds += mod;
+                    Torso.Wounds += mod;
+                    LeftArm.Wounds += mod;
+                    LeftLeg.Wounds += mod;
+                    RightArm.Wounds += mod;
+                    RightLeg.Wounds += mod;
+                    break;
+                case "Angel":
+                    break;
+                case "Pilot":
+                    break;
+            }
+        }
+        public void armorIncrease(String BodyType, int mod)
+        {
+            switch (BodyType)
+            {
+                case "Evangelion":
+                    Head.Armor += mod;
+                    Torso.Armor += mod;
+                    LeftArm.Armor += mod;
+                    LeftLeg.Armor += mod;
+                    RightArm.Armor += mod;
+                    RightLeg.Armor += mod;
                     break;
                 case "Angel":
                     break;
