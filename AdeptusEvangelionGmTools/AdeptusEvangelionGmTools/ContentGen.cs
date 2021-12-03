@@ -25,7 +25,8 @@ namespace AdeptusEvangelionGmTools
 
         private void AngelGen_Click(object sender, EventArgs e)
         {
-
+            AngelGenerator AG = new AngelGenerator();
+            AG.Show();
         }
     }
 }
