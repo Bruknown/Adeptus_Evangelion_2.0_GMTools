@@ -31,6 +31,7 @@ namespace AdeptusEvangelionGmTools.Objects
         public String secondaryColor { get; set; }
         public Body Body { get; set; }
         #endregion
+
         #region Constructors
         public Evangelion()
         {
@@ -96,6 +97,7 @@ namespace AdeptusEvangelionGmTools.Objects
             BallisticSkill = 15;
         }
         #endregion
+
         #region Private Methods
         private void CalculateEffects(List<Mutation> mutations, List<Construction> constructions, History history)
         {

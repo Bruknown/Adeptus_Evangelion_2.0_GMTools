@@ -43,6 +43,7 @@ namespace AdeptusEvangelionGmTools.Objects
             }
         }
         #endregion
+
         #region public methods
         public void woundIncrease(String BodyType, int mod)
         {

@@ -53,6 +53,7 @@ namespace AdeptusEvangelionGmTools
             this.AngelGen.TabIndex = 1;
             this.AngelGen.Text = "Angel Generator";
             this.AngelGen.UseVisualStyleBackColor = true;
+            this.AngelGen.Click += new System.EventHandler(this.AngelGen_Click);
             // 
             // PilotGen
             // 

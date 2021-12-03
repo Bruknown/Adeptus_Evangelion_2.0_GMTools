@@ -22,5 +22,10 @@ namespace AdeptusEvangelionGmTools
             EvangelionGenerator EG = new EvangelionGenerator();
             EG.Show();
         }
+
+        private void AngelGen_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
