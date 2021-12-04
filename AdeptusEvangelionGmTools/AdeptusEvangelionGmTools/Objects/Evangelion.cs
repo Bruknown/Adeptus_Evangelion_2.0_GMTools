@@ -11,10 +11,14 @@ namespace AdeptusEvangelionGmTools.Objects
     {
         #region Properties
         Random rnd = new Random();
-        public List<Soul> SoulList = new List<Soul>();
-        public List<Mutation> MutationList = new List<Mutation>();
-        public List<Construction> ConstructionList = new List<Construction>();
-        public List<History> HistoryList = new List<History>();
+
+
+        public List<Soul> ComboBoxSoulList = new List<Soul>();
+        public List<Mutation> ComboBoxMutationList = new List<Mutation>();
+        public List<Construction> ComboBoxConstructionList = new List<Construction>();
+        public List<History> ComboBoxHistoryList = new List<History>();
+
+
         public List<String> MainColor = new List<String>();
         public List<String> ColorDescription = new List<String>();
         public Soul Soul { get; set; }
@@ -163,7 +167,7 @@ namespace AdeptusEvangelionGmTools.Objects
         {
             Construction = new List<Construction>();
             Mutations = new List<Mutation>();
-            SoulList = new List<Soul>
+            ComboBoxSoulList = new List<Soul>
             {
                  new Soul("Fractured Mind", 1, "Whenever the pilot rolls initiative, also roll a Synch  Ratio Test. On a failure, the Eva becomes Frenzied. It spends 1 round flailing around and attacking the environment before engaging the enemy"),
                  new Soul("Weeping", 2, "When in the Entry Plug, you swear that there is someone sobbing just on the edge of your hearing. This is understandably unnerving, and whenever you gain Insanity Points in the Entry Plug you gain 1 extra."),
@@ -177,7 +181,7 @@ namespace AdeptusEvangelionGmTools.Objects
                  new Soul("Skittish", 10,"Like a wild animal, the Evangelion shies away from danger. The Evangelions Agility increases by 5. When Berserk, the Evangelion will immediately disengage from melee for 1 round after receiving critical damage."),
                  new Soul("Bonded", 11,"The Evangelion seems to have an emotional attachment with its chosen pilot, and the pilot’s SR increases by 3. However, it will not function for anyone else under any circumstances, even rejecting Dummy Plugs.")
             };
-            MutationList = new List<Mutation>
+            ComboBoxMutationList = new List<Mutation>
             {
                 new Mutation("Pressurized Blood", 1, "The Evangelions blood pressure is through the roof! Whenever the Evangelion rolls for Blood Loss, it must roll twice and take the worse roll."),
                 new Mutation("Bioluminescent", 2, "The unit's blood gives off light due to unidentified chemicals in its blood cells. This light tends to leak from between the armor plates, and from the mouth and eyes. The Eva takes a -20 to Concealment. The color of the light is determined by rolling an extra secondary color."),
@@ -192,7 +196,7 @@ namespace AdeptusEvangelionGmTools.Objects
                 new Mutation("Predatory", 11, "As Unrestrained Jaw, but the Eva gains a +3 to Weapon Skill and a +3 to Strength as well"),
                 new Mutation("Extra Eyes", 12, "The Evangelion has an extra set of eyes, usually totaling 4 or 6 eyes. It’s increases sense of sight grants it a +3 to Ballistic Skill, and once per round the pilot may reroll a failed Awareness Test.")
             };
-            ConstructionList = new List<Construction>
+            ComboBoxConstructionList = new List<Construction>
             {
                 new Construction("Clinker", 1, "The unit's armor is ill-fitting and poorly lubricated. While it can power through these discomforts without a dip in performance, doing so causes it to give off immense clanking and grinding noises, as well as the occasional stray bolt. Add one point of collateral to the pool after every fight in which this Evangelion took damage."),
                 new Construction("Single Winged", 2, "The Evangelion lacks a wing on 1 arm."),
@@ -207,7 +211,7 @@ namespace AdeptusEvangelionGmTools.Objects
                 new Construction("Advanced Battery", 11, "The Eva’s body contains a larger than normal battery, allowing it to continue operating for 6 rounds after being severed from an umbilical rather than 5."),
                 new Construction("Weapon Rack", 12, "The Evangelion has, on its back, a mount to hold a single basic weapon. While the Evangelion may not emerge from a Launch point with this weapon, it may acquire a basic weapon afterwards and carry it without using its hands with no penalty.")
             };
-            HistoryList = new List<History>
+            ComboBoxHistoryList = new List<History>
             {
                 new History("Badly Financed", 1, ""),
                 new History("Patchwork", 2, "The Evangelion is made from a patchwork of failed prototypes, dummy bodies, and duct tape. It works, if reluctantly, but its Toughness is reduced by 10.However, it has a wealth of spare parts on hand, and no additional collateral damage is gained when this Eva loses a limb."),
@@ -241,29 +245,29 @@ namespace AdeptusEvangelionGmTools.Objects
         private Soul randomSoul(int soul)
         {
             if      (soul >= 1 && soul <= 5)
-                return SoulList[0];
+                return ComboBoxSoulList[0];
             else if (soul >= 6 && soul <= 10)
-                return SoulList[1];
+                return ComboBoxSoulList[1];
             else if (soul >= 11 && soul <= 15)
-                return SoulList[2];
+                return ComboBoxSoulList[2];
             else if (soul >= 16 && soul <= 25)
-                return SoulList[3];
+                return ComboBoxSoulList[3];
             else if (soul >= 26 && soul <= 35)
-                return SoulList[4];
+                return ComboBoxSoulList[4];
             else if (soul >= 36 && soul <= 45)
-                return SoulList[5];
+                return ComboBoxSoulList[5];
             else if (soul >= 46 && soul <= 60)
-                return SoulList[6];
+                return ComboBoxSoulList[6];
             else if (soul >= 61 && soul <= 70)
-                return SoulList[7];
+                return ComboBoxSoulList[7];
             else if (soul >= 71 && soul <= 80)
-                return SoulList[8];
+                return ComboBoxSoulList[8];
             else if (soul >= 81 && soul <= 90)
-                return SoulList[9];
+                return ComboBoxSoulList[9];
             else if (soul >= 91 && soul <= 100)
-                return SoulList[10];
+                return ComboBoxSoulList[10];
 
-            return SoulList[rnd.Next(1,11)];
+            return ComboBoxSoulList[rnd.Next(1,11)];
         }
         private List<Mutation> randomMutations(int randomMutation)
         {
@@ -283,30 +287,30 @@ namespace AdeptusEvangelionGmTools.Objects
         }
         private Mutation mutationGen(int mutation)
         {
-            if (mutation >= 1 && mutation <= 10 && !Mutations.Contains(MutationList[0]))
-                return MutationList[0];
-            else if (mutation >= 11 && mutation <= 20 && !Mutations.Contains(MutationList[1]))
-                return MutationList[1];
-            else if (mutation >= 21 && mutation <= 25 && !Mutations.Contains(MutationList[2]))
-                return MutationList[2];
-            else if (mutation >= 26 && mutation <= 35 && !Mutations.Contains(MutationList[3]))
-                return MutationList[3];
-            else if (mutation >= 36 && mutation <= 45 && !Mutations.Contains(MutationList[4]))
-                return MutationList[4];
-            else if (mutation >= 46 && mutation <= 50 && !Mutations.Contains(MutationList[5]))
-                return MutationList[5];
-            else if (mutation >= 51 && mutation <= 60 && !Mutations.Contains(MutationList[6]))
-                return MutationList[6];
-            else if (mutation >= 61 && mutation <= 70 && !Mutations.Contains(MutationList[7]))
-                return MutationList[7];
-            else if (mutation >= 71 && mutation <= 75 && !Mutations.Contains(MutationList[8]))
-                return MutationList[8];
-            else if (mutation >= 76 && mutation <= 85 && !Mutations.Contains(MutationList[9]))
-                return MutationList[9];
-            else if (mutation >= 86 && mutation <= 90 && !Mutations.Contains(MutationList[10]))
-                return MutationList[10];
-            else if (mutation >= 91 && mutation <= 99 && !Mutations.Contains(MutationList[11]))
-                return MutationList[11];
+            if (mutation >= 1 && mutation <= 10 && !Mutations.Contains(ComboBoxMutationList[0]))
+                return ComboBoxMutationList[0];
+            else if (mutation >= 11 && mutation <= 20 && !Mutations.Contains(ComboBoxMutationList[1]))
+                return ComboBoxMutationList[1];
+            else if (mutation >= 21 && mutation <= 25 && !Mutations.Contains(ComboBoxMutationList[2]))
+                return ComboBoxMutationList[2];
+            else if (mutation >= 26 && mutation <= 35 && !Mutations.Contains(ComboBoxMutationList[3]))
+                return ComboBoxMutationList[3];
+            else if (mutation >= 36 && mutation <= 45 && !Mutations.Contains(ComboBoxMutationList[4]))
+                return ComboBoxMutationList[4];
+            else if (mutation >= 46 && mutation <= 50 && !Mutations.Contains(ComboBoxMutationList[5]))
+                return ComboBoxMutationList[5];
+            else if (mutation >= 51 && mutation <= 60 && !Mutations.Contains(ComboBoxMutationList[6]))
+                return ComboBoxMutationList[6];
+            else if (mutation >= 61 && mutation <= 70 && !Mutations.Contains(ComboBoxMutationList[7]))
+                return ComboBoxMutationList[7];
+            else if (mutation >= 71 && mutation <= 75 && !Mutations.Contains(ComboBoxMutationList[8]))
+                return ComboBoxMutationList[8];
+            else if (mutation >= 76 && mutation <= 85 && !Mutations.Contains(ComboBoxMutationList[9]))
+                return ComboBoxMutationList[9];
+            else if (mutation >= 86 && mutation <= 90 && !Mutations.Contains(ComboBoxMutationList[10]))
+                return ComboBoxMutationList[10];
+            else if (mutation >= 91 && mutation <= 99 && !Mutations.Contains(ComboBoxMutationList[11]))
+                return ComboBoxMutationList[11];
 
             return mutationGen(rnd.Next(1, 100));
         }
@@ -328,29 +332,29 @@ namespace AdeptusEvangelionGmTools.Objects
         private Construction constructionGen(int construction)
         {
             if (construction >= 1 && construction <= 15)
-                return ConstructionList[0];
+                return ComboBoxConstructionList[0];
             else if (construction >= 16 && construction <= 20)
-                return ConstructionList[1];
+                return ComboBoxConstructionList[1];
             else if (construction >= 21 && construction <= 30)
-                return ConstructionList[2];
+                return ComboBoxConstructionList[2];
             else if (construction >= 31 && construction <= 40)
-                return ConstructionList[3];
+                return ComboBoxConstructionList[3];
             else if (construction >= 41 && construction <= 50)
-                return ConstructionList[4];
+                return ComboBoxConstructionList[4];
             else if (construction >= 51 && construction <= 60)
-                return ConstructionList[5];
+                return ComboBoxConstructionList[5];
             else if (construction >= 61 && construction <= 70)
-                return ConstructionList[6];
+                return ComboBoxConstructionList[6];
             else if (construction >= 71 && construction <= 75)
-                return ConstructionList[7];
+                return ComboBoxConstructionList[7];
             else if (construction >= 76 && construction <= 80)
-                return ConstructionList[8];
+                return ComboBoxConstructionList[8];
             else if (construction >= 81 && construction <= 85)
-                return ConstructionList[9];
+                return ComboBoxConstructionList[9];
             else if (construction >= 86 && construction <= 90)
-                return ConstructionList[10];
+                return ComboBoxConstructionList[10];
             else if (construction >= 91 && construction <= 99)
-                return ConstructionList[11];
+                return ComboBoxConstructionList[11];
 
             return constructionGen(rnd.Next(1,100));
         }
@@ -358,23 +362,23 @@ namespace AdeptusEvangelionGmTools.Objects
         {
 
             if (history >= 1 && history <= 9)
-                return HistoryList[0];
+                return ComboBoxHistoryList[0];
             else if (history >= 10 && history <= 25)
-                return HistoryList[1];
+                return ComboBoxHistoryList[1];
             else if (history >= 26 && history <= 36)
-                return HistoryList[2];
+                return ComboBoxHistoryList[2];
             else if (history >= 37 && history <= 45)
-                return HistoryList[3];
+                return ComboBoxHistoryList[3];
             else if (history >= 46 && history <= 54)
-                return HistoryList[4];
+                return ComboBoxHistoryList[4];
             else if (history >= 55 && history <= 63)
-                return HistoryList[5];
+                return ComboBoxHistoryList[5];
             else if (history >= 64 && history <= 72)
-                return HistoryList[6];
+                return ComboBoxHistoryList[6];
             else if (history >= 73 && history <= 100)
-                return HistoryList[7];
+                return ComboBoxHistoryList[7];
 
-            return HistoryList[rnd.Next(1,8)];
+            return ComboBoxHistoryList[rnd.Next(1,8)];
         }
         private String randomColor(int part1, int part2)
         {

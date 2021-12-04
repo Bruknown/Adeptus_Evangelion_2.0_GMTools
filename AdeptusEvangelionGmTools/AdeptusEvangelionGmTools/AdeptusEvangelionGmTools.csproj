@@ -88,6 +88,12 @@
     <Compile Include="MutationChoose.Designer.cs">
       <DependentUpon>MutationChoose.cs</DependentUpon>
     </Compile>
+    <Compile Include="Objects\Angel.cs" />
+    <Compile Include="Objects\AngelProperties\BodyType.cs" />
+    <Compile Include="Objects\AngelProperties\Difficulty.cs" />
+    <Compile Include="Objects\AngelProperties\Locomotion.cs" />
+    <Compile Include="Objects\AngelProperties\BodySize.cs" />
+    <Compile Include="Objects\AngelProperties\Specialization.cs" />
     <Compile Include="Objects\Body.cs" />
     <Compile Include="Objects\BodyParts\Core.cs" />
     <Compile Include="Objects\Evangelion.cs" />

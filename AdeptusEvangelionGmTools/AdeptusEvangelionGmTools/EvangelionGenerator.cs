@@ -116,28 +116,28 @@ namespace AdeptusEvangelionGmTools
         {
             eva = new Evangelion();
             if (SoulSelect.SelectedItem != null)
-                selectedSoul = eva.SoulList.Where(x => x.Name.Equals(SoulSelect.SelectedItem.ToString())).FirstOrDefault();
+                selectedSoul = eva.ComboBoxSoulList.Where(x => x.Name.Equals(SoulSelect.SelectedItem.ToString())).FirstOrDefault();
         }
 
         private void MutationSelect_TextChanged(object sender, EventArgs e)
         {
             eva = new Evangelion();
             if (MutationSelect.SelectedItem != null)
-                selectedMutation = eva.MutationList.Where(x => x.Name.Equals(MutationSelect.SelectedItem.ToString())).FirstOrDefault();
+                selectedMutation = eva.ComboBoxMutationList.Where(x => x.Name.Equals(MutationSelect.SelectedItem.ToString())).FirstOrDefault();
         }
 
         private void ConstructionSelect_TextChanged(object sender, EventArgs e)
         {
             eva = new Evangelion();
             if (ConstructionSelect.SelectedItem != null)
-                selectedConstruction = eva.ConstructionList.Where(x => x.Name.Equals(ConstructionSelect.SelectedItem.ToString())).FirstOrDefault();
+                selectedConstruction = eva.ComboBoxConstructionList.Where(x => x.Name.Equals(ConstructionSelect.SelectedItem.ToString())).FirstOrDefault();
         }
 
         private void HistorySelect_TextChanged(object sender, EventArgs e)
         {
             eva = new Evangelion();
             if (HistorySelect.SelectedItem != null)
-                selectedHistory = eva.HistoryList.Where(x => x.Name.Equals(HistorySelect.SelectedItem.ToString())).FirstOrDefault();
+                selectedHistory = eva.ComboBoxHistoryList.Where(x => x.Name.Equals(HistorySelect.SelectedItem.ToString())).FirstOrDefault();
         }
 
         private void MColor1Select_TextChanged(object sender, EventArgs e)
@@ -262,19 +262,19 @@ namespace AdeptusEvangelionGmTools
         private void initiateComboBox()
         {
             Evangelion evangelion = new Evangelion();
-            foreach (Soul soul in evangelion.SoulList)
+            foreach (Soul soul in evangelion.ComboBoxSoulList)
             {
                 SoulSelect.Items.Add(soul.Name);
             }
-            foreach (Mutation mutation in evangelion.MutationList)
+            foreach (Mutation mutation in evangelion.ComboBoxMutationList)
             {
                 MutationSelect.Items.Add(mutation.Name);
             }
-            foreach (Construction construction in evangelion.ConstructionList)
+            foreach (Construction construction in evangelion.ComboBoxConstructionList)
             {
                 ConstructionSelect.Items.Add(construction.Name);
             }
-            foreach (History history in evangelion.HistoryList)
+            foreach (History history in evangelion.ComboBoxHistoryList)
             {
                 HistorySelect.Items.Add(history.Name);
             }
