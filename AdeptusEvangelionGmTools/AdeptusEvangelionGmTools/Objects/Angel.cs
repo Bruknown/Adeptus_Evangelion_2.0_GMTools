@@ -48,6 +48,20 @@ namespace AdeptusEvangelionGmTools.Objects
                     int weaponSkill, int strength, int toughness, int agility,
                     int intelligence, int perception, int willpower, int fellowship, int synchRatio)
         {
+            switch (difficulty.Name)
+            {
+                case "Introductory":
+
+                    break;
+                case "Easy":
+                    break;
+                case "Medium":
+                    break;
+                case "hard":
+                    break;
+                case "Apocalyptic":
+                    break;
+            }
             this.bodyType = bodyType;
             this.difficulty = difficulty;
             this.locomotion = locomotion;

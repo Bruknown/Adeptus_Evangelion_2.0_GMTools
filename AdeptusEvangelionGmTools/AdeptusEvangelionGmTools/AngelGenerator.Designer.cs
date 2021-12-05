@@ -30,6 +30,9 @@ namespace AdeptusEvangelionGmTools
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.RandomDifficulty = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.DifficultyBox = new System.Windows.Forms.ComboBox();
             this.rndSizeChkBox = new System.Windows.Forms.CheckBox();
             this.rndLocomotionChkBox = new System.Windows.Forms.CheckBox();
             this.rndBodyTypeChkBox = new System.Windows.Forms.CheckBox();
@@ -46,9 +49,6 @@ namespace AdeptusEvangelionGmTools
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.GenButton = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.DifficultyBox = new System.Windows.Forms.ComboBox();
-            this.RandomDifficulty = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.RandomWS = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -70,29 +70,29 @@ namespace AdeptusEvangelionGmTools
             this.label11 = new System.Windows.Forms.Label();
             this.RandomSR = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.WSValue = new System.Windows.Forms.NumericUpDown();
-            this.BSValue = new System.Windows.Forms.NumericUpDown();
-            this.StrengthValue = new System.Windows.Forms.NumericUpDown();
-            this.ToughnessValue = new System.Windows.Forms.NumericUpDown();
-            this.AgilityValue = new System.Windows.Forms.NumericUpDown();
-            this.IntValue = new System.Windows.Forms.NumericUpDown();
-            this.PerValue = new System.Windows.Forms.NumericUpDown();
-            this.WPValue = new System.Windows.Forms.NumericUpDown();
-            this.FelValue = new System.Windows.Forms.NumericUpDown();
             this.SRValue = new System.Windows.Forms.NumericUpDown();
+            this.FelValue = new System.Windows.Forms.NumericUpDown();
+            this.WPValue = new System.Windows.Forms.NumericUpDown();
+            this.PerValue = new System.Windows.Forms.NumericUpDown();
+            this.IntValue = new System.Windows.Forms.NumericUpDown();
+            this.AgilityValue = new System.Windows.Forms.NumericUpDown();
+            this.ToughnessValue = new System.Windows.Forms.NumericUpDown();
+            this.StrengthValue = new System.Windows.Forms.NumericUpDown();
+            this.BSValue = new System.Windows.Forms.NumericUpDown();
+            this.WSValue = new System.Windows.Forms.NumericUpDown();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WSValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BSValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StrengthValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ToughnessValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AgilityValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IntValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PerValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WPValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FelValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SRValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FelValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WPValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PerValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IntValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AgilityValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ToughnessValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StrengthValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BSValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSValue)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -119,6 +119,36 @@ namespace AdeptusEvangelionGmTools
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Angel Description";
             // 
+            // RandomDifficulty
+            // 
+            this.RandomDifficulty.AutoSize = true;
+            this.RandomDifficulty.Location = new System.Drawing.Point(133, 48);
+            this.RandomDifficulty.Name = "RandomDifficulty";
+            this.RandomDifficulty.Size = new System.Drawing.Size(83, 21);
+            this.RandomDifficulty.TabIndex = 14;
+            this.RandomDifficulty.Text = "Random";
+            this.RandomDifficulty.UseVisualStyleBackColor = true;
+            this.RandomDifficulty.CheckedChanged += new System.EventHandler(this.RandomDifficulty_CheckedChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 25);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(65, 17);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "Difficulty:";
+            // 
+            // DifficultyBox
+            // 
+            this.DifficultyBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DifficultyBox.FormattingEnabled = true;
+            this.DifficultyBox.Location = new System.Drawing.Point(5, 45);
+            this.DifficultyBox.Name = "DifficultyBox";
+            this.DifficultyBox.Size = new System.Drawing.Size(121, 24);
+            this.DifficultyBox.TabIndex = 12;
+            this.DifficultyBox.TextChanged += new System.EventHandler(this.DifficultyBox_TextChanged);
+            // 
             // rndSizeChkBox
             // 
             this.rndSizeChkBox.AutoSize = true;
@@ -128,6 +158,7 @@ namespace AdeptusEvangelionGmTools
             this.rndSizeChkBox.TabIndex = 11;
             this.rndSizeChkBox.Text = "Random";
             this.rndSizeChkBox.UseVisualStyleBackColor = true;
+            this.rndSizeChkBox.CheckedChanged += new System.EventHandler(this.rndSizeChkBox_CheckedChanged);
             // 
             // rndLocomotionChkBox
             // 
@@ -138,6 +169,7 @@ namespace AdeptusEvangelionGmTools
             this.rndLocomotionChkBox.TabIndex = 10;
             this.rndLocomotionChkBox.Text = "Random";
             this.rndLocomotionChkBox.UseVisualStyleBackColor = true;
+            this.rndLocomotionChkBox.CheckedChanged += new System.EventHandler(this.rndLocomotionChkBox_CheckedChanged);
             // 
             // rndBodyTypeChkBox
             // 
@@ -148,6 +180,7 @@ namespace AdeptusEvangelionGmTools
             this.rndBodyTypeChkBox.TabIndex = 9;
             this.rndBodyTypeChkBox.Text = "Random";
             this.rndBodyTypeChkBox.UseVisualStyleBackColor = true;
+            this.rndBodyTypeChkBox.CheckedChanged += new System.EventHandler(this.rndBodyTypeChkBox_CheckedChanged);
             // 
             // rndSpecializationChkBox
             // 
@@ -158,6 +191,7 @@ namespace AdeptusEvangelionGmTools
             this.rndSpecializationChkBox.TabIndex = 8;
             this.rndSpecializationChkBox.Text = "Random";
             this.rndSpecializationChkBox.UseVisualStyleBackColor = true;
+            this.rndSpecializationChkBox.CheckedChanged += new System.EventHandler(this.rndSpecializationChkBox_CheckedChanged);
             // 
             // label4
             // 
@@ -170,11 +204,13 @@ namespace AdeptusEvangelionGmTools
             // 
             // SizeCombo
             // 
+            this.SizeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SizeCombo.FormattingEnabled = true;
             this.SizeCombo.Location = new System.Drawing.Point(5, 232);
             this.SizeCombo.Name = "SizeCombo";
             this.SizeCombo.Size = new System.Drawing.Size(121, 24);
             this.SizeCombo.TabIndex = 6;
+            this.SizeCombo.TextChanged += new System.EventHandler(this.SizeCombo_TextChanged);
             // 
             // label3
             // 
@@ -187,11 +223,13 @@ namespace AdeptusEvangelionGmTools
             // 
             // LocomotionCombo
             // 
+            this.LocomotionCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LocomotionCombo.FormattingEnabled = true;
             this.LocomotionCombo.Location = new System.Drawing.Point(6, 185);
             this.LocomotionCombo.Name = "LocomotionCombo";
             this.LocomotionCombo.Size = new System.Drawing.Size(121, 24);
             this.LocomotionCombo.TabIndex = 4;
+            this.LocomotionCombo.TextChanged += new System.EventHandler(this.LocomotionCombo_TextChanged);
             // 
             // label2
             // 
@@ -213,19 +251,23 @@ namespace AdeptusEvangelionGmTools
             // 
             // BodyTypeCombo
             // 
+            this.BodyTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BodyTypeCombo.FormattingEnabled = true;
             this.BodyTypeCombo.Location = new System.Drawing.Point(6, 138);
             this.BodyTypeCombo.Name = "BodyTypeCombo";
             this.BodyTypeCombo.Size = new System.Drawing.Size(121, 24);
             this.BodyTypeCombo.TabIndex = 1;
+            this.BodyTypeCombo.TextChanged += new System.EventHandler(this.BodyTypeCombo_TextChanged);
             // 
             // SpecializationCombo
             // 
+            this.SpecializationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SpecializationCombo.FormattingEnabled = true;
             this.SpecializationCombo.Location = new System.Drawing.Point(5, 91);
             this.SpecializationCombo.Name = "SpecializationCombo";
             this.SpecializationCombo.Size = new System.Drawing.Size(121, 24);
             this.SpecializationCombo.TabIndex = 0;
+            this.SpecializationCombo.TextChanged += new System.EventHandler(this.SpecializationCombo_TextChanged);
             // 
             // richTextBox1
             // 
@@ -264,33 +306,6 @@ namespace AdeptusEvangelionGmTools
             this.GenButton.UseVisualStyleBackColor = true;
             this.GenButton.Click += new System.EventHandler(this.GenButton_Click);
             // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 25);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(65, 17);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "Difficulty:";
-            // 
-            // DifficultyBox
-            // 
-            this.DifficultyBox.FormattingEnabled = true;
-            this.DifficultyBox.Location = new System.Drawing.Point(5, 45);
-            this.DifficultyBox.Name = "DifficultyBox";
-            this.DifficultyBox.Size = new System.Drawing.Size(121, 24);
-            this.DifficultyBox.TabIndex = 12;
-            // 
-            // RandomDifficulty
-            // 
-            this.RandomDifficulty.AutoSize = true;
-            this.RandomDifficulty.Location = new System.Drawing.Point(133, 48);
-            this.RandomDifficulty.Name = "RandomDifficulty";
-            this.RandomDifficulty.Size = new System.Drawing.Size(83, 21);
-            this.RandomDifficulty.TabIndex = 14;
-            this.RandomDifficulty.Text = "Random";
-            this.RandomDifficulty.UseVisualStyleBackColor = true;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -303,12 +318,13 @@ namespace AdeptusEvangelionGmTools
             // RandomWS
             // 
             this.RandomWS.AutoSize = true;
-            this.RandomWS.Location = new System.Drawing.Point(149, 25);
+            this.RandomWS.Location = new System.Drawing.Point(148, 26);
             this.RandomWS.Name = "RandomWS";
             this.RandomWS.Size = new System.Drawing.Size(83, 21);
             this.RandomWS.TabIndex = 2;
             this.RandomWS.Text = "Random";
             this.RandomWS.UseVisualStyleBackColor = true;
+            this.RandomWS.CheckedChanged += new System.EventHandler(this.RandomWS_CheckedChanged);
             // 
             // label6
             // 
@@ -322,12 +338,13 @@ namespace AdeptusEvangelionGmTools
             // RandomBS
             // 
             this.RandomBS.AutoSize = true;
-            this.RandomBS.Location = new System.Drawing.Point(149, 54);
+            this.RandomBS.Location = new System.Drawing.Point(148, 56);
             this.RandomBS.Name = "RandomBS";
             this.RandomBS.Size = new System.Drawing.Size(83, 21);
             this.RandomBS.TabIndex = 5;
             this.RandomBS.Text = "Random";
             this.RandomBS.UseVisualStyleBackColor = true;
+            this.RandomBS.CheckedChanged += new System.EventHandler(this.RandomBS_CheckedChanged);
             // 
             // label7
             // 
@@ -341,12 +358,13 @@ namespace AdeptusEvangelionGmTools
             // RandomStrength
             // 
             this.RandomStrength.AutoSize = true;
-            this.RandomStrength.Location = new System.Drawing.Point(149, 80);
+            this.RandomStrength.Location = new System.Drawing.Point(148, 84);
             this.RandomStrength.Name = "RandomStrength";
             this.RandomStrength.Size = new System.Drawing.Size(83, 21);
             this.RandomStrength.TabIndex = 8;
             this.RandomStrength.Text = "Random";
             this.RandomStrength.UseVisualStyleBackColor = true;
+            this.RandomStrength.CheckedChanged += new System.EventHandler(this.RandomStrength_CheckedChanged);
             // 
             // label8
             // 
@@ -360,12 +378,13 @@ namespace AdeptusEvangelionGmTools
             // RandomToughness
             // 
             this.RandomToughness.AutoSize = true;
-            this.RandomToughness.Location = new System.Drawing.Point(149, 108);
+            this.RandomToughness.Location = new System.Drawing.Point(148, 113);
             this.RandomToughness.Name = "RandomToughness";
             this.RandomToughness.Size = new System.Drawing.Size(83, 21);
             this.RandomToughness.TabIndex = 11;
             this.RandomToughness.Text = "Random";
             this.RandomToughness.UseVisualStyleBackColor = true;
+            this.RandomToughness.CheckedChanged += new System.EventHandler(this.RandomToughness_CheckedChanged);
             // 
             // label9
             // 
@@ -379,12 +398,13 @@ namespace AdeptusEvangelionGmTools
             // RandomAgility
             // 
             this.RandomAgility.AutoSize = true;
-            this.RandomAgility.Location = new System.Drawing.Point(149, 135);
+            this.RandomAgility.Location = new System.Drawing.Point(148, 140);
             this.RandomAgility.Name = "RandomAgility";
             this.RandomAgility.Size = new System.Drawing.Size(83, 21);
             this.RandomAgility.TabIndex = 14;
             this.RandomAgility.Text = "Random";
             this.RandomAgility.UseVisualStyleBackColor = true;
+            this.RandomAgility.CheckedChanged += new System.EventHandler(this.RandomAgility_CheckedChanged);
             // 
             // label10
             // 
@@ -398,12 +418,13 @@ namespace AdeptusEvangelionGmTools
             // RandomInt
             // 
             this.RandomInt.AutoSize = true;
-            this.RandomInt.Location = new System.Drawing.Point(149, 164);
+            this.RandomInt.Location = new System.Drawing.Point(148, 169);
             this.RandomInt.Name = "RandomInt";
             this.RandomInt.Size = new System.Drawing.Size(83, 21);
             this.RandomInt.TabIndex = 17;
             this.RandomInt.Text = "Random";
             this.RandomInt.UseVisualStyleBackColor = true;
+            this.RandomInt.CheckedChanged += new System.EventHandler(this.RandomInt_CheckedChanged);
             // 
             // label14
             // 
@@ -417,12 +438,13 @@ namespace AdeptusEvangelionGmTools
             // RandomPer
             // 
             this.RandomPer.AutoSize = true;
-            this.RandomPer.Location = new System.Drawing.Point(148, 192);
+            this.RandomPer.Location = new System.Drawing.Point(148, 198);
             this.RandomPer.Name = "RandomPer";
             this.RandomPer.Size = new System.Drawing.Size(83, 21);
             this.RandomPer.TabIndex = 20;
             this.RandomPer.Text = "Random";
             this.RandomPer.UseVisualStyleBackColor = true;
+            this.RandomPer.CheckedChanged += new System.EventHandler(this.RandomPer_CheckedChanged);
             // 
             // label13
             // 
@@ -436,12 +458,13 @@ namespace AdeptusEvangelionGmTools
             // RandomWP
             // 
             this.RandomWP.AutoSize = true;
-            this.RandomWP.Location = new System.Drawing.Point(149, 221);
+            this.RandomWP.Location = new System.Drawing.Point(148, 225);
             this.RandomWP.Name = "RandomWP";
             this.RandomWP.Size = new System.Drawing.Size(83, 21);
             this.RandomWP.TabIndex = 23;
             this.RandomWP.Text = "Random";
             this.RandomWP.UseVisualStyleBackColor = true;
+            this.RandomWP.CheckedChanged += new System.EventHandler(this.RandomWP_CheckedChanged);
             // 
             // label12
             // 
@@ -455,12 +478,13 @@ namespace AdeptusEvangelionGmTools
             // RandomFel
             // 
             this.RandomFel.AutoSize = true;
-            this.RandomFel.Location = new System.Drawing.Point(149, 248);
+            this.RandomFel.Location = new System.Drawing.Point(148, 254);
             this.RandomFel.Name = "RandomFel";
             this.RandomFel.Size = new System.Drawing.Size(83, 21);
             this.RandomFel.TabIndex = 26;
             this.RandomFel.Text = "Random";
             this.RandomFel.UseVisualStyleBackColor = true;
+            this.RandomFel.CheckedChanged += new System.EventHandler(this.RandomFel_CheckedChanged);
             // 
             // label11
             // 
@@ -474,12 +498,13 @@ namespace AdeptusEvangelionGmTools
             // RandomSR
             // 
             this.RandomSR.AutoSize = true;
-            this.RandomSR.Location = new System.Drawing.Point(149, 277);
+            this.RandomSR.Location = new System.Drawing.Point(147, 282);
             this.RandomSR.Name = "RandomSR";
             this.RandomSR.Size = new System.Drawing.Size(83, 21);
             this.RandomSR.TabIndex = 29;
             this.RandomSR.Text = "Random";
             this.RandomSR.UseVisualStyleBackColor = true;
+            this.RandomSR.CheckedChanged += new System.EventHandler(this.RandomSR_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -520,75 +545,75 @@ namespace AdeptusEvangelionGmTools
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Attributes";
             // 
-            // WSValue
+            // SRValue
             // 
-            this.WSValue.Location = new System.Drawing.Point(43, 24);
-            this.WSValue.Name = "WSValue";
-            this.WSValue.Size = new System.Drawing.Size(99, 22);
-            this.WSValue.TabIndex = 30;
-            // 
-            // BSValue
-            // 
-            this.BSValue.Location = new System.Drawing.Point(43, 54);
-            this.BSValue.Name = "BSValue";
-            this.BSValue.Size = new System.Drawing.Size(99, 22);
-            this.BSValue.TabIndex = 31;
-            // 
-            // StrengthValue
-            // 
-            this.StrengthValue.Location = new System.Drawing.Point(43, 82);
-            this.StrengthValue.Name = "StrengthValue";
-            this.StrengthValue.Size = new System.Drawing.Size(99, 22);
-            this.StrengthValue.TabIndex = 32;
-            // 
-            // ToughnessValue
-            // 
-            this.ToughnessValue.Location = new System.Drawing.Point(43, 111);
-            this.ToughnessValue.Name = "ToughnessValue";
-            this.ToughnessValue.Size = new System.Drawing.Size(99, 22);
-            this.ToughnessValue.TabIndex = 33;
-            // 
-            // AgilityValue
-            // 
-            this.AgilityValue.Location = new System.Drawing.Point(43, 139);
-            this.AgilityValue.Name = "AgilityValue";
-            this.AgilityValue.Size = new System.Drawing.Size(99, 22);
-            this.AgilityValue.TabIndex = 34;
-            // 
-            // IntValue
-            // 
-            this.IntValue.Location = new System.Drawing.Point(43, 167);
-            this.IntValue.Name = "IntValue";
-            this.IntValue.Size = new System.Drawing.Size(99, 22);
-            this.IntValue.TabIndex = 35;
-            // 
-            // PerValue
-            // 
-            this.PerValue.Location = new System.Drawing.Point(44, 197);
-            this.PerValue.Name = "PerValue";
-            this.PerValue.Size = new System.Drawing.Size(99, 22);
-            this.PerValue.TabIndex = 36;
-            // 
-            // WPValue
-            // 
-            this.WPValue.Location = new System.Drawing.Point(43, 225);
-            this.WPValue.Name = "WPValue";
-            this.WPValue.Size = new System.Drawing.Size(99, 22);
-            this.WPValue.TabIndex = 37;
+            this.SRValue.Location = new System.Drawing.Point(42, 281);
+            this.SRValue.Name = "SRValue";
+            this.SRValue.Size = new System.Drawing.Size(99, 22);
+            this.SRValue.TabIndex = 39;
             // 
             // FelValue
             // 
-            this.FelValue.Location = new System.Drawing.Point(44, 253);
+            this.FelValue.Location = new System.Drawing.Point(42, 253);
             this.FelValue.Name = "FelValue";
             this.FelValue.Size = new System.Drawing.Size(99, 22);
             this.FelValue.TabIndex = 38;
             // 
-            // SRValue
+            // WPValue
             // 
-            this.SRValue.Location = new System.Drawing.Point(44, 281);
-            this.SRValue.Name = "SRValue";
-            this.SRValue.Size = new System.Drawing.Size(99, 22);
-            this.SRValue.TabIndex = 39;
+            this.WPValue.Location = new System.Drawing.Point(42, 225);
+            this.WPValue.Name = "WPValue";
+            this.WPValue.Size = new System.Drawing.Size(99, 22);
+            this.WPValue.TabIndex = 37;
+            // 
+            // PerValue
+            // 
+            this.PerValue.Location = new System.Drawing.Point(42, 197);
+            this.PerValue.Name = "PerValue";
+            this.PerValue.Size = new System.Drawing.Size(99, 22);
+            this.PerValue.TabIndex = 36;
+            // 
+            // IntValue
+            // 
+            this.IntValue.Location = new System.Drawing.Point(42, 168);
+            this.IntValue.Name = "IntValue";
+            this.IntValue.Size = new System.Drawing.Size(99, 22);
+            this.IntValue.TabIndex = 35;
+            // 
+            // AgilityValue
+            // 
+            this.AgilityValue.Location = new System.Drawing.Point(42, 140);
+            this.AgilityValue.Name = "AgilityValue";
+            this.AgilityValue.Size = new System.Drawing.Size(99, 22);
+            this.AgilityValue.TabIndex = 34;
+            // 
+            // ToughnessValue
+            // 
+            this.ToughnessValue.Location = new System.Drawing.Point(42, 112);
+            this.ToughnessValue.Name = "ToughnessValue";
+            this.ToughnessValue.Size = new System.Drawing.Size(99, 22);
+            this.ToughnessValue.TabIndex = 33;
+            // 
+            // StrengthValue
+            // 
+            this.StrengthValue.Location = new System.Drawing.Point(42, 83);
+            this.StrengthValue.Name = "StrengthValue";
+            this.StrengthValue.Size = new System.Drawing.Size(99, 22);
+            this.StrengthValue.TabIndex = 32;
+            // 
+            // BSValue
+            // 
+            this.BSValue.Location = new System.Drawing.Point(42, 54);
+            this.BSValue.Name = "BSValue";
+            this.BSValue.Size = new System.Drawing.Size(99, 22);
+            this.BSValue.TabIndex = 31;
+            // 
+            // WSValue
+            // 
+            this.WSValue.Location = new System.Drawing.Point(42, 25);
+            this.WSValue.Name = "WSValue";
+            this.WSValue.Size = new System.Drawing.Size(99, 22);
+            this.WSValue.TabIndex = 30;
             // 
             // AngelGenerator
             // 
@@ -607,16 +632,16 @@ namespace AdeptusEvangelionGmTools
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.WSValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BSValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StrengthValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ToughnessValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AgilityValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.IntValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PerValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WPValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FelValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SRValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FelValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WPValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PerValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.IntValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AgilityValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ToughnessValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StrengthValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BSValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WSValue)).EndInit();
             this.ResumeLayout(false);
 
         }
