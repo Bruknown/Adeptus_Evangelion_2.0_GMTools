@@ -48,25 +48,51 @@ namespace AdeptusEvangelionGmTools.Objects
                     int weaponSkill, int strength, int toughness, int agility,
                     int intelligence, int perception, int willpower, int fellowship, int synchRatio)
         {
-            switch (difficulty.Name)
+            InitiateComponents();
+            if (difficulty == null)
             {
-                case "Introductory":
-
-                    break;
-                case "Easy":
-                    break;
-                case "Medium":
-                    break;
-                case "hard":
-                    break;
-                case "Apocalyptic":
-                    break;
+                this.difficulty = RandomDifficulty();
             }
-            this.bodyType = bodyType;
-            this.difficulty = difficulty;
-            this.locomotion = locomotion;
-            this.size = size;
-            this.specialization = specialization;
+            else
+            {
+                this.difficulty = difficulty;
+            }
+
+            if (specialization == null)
+            {
+                int randomSpecialization = rnd.Next(1, 101);
+                this.specialization = RandomSpecialization(randomSpecialization);
+            }
+            else
+            {
+                this.specialization = specialization;
+            }
+
+            if (bodyType == null)
+            {
+                int randomBodyType = rnd.Next(1, 101);
+                this.bodyType = RandomBodyType(randomBodyType);
+            }
+            else
+            {
+                this.bodyType = bodyType;
+            }
+            if (locomotion == null)
+            {
+                this.locomotion = RandomLocomotion();
+            }
+            else
+            {
+                this.locomotion = locomotion;
+            }
+            if (size == null)
+            {
+                this.size = RandomSize();
+            }
+            else
+            {
+                this.size = size;
+            }
             BallisticSkill = ballisticSkill;
             WeaponSkill = weaponSkill;
             Strength = strength;
@@ -78,6 +104,7 @@ namespace AdeptusEvangelionGmTools.Objects
             Fellowship = fellowship;
             SynchRatio = synchRatio;
         }
+
         #endregion
         #region Private Methods
         private void InitiateComponents()
@@ -122,6 +149,107 @@ namespace AdeptusEvangelionGmTools.Objects
                 new Specialization("Distance Fighting","Distance Fighting angels have dedicated tools for keeping enemies at distance and dealing massive damage, usually squishy in close quarters"),
                 new Specialization("Encroachment","Encroachment angels have specialized tools for dealing with pilots, attacking them directly"),
             };
+        }
+
+        private BodySize RandomSize()
+        {
+            return null;
+        }
+
+        private Locomotion RandomLocomotion()
+        {
+            return null;
+        }
+
+        private BodyType RandomBodyType(int randomBodyType)
+        {
+            if (specialization.Name.Equals("Frontal Assault"))
+                return RandomBodyTypeFrontalAssault(randomBodyType);
+            else if (specialization.Name.Equals("Distance Fighting"))
+                return RandomBodyTypeDistanceFighting(randomBodyType);
+            else if (specialization.Name.Equals("Encroachment"))
+                return RandomBodyTypeEncroachment(randomBodyType);
+
+            return RandomBodyType(rnd.Next(1, 101));
+        }
+
+        private BodyType RandomBodyTypeFrontalAssault(int randomBodyType)
+        {
+            if (randomBodyType >= 1 && randomBodyType <= 35)
+                return ComboBoxBodyType[0];
+            else if (randomBodyType >= 36 && randomBodyType <= 50)
+                return ComboBoxBodyType[1];
+            else if (randomBodyType >= 51 && randomBodyType <= 70)
+                return ComboBoxBodyType[3];
+            else if (randomBodyType >= 71 && randomBodyType <= 80)
+                return ComboBoxBodyType[4];
+            else if (randomBodyType >= 81 && randomBodyType <= 100)
+                return ComboBoxBodyType[5];
+
+            return RandomBodyTypeDistanceFighting(rnd.Next(1, 101));
+        }
+        private BodyType RandomBodyTypeDistanceFighting(int randomBodyType)
+        {
+            if (randomBodyType >= 1 && randomBodyType <= 5)
+                return ComboBoxBodyType[0]; //bipedal
+            else if (randomBodyType >= 6 && randomBodyType <= 20)
+                return ComboBoxBodyType[1]; //insectile
+            else if (randomBodyType >= 21 && randomBodyType <= 40)
+                return ComboBoxBodyType[2]; //orbital
+            else if (randomBodyType >= 41 && randomBodyType <= 45)
+                return ComboBoxBodyType[3]; //bestial
+            else if (randomBodyType >= 46 && randomBodyType <= 70)
+                return ComboBoxBodyType[4]; //artificial
+            else if (randomBodyType >= 71 && randomBodyType <= 100)
+                return ComboBoxBodyType[5]; //amorphous
+
+            return RandomBodyTypeDistanceFighting(rnd.Next(1, 101));
+        }
+        private BodyType RandomBodyTypeEncroachment(int randomBodyType)
+        {
+            if (randomBodyType >= 1 && randomBodyType <= 15)
+                return ComboBoxBodyType[0];
+            else if (randomBodyType >= 16 && randomBodyType <= 30)
+                return ComboBoxBodyType[1];
+            else if (randomBodyType >= 31 && randomBodyType <= 50)
+                return ComboBoxBodyType[2];
+            else if (randomBodyType >= 51 && randomBodyType <= 60)
+                return ComboBoxBodyType[3];
+            else if (randomBodyType >= 61 && randomBodyType <= 70)
+                return ComboBoxBodyType[4];
+            else if (randomBodyType >= 71 && randomBodyType <= 100)
+                return ComboBoxBodyType[5];
+
+            return RandomBodyTypeEncroachment(rnd.Next(1, 101));
+        }
+
+        private Specialization RandomSpecialization(int randomSpec)
+        {
+            if (difficulty.Name.Equals("Introductory") || difficulty.Name.Equals("Easy"))
+            {
+                return ComboBoxSpecialization[rnd.Next(0, 1)];
+            }
+            else
+            {
+                if (randomSpec >= 1 && randomSpec <= 40)
+                {
+                    return ComboBoxSpecialization[0];
+                }
+                if (randomSpec >= 41 && randomSpec <= 80)
+                {
+                    return ComboBoxSpecialization[1];
+                }
+                if (randomSpec >= 81 && randomSpec <= 100)
+                {
+                    return ComboBoxSpecialization[2];
+                }
+            }
+            return RandomSpecialization(rnd.Next(1, 101));
+        }
+
+        private Difficulty RandomDifficulty()
+        {
+            return ComboBoxDifficulty[rnd.Next(0, ComboBoxDifficulty.Count())];
         }
         #endregion
     }
