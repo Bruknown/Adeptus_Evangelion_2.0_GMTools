@@ -1,5 +1,5 @@
 # Adeptus_Evangelion_2.0_GMTools
-##A handy tool for AdEva Gms
+## A handy tool for AdEva Gms
 
 ## Planned additions:
 
@@ -21,6 +21,6 @@
 
 9. **same as 8. but for microphones...To do**
 
-###When every Obligatory item has been completed the first version of this app shall be released
+### When every Obligatory item has been completed the first version of this app shall be released
 
-###Until then, it wont leave Beta/Alpha state
+### Until then, it wont leave Beta/Alpha state
