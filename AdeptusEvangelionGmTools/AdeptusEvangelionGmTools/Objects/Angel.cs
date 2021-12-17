@@ -24,6 +24,7 @@ namespace AdeptusEvangelionGmTools.Objects
         public Locomotion locomotion { get; set; }
         public BodySize size { get; set; }
         public Specialization specialization { get; set; }
+        public Body body { get; set; }
 
         public int BallisticSkill { get; set; }
         public int WeaponSkill { get; set; }
@@ -49,60 +50,26 @@ namespace AdeptusEvangelionGmTools.Objects
                     int intelligence, int perception, int willpower, int fellowship, int synchRatio)
         {
             InitiateComponents();
-            if (difficulty == null)
-            {
-                this.difficulty = RandomDifficulty();
-            }
-            else
-            {
-                this.difficulty = difficulty;
-            }
 
-            if (specialization == null)
-            {
-                int randomSpecialization = rnd.Next(1, 101);
-                this.specialization = RandomSpecialization(randomSpecialization);
-            }
-            else
-            {
-                this.specialization = specialization;
-            }
+            this.difficulty     = (this.difficulty == null)     ? this.difficulty       = RandomDifficulty() : this.difficulty = difficulty;
+            this.specialization = (this.specialization == null) ? this.specialization   = RandomSpecialization(rnd.Next(1, 101)) : this.specialization = specialization;
+            this.bodyType       = (this.bodyType == null)       ? this.bodyType         = RandomBodyType(rnd.Next(1, 101)) : this.bodyType = bodyType;
+            this.locomotion     = (this.locomotion == null)     ? this.locomotion       = RandomLocomotion(rnd.Next(1, 101), this.bodyType) : this.locomotion = locomotion;
+            this.size           = (this.size == null)           ? this.size             = RandomSize(rnd.Next(1, 101), this.bodyType) : this.size = size;
+            
+            BallisticSkill  = (BallisticSkill == 0) ? BallisticSkill    = RandomBS(rnd.Next(1, 101), this.specialization)    : BallisticSkill = ballisticSkill;
+            WeaponSkill     = (WeaponSkill == 0)    ? WeaponSkill       = RandomWS(rnd.Next(1, 101), this.specialization)    : WeaponSkill = weaponSkill;
+            Strength        = (Strength == 0)       ? Strength          = RandomStr(rnd.Next(1, 101), this.specialization)   : Strength = strength;
+            Toughness       = (Toughness == 0)      ? Toughness         = RandomTough(rnd.Next(1, 101), this.specialization) : Toughness = toughness;
+            Agility         = (Agility == 0)        ? Agility           = RandomAgi(rnd.Next(1, 101), this.specialization)   : Agility = agility;
+            Intelligence    = (Intelligence == 0)   ? Intelligence      = RandomInt(rnd.Next(1, 101), this.specialization)   : Intelligence = intelligence;
+            Perception      = (Perception == 0)     ? Perception        = RandomPer(rnd.Next(1, 101), this.specialization)   : Perception = perception;
+            Willpower       = (Willpower == 0)      ? Willpower         = RandomWP(rnd.Next(1, 101), this.specialization)    : Willpower = willpower;
+            Fellowship      = (Fellowship == 0)     ? Fellowship        = RandomFel(rnd.Next(1, 101), this.specialization)   : Fellowship = fellowship;
+            SynchRatio      = (SynchRatio == 0)     ? SynchRatio        = RandomSR(rnd.Next(1, 101), this.specialization)    : SynchRatio = synchRatio;
 
-            if (bodyType == null)
-            {
-                int randomBodyType = rnd.Next(1, 101);
-                this.bodyType = RandomBodyType(randomBodyType);
-            }
-            else
-            {
-                this.bodyType = bodyType;
-            }
-            if (locomotion == null)
-            {
-                this.locomotion = RandomLocomotion();
-            }
-            else
-            {
-                this.locomotion = locomotion;
-            }
-            if (size == null)
-            {
-                this.size = RandomSize();
-            }
-            else
-            {
-                this.size = size;
-            }
-            BallisticSkill = ballisticSkill;
-            WeaponSkill = weaponSkill;
-            Strength = strength;
-            Toughness = toughness;
-            Agility = agility;
-            Intelligence = intelligence;
-            Perception = perception;
-            Willpower = willpower;
-            Fellowship = fellowship;
-            SynchRatio = synchRatio;
+            body = new Body(Toughness, bodyType.Name);
+
         }
 
         #endregion
@@ -150,17 +117,608 @@ namespace AdeptusEvangelionGmTools.Objects
                 new Specialization("Encroachment","Encroachment angels have specialized tools for dealing with pilots, attacking them directly"),
             };
         }
-
-        private BodySize RandomSize()
+        private void ArmorHandling(int randomArmor, Specialization specialization)
         {
+            switch(specialization.Name)
+            {
+                case "Frontal Assault":
+                    if (randomArmor >= 11 || randomArmor <= 25)
+                    {
+                        body.Head.Armor = 2;
+                        body.Torso.Armor = 2;
+                    }
+                    else if (randomArmor >= 26 || randomArmor <= 60)
+                    {
+                        int armor = rnd.Next(1, 6);
+                        body.Head.Armor = armor;
+                        body.Torso.Armor = armor;
+                    }
+                    else if (randomArmor >= 61 || randomArmor <= 85)
+                    {
+                        int armor = rnd.Next(1, 6)+2;
+                        body.Head.Armor = armor;
+                        body.Torso.Armor = armor;
+                        body.Core.Armor = armor;
+                        body.LeftArm.Armor = 2;
+                        body.RightArm.Armor = 2;
+                        body.RightLeg.Armor = 2;
+                        body.LeftLeg.Armor = 2;
+                    }
+                    else if (randomArmor >= 86 || randomArmor <= 95)
+                    {
+                        int armor = rnd.Next(1, 6) + 4;
+                        int armorlimb = rnd.Next(1, 6);
+                        body.Head.Armor = armor;
+                        body.Torso.Armor = armor;
+                        body.Core.Armor = armor;
+                        body.LeftArm.Armor = armorlimb;
+                        body.RightArm.Armor = armorlimb;
+                        body.RightLeg.Armor = armorlimb;
+                        body.LeftLeg.Armor = armorlimb;
+                    }
+                    else if (randomArmor >= 96 || randomArmor <= 100)
+                    {
+                        int armor = rnd.Next(1, 11) + 5;
+                        int armorlimb = rnd.Next(1, 6) +2;
+                        body.Head.Armor = armor;
+                        body.Torso.Armor = armor;
+                        body.Core.Armor = armor;
+                        body.LeftArm.Armor = armorlimb;
+                        body.RightArm.Armor = armorlimb;
+                        body.RightLeg.Armor = armorlimb;
+                        body.LeftLeg.Armor = armorlimb;
+                    }
+                    break;
+                case "Distance Fighting":
+                    break;
+                case "Encroacher":
+                    break;
+            }
+        }
+        private int RandomBS(int randomBS, Specialization spec)
+        {
+            switch (spec.Name)
+            {
+                case "Frontal Assault":
+                    if (randomBS >= 1 && randomBS <= 40)
+                        return 35;
+                    if (randomBS >= 41 && randomBS <= 70)
+                        return 40;
+                    if (randomBS >= 71 && randomBS <= 90)
+                        return 45;
+                    if (randomBS >= 91 && randomBS <= 100)
+                        return 50;
+                    break;
+                case "Distance Fighting":
+                    if (randomBS >= 1 && randomBS <= 25)
+                        return 10;
+                    if (randomBS >= 26 && randomBS <= 50)
+                        return 20;
+                    if (randomBS >= 51 && randomBS <= 80)
+                        return 35;
+                    if (randomBS >= 81 && randomBS <= 100)
+                        return 40;
+                    break;
+                case "Encroachment":
+                    if (randomBS >= 1 && randomBS <= 10)
+                        return 10;
+                    if (randomBS >= 11 && randomBS <= 20)
+                        return 20;
+                    if (randomBS >= 21 && randomBS <= 40)
+                        return 35;
+                    if (randomBS >= 41 && randomBS <= 90)
+                        return 40;
+                    if (randomBS >= 91 && randomBS <= 95)
+                        return 45;
+                    if (randomBS >= 96 && randomBS <= 100)
+                        return 50;
+                    break;
+            }
+            return 0;
+        }
+        private int RandomWS(int randomWS, Specialization spec)
+        {
+            switch (spec.Name)
+            {
+                case "Frontal Assault":
+                    if (randomWS >= 1 && randomWS <= 15)
+                        return 10;
+                    if (randomWS >= 16 && randomWS <= 40)
+                        return 40;
+                    if (randomWS >= 41 && randomWS <= 85)
+                        return 45;
+                    if (randomWS >= 86 && randomWS <= 100)
+                        return 50;
+                    break;
+                case "Distance Fighting":
+                    if (randomWS >= 1 && randomWS <= 5)
+                        return 20;
+                    if (randomWS >= 6 && randomWS <= 20)
+                        return 35;
+                    if (randomWS >= 21 && randomWS <= 60)
+                        return 40;
+                    if (randomWS >= 61 && randomWS <= 90)
+                        return 45;
+                    if (randomWS >= 91 && randomWS <= 100)
+                        return 50;
+                    break;
+                case "Encroachment":
+                    if (randomWS >= 1 && randomWS <= 10)
+                        return 10;
+                    if (randomWS >= 11 && randomWS <= 20)
+                        return 20;
+                    if (randomWS >= 21 && randomWS <= 40)
+                        return 35;
+                    if (randomWS >= 41 && randomWS <= 90)
+                        return 40;
+                    if (randomWS >= 91 && randomWS <= 95)
+                        return 45;
+                    if (randomWS >= 96 && randomWS <= 100)
+                        return 50;
+                    break;
+            }
+            return 0;
+        }
+        private int RandomStr(int randomStr, Specialization spec)
+        {
+            switch (spec.Name)
+            {
+                case "Frontal Assault":
+                    if (randomStr >= 1 && randomStr <= 10)
+                        return 20;
+                    if (randomStr >= 11 && randomStr <= 20)
+                        return 30;
+                    if (randomStr >= 21 && randomStr <= 60)
+                        return 40;
+                    if (randomStr >= 61 && randomStr <= 75)
+                        return 45;
+                    if (randomStr >= 76 && randomStr <= 85)
+                        return 50;
+                    if (randomStr >= 86 && randomStr <= 95)
+                        return 55;
+                    if (randomStr >= 96 && randomStr <= 100)
+                        return 60;
+                    break;
+                case "Distance Fighting":
+                    if (randomStr >= 1 && randomStr <= 20)
+                        return 10;
+                    if (randomStr >= 21 && randomStr <= 50)
+                        return 20;
+                    if (randomStr >= 51 && randomStr <= 90)
+                        return 30;
+                    if (randomStr >= 91 && randomStr <= 100)
+                        return 40;
+                    break;
+                case "Encroachment":
+                    if (randomStr >= 1 && randomStr <= 15)
+                        return 10;
+                    if (randomStr >= 16 && randomStr <= 30)
+                        return 20;
+                    if (randomStr >= 31 && randomStr <= 65)
+                        return 30;
+                    if (randomStr >= 66 && randomStr <= 75)
+                        return 40;
+                    if (randomStr >= 76 && randomStr <= 85)
+                        return 45;
+                    if (randomStr >= 86 && randomStr <= 95)
+                        return 50;
+                    if (randomStr >= 96 && randomStr <= 100)
+                        return 55;
+                    break;
+            }
+            return 0;
+        }
+        private int RandomTough(int randomTough, Specialization spec)
+        {
+            switch (spec.Name)
+            {
+                case "Frontal Assault":
+                    if (randomTough >= 1 && randomTough <= 5)
+                        return 10;
+                    if (randomTough >= 6 && randomTough <= 10)
+                        return 20;
+                    if (randomTough >= 11 && randomTough <= 40)
+                        return 35;
+                    if (randomTough >= 41 && randomTough <= 80)
+                        return 40;
+                    if (randomTough >= 81 && randomTough <= 95)
+                        return 45;
+                    if (randomTough >= 96 && randomTough <= 100)
+                        return 50;
+                    break;
+                case "Distance Fighting":
+                    if (randomTough >= 1 && randomTough <= 10)
+                        return 10;
+                    if (randomTough >= 11 && randomTough <= 20)
+                        return 20;
+                    if (randomTough >= 21 && randomTough <= 30)
+                        return 35;
+                    if (randomTough >= 31 && randomTough <= 70)
+                        return 40;
+                    if (randomTough >= 71 && randomTough <= 85)
+                        return 45;
+                    if (randomTough >= 86 && randomTough <= 100)
+                        return 50;
+                    break;
+                case "Encroachment":
+                    if (randomTough >= 1 && randomTough <= 35)
+                        return 10;
+                    if (randomTough >= 36 && randomTough <= 70)
+                        return 20;
+                    if (randomTough >= 71 && randomTough <= 99)
+                        return 35;
+                    if (randomTough == 100)
+                        return 40;
+                    break;
+            }
+            return 0;
+        }
+        private int RandomAgi(int randomAgi, Specialization spec)
+        {
+            switch (spec.Name)
+            {
+                case "Frontal Assault":
+                    if (randomAgi >= 1 && randomAgi <= 15)
+                        return 10;
+                    if (randomAgi >= 16 && randomAgi <= 30)
+                        return 20;
+                    if (randomAgi >= 31 && randomAgi <= 50)
+                        return 30;
+                    if (randomAgi >= 51 && randomAgi <= 75)
+                        return 40;
+                    if (randomAgi >= 76 && randomAgi <= 90)
+                        return 50;
+                    if (randomAgi >= 91 && randomAgi <= 100)
+                        return 60;
+                    break;
+                case "Distance Fighting":
+                    if (randomAgi >= 1 && randomAgi <= 20)
+                        return 10;
+                    if (randomAgi >= 21 && randomAgi <= 45)
+                        return 20;
+                    if (randomAgi >= 46 && randomAgi <= 80)
+                        return 30;
+                    if (randomAgi >= 81 && randomAgi <= 100)
+                        return 40;
+                    break;
+                case "Encroachment":
+                    if (randomAgi >= 1 && randomAgi <= 5)
+                        return 10;
+                    if (randomAgi >= 6 && randomAgi <= 15)
+                        return 20;
+                    if (randomAgi >= 16 && randomAgi <= 40)
+                        return 30;
+                    if (randomAgi >= 41 && randomAgi <= 80)
+                        return 40;
+                    if (randomAgi >= 81 && randomAgi <= 95)
+                        return 50;
+                    if (randomAgi >= 96 && randomAgi <= 100)
+                        return 60;
+                    break;
+            }
+            return 0;
+        }
+        private int RandomInt(int randomInt, Specialization spec)
+        {
+            switch (spec.Name)
+            {
+                case "Frontal Assault":
+                    if (randomInt >= 1 && randomInt <= 40)
+                        return 20;
+                    if (randomInt >= 41 && randomInt <= 75)
+                        return 30;
+                    if (randomInt >= 76 && randomInt <= 90)
+                        return 40;
+                    if (randomInt >= 91 && randomInt <= 100)
+                        return 50;
+                    break;
+                case "Distance Fighting":
+                    if (randomInt >= 1 && randomInt <= 30)
+                        return 30;
+                    if (randomInt >= 31 && randomInt <= 80)
+                        return 40;
+                    if (randomInt >= 81 && randomInt <= 100)
+                        return 50;
+                    break;
+                case "Encroachment":
+                    if (randomInt >= 1 && randomInt <= 20)
+                        return 20;
+                    if (randomInt >= 21 && randomInt <= 50)
+                        return 30;
+                    if (randomInt >= 51 && randomInt <= 75)
+                        return 40;
+                    if (randomInt >= 76 && randomInt <= 100)
+                        return 50;
+                    break;
+            }
+            return 0;
+        }
+        private int RandomPer(int randomPer, Specialization spec)
+        {
+            switch (spec.Name)
+            {
+                case "Frontal Assault":
+                    if (randomPer >= 1 && randomPer <= 45)
+                        return 30;
+                    if (randomPer >= 46 && randomPer <= 90)
+                        return 40;
+                    if (randomPer >= 91 && randomPer <= 100)
+                        return 50;
+                    break;
+                case "Distance Fighting":
+                    if (randomPer >= 1 && randomPer <= 10)
+                        return 30;
+                    if (randomPer >= 11 && randomPer <= 50)
+                        return 40;
+                    if (randomPer >= 51 && randomPer <= 100)
+                        return 50;
+                    break;
+                case "Encroachment":
+                    if (randomPer >= 1 && randomPer <= 35)
+                        return 30;
+                    if (randomPer >= 36 && randomPer <= 85)
+                        return 40;
+                    if (randomPer >= 86 && randomPer <= 100)
+                        return 50;
+                    break;
+            }
+            return 0;
+        }
+        private int RandomWP(int randomWP, Specialization spec)
+        {
+            switch (spec.Name)
+            {
+                case "Frontal Assault":
+                    if (randomWP >= 1 && randomWP <= 65)
+                        return 20;
+                    if (randomWP >= 66 && randomWP <= 80)
+                        return 30;
+                    if (randomWP >= 81 && randomWP <= 95)
+                        return 40;
+                    if (randomWP >= 96 && randomWP <= 100)
+                        return 50;
+                    break;
+                case "Distance Fighting":
+                    if (randomWP >= 1 && randomWP <= 25)
+                        return 20;
+                    if (randomWP >= 26 && randomWP <= 55)
+                        return 30;
+                    if (randomWP >= 56 && randomWP <= 80)
+                        return 40;
+                    if (randomWP >= 81 && randomWP <= 100)
+                        return 50;
+                    break;
+                case "Encroachment":
+                    if (randomWP >= 1 && randomWP <= 10)
+                        return 20;
+                    if (randomWP >= 11 && randomWP <= 40)
+                        return 30;
+                    if (randomWP >= 41 && randomWP <= 75)
+                        return 40;
+                    if (randomWP >= 76 && randomWP <= 100)
+                        return 50;
+                    break;
+            }
+            return 0;
+        }
+        private int RandomFel(int randomFel, Specialization spec)
+        {
+            switch (spec.Name)
+            {
+                case "Frontal Assault":
+                    if (randomFel >= 1 && randomFel <= 50)
+                        return 10;
+                    if (randomFel >= 51 && randomFel <= 95)
+                        return 20;
+                    if (randomFel >= 96 && randomFel <= 100)
+                        return 30;
+                    break;
+                case "Distance Fighting":
+                    if (randomFel >= 1 && randomFel <= 70)
+                        return 10;
+                    if (randomFel >= 71 && randomFel <= 90)
+                        return 20;
+                    if (randomFel >= 91 && randomFel <= 100)
+                        return 30;
+                    break;
+                case "Encroachment":
+                    if (randomFel >= 1 && randomFel <= 35)
+                        return 10;
+                    if (randomFel >= 36 && randomFel <= 80)
+                        return 20;
+                    if (randomFel >= 81 && randomFel <= 100)
+                        return 30;
+                    break;
+            }
+            return 0;
+        }
+        private int RandomSR(int randomSR, Specialization spec)
+        {
+            switch (spec.Name)
+            {
+                case "Frontal Assault":
+                    if (randomSR >= 1 && randomSR <= 20)
+                        return (rnd.Next(1,6)+3)*10;
+                    if (randomSR >= 21 && randomSR <= 50)
+                        return (rnd.Next(1, 6) + 7) * 10;
+                    if (randomSR >= 51 && randomSR <= 75)
+                        return (rnd.Next(1, 6) + 9) * 10;
+                    if (randomSR >= 76 && randomSR <= 90)
+                        return (rnd.Next(1, 6) + 10) * 10;
+                    if (randomSR >= 91 && randomSR <= 95)
+                        return (rnd.Next(1, 11) + 10) * 10;
+                    if (randomSR >= 96 && randomSR <= 100)
+                        return 200;
+                    break;
+                case "Distance Fighting":
+                    if (randomSR >= 1 && randomSR <= 10)
+                        return (rnd.Next(1, 6) + 3) * 10;
+                    if (randomSR >= 11 && randomSR <= 25)
+                        return (rnd.Next(1, 6) + 7) * 10;
+                    if (randomSR >= 26 && randomSR <= 50)
+                        return (rnd.Next(1, 6) + 9) * 10;
+                    if (randomSR >= 51 && randomSR <= 80)
+                        return (rnd.Next(1, 6) + 10) * 10;
+                    if (randomSR >= 81 && randomSR <= 90)
+                        return (rnd.Next(1, 11) + 10) * 10;
+                    if (randomSR >= 91 && randomSR <= 100)
+                        return 200;
+                    break;
+                case "Encroachment":
+                    if (randomSR >= 1 && randomSR <= 15)
+                        return (rnd.Next(1, 6) + 7) * 10;
+                    if (randomSR >= 16 && randomSR <= 50)
+                        return (rnd.Next(1, 6) + 9) * 10;
+                    if (randomSR >= 51 && randomSR <= 80)
+                        return (rnd.Next(1, 6) + 10) * 10;
+                    if (randomSR >= 81 && randomSR <= 90)
+                        return (rnd.Next(1, 11) + 10) * 10;
+                    if (randomSR >= 91 && randomSR <= 100)
+                        return 200;
+                    break;
+            }
+            return 0;
+        }
+        private BodySize RandomSize(int randomSize, BodyType bodyType)
+        {
+            switch (bodyType.Name)
+            {
+                case "Bipedal":
+                    if (randomSize >= 1 && randomSize <= 10)
+                        return ComboBoxSize[0];
+                    else if (randomSize >= 11 && randomSize <= 80)
+                        return ComboBoxSize[1];
+                    else if (randomSize >= 81 && randomSize <= 99)
+                        return ComboBoxSize[2];
+                    else if (randomSize == 100)
+                        return ComboBoxSize[3];
+                    break;
+                case "Insectile":
+                    if (randomSize >= 1 && randomSize <= 10)
+                        return ComboBoxSize[0];
+                    else if (randomSize >= 11 && randomSize <= 60)
+                        return ComboBoxSize[1];
+                    else if (randomSize >= 61 && randomSize <= 95)
+                        return ComboBoxSize[2];
+                    else if (randomSize >= 96 && randomSize <= 100)
+                        return ComboBoxSize[3];
+                    break;
+                case "Orbital":
+                    if (randomSize >= 1 && randomSize <= 10)
+                        return ComboBoxSize[2];
+                    else if (randomSize >= 11 && randomSize <= 80)
+                        return ComboBoxSize[3];
+                    else if (randomSize >= 81 && randomSize <= 100)
+                        return ComboBoxSize[4];
+                    break;
+                case "Bestial":
+                    if (randomSize >= 1 && randomSize <= 15)
+                        return ComboBoxSize[0];
+                    else if (randomSize >= 16 && randomSize <= 65)
+                        return ComboBoxSize[1];
+                    else if (randomSize >= 66 && randomSize <= 90)
+                        return ComboBoxSize[2];
+                    else if (randomSize >= 91 && randomSize <= 100)
+                        return ComboBoxSize[4];
+                    break;
+                case "Artificial":
+                    if (randomSize >= 1 && randomSize <= 20)
+                        return ComboBoxSize[0];
+                    else if (randomSize >= 21 && randomSize <= 50)
+                        return ComboBoxSize[1];
+                    else if (randomSize >= 51 && randomSize <= 80)
+                        return ComboBoxSize[2];
+                    else if (randomSize >= 81 && randomSize <= 100)
+                        return ComboBoxSize[3];
+                    break;
+                case "Amorphous":
+                    if (randomSize >= 1 && randomSize <= 5)
+                        return ComboBoxSize[0];
+                    else if (randomSize >= 6 && randomSize <= 35)
+                        return ComboBoxSize[1];
+                    else if (randomSize >= 36 && randomSize <= 70)
+                        return ComboBoxSize[2];
+                    else if (randomSize >= 71 && randomSize <= 99)
+                        return ComboBoxSize[3];
+                    else if (randomSize == 100)
+                        return ComboBoxSize[4];
+                    break;
+            }
             return null;
         }
-
-        private Locomotion RandomLocomotion()
+        private Locomotion RandomLocomotion(int randomLocomotion, BodyType bodyType)
         {
+            switch (bodyType.Name)
+            {
+                case "Bipedal":
+                    if (randomLocomotion >= 1 && randomLocomotion <= 50)
+                        return ComboBoxLocomotion[0];
+                    else if (randomLocomotion >= 51 && randomLocomotion <= 75)
+                        return ComboBoxLocomotion[2];
+                    else if (randomLocomotion >= 76 && randomLocomotion <= 90)
+                        return ComboBoxLocomotion[3];
+                    else if (randomLocomotion >= 91 && randomLocomotion <= 95)
+                        return ComboBoxLocomotion[4];
+                    else if (randomLocomotion >= 96 && randomLocomotion <= 100)
+                        return ComboBoxLocomotion[5];
+                    break;
+                case "Insectile":
+                    if (randomLocomotion >= 1 && randomLocomotion <= 50)
+                        return ComboBoxLocomotion[0];
+                    else if (randomLocomotion >= 51 && randomLocomotion <= 60)
+                        return ComboBoxLocomotion[1];
+                    else if (randomLocomotion >= 61 && randomLocomotion <= 70)
+                        return ComboBoxLocomotion[2];
+                    else if (randomLocomotion >= 71 && randomLocomotion <= 100)
+                        return ComboBoxLocomotion[4];
+                    break;
+                case "Orbital":
+                    if (randomLocomotion >= 1 && randomLocomotion <= 90)
+                        return ComboBoxLocomotion[4];
+                    else if (randomLocomotion >= 91 && randomLocomotion <= 100)
+                        return ComboBoxLocomotion[5];
+                    break;
+                case "Bestial":
+                    if (randomLocomotion >= 1 && randomLocomotion <= 40)
+                        return ComboBoxLocomotion[0];
+                    else if (randomLocomotion >= 41 && randomLocomotion <= 75)
+                        return ComboBoxLocomotion[1];
+                    else if (randomLocomotion >= 76 && randomLocomotion <= 90)
+                        return ComboBoxLocomotion[2];
+                    else if (randomLocomotion >= 91 && randomLocomotion <= 100)
+                        return ComboBoxLocomotion[4];
+                    break;
+                case "Artificial":
+                    if (randomLocomotion >= 1 && randomLocomotion <= 15)
+                        return ComboBoxLocomotion[0];
+                    else if (randomLocomotion >= 16 && randomLocomotion <= 20)
+                        return ComboBoxLocomotion[1];
+                    else if (randomLocomotion >= 21 && randomLocomotion <= 25)
+                        return ComboBoxLocomotion[2];
+                    else if (randomLocomotion >= 26 && randomLocomotion <= 75)
+                        return ComboBoxLocomotion[3];
+                    else if (randomLocomotion >= 76 && randomLocomotion <= 80)
+                        return ComboBoxLocomotion[4];
+                    else if (randomLocomotion >= 81 && randomLocomotion <= 100)
+                        return ComboBoxLocomotion[5];
+                    break;
+                case "Amorphous":
+                    if (randomLocomotion >= 1 && randomLocomotion <= 15)
+                        return ComboBoxLocomotion[0];
+                    else if (randomLocomotion >= 16 && randomLocomotion <= 20)
+                        return ComboBoxLocomotion[1];
+                    else if (randomLocomotion >= 21 && randomLocomotion <= 30)
+                        return ComboBoxLocomotion[2];
+                    else if (randomLocomotion >= 31 && randomLocomotion <= 70)
+                        return ComboBoxLocomotion[3];
+                    else if (randomLocomotion >= 71 && randomLocomotion <= 75)
+                        return ComboBoxLocomotion[4];
+                    else if (randomLocomotion >= 76 && randomLocomotion <= 100)
+                        return ComboBoxLocomotion[5];
+                    break;
+            }
             return null;
         }
-
         private BodyType RandomBodyType(int randomBodyType)
         {
             if (specialization.Name.Equals("Frontal Assault"))
@@ -172,7 +730,6 @@ namespace AdeptusEvangelionGmTools.Objects
 
             return RandomBodyType(rnd.Next(1, 101));
         }
-
         private BodyType RandomBodyTypeFrontalAssault(int randomBodyType)
         {
             if (randomBodyType >= 1 && randomBodyType <= 35)
@@ -222,7 +779,6 @@ namespace AdeptusEvangelionGmTools.Objects
 
             return RandomBodyTypeEncroachment(rnd.Next(1, 101));
         }
-
         private Specialization RandomSpecialization(int randomSpec)
         {
             if (difficulty.Name.Equals("Introductory") || difficulty.Name.Equals("Easy"))
@@ -246,7 +802,6 @@ namespace AdeptusEvangelionGmTools.Objects
             }
             return RandomSpecialization(rnd.Next(1, 101));
         }
-
         private Difficulty RandomDifficulty()
         {
             return ComboBoxDifficulty[rnd.Next(0, ComboBoxDifficulty.Count())];

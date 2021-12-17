@@ -24,19 +24,65 @@ namespace AdeptusEvangelionGmTools.Objects
         #region Constructor
         public Body(int Toughness, String bodyType)
         {
+            Random rnd = new Random();
             BaseToughness = Toughness;
             BodyType = bodyType;
             switch (BodyType)
             {
                 case "Evangelion":
                     Head = new Head(Toughness / 10, 2, 0);
-                    Torso = new Torso((Toughness / 10)*2+3, 4, 0);
+                    Torso = new Torso(Toughness / 10*2+3, 4, 0);
                     LeftArm = new LeftArm((Toughness / 10)+2, 2, 0);
                     RightArm = new RightArm((Toughness / 10) + 2, 2, 0);
                     LeftLeg = new LeftLeg((Toughness / 10) + 2, 2, 0);
                     RightLeg = new RightLeg((Toughness / 10) + 2, 2, 0);
                     break;
-                case "Angel":
+                case "Bipedal":
+                    Head = new Head((Toughness / 10)-2, 0, 0);
+                    LeftArm = new LeftArm(Toughness / 10, 0, 0);
+                    RightArm = new RightArm(Toughness / 10, 0, 0);
+                    Core = new Core((Toughness / 10) + rnd.Next(1,11), 0, 0);
+                    Torso = new Torso((Toughness / 10 * 2) + rnd.Next(1, 6), 0, 0);
+                    RightLeg = new RightLeg(Toughness / 10, 0, 0);
+                    LeftLeg = new LeftLeg(Toughness / 10, 0, 0);
+                    break;
+                case "Insectile":
+                    if (rnd.Next(1,11) != 8 || rnd.Next(1, 11) != 9 || rnd.Next(1, 11) != 10)
+                    {
+                        LeftArm = new LeftArm(Toughness / 10, 0, 0);
+                        RightArm = new RightArm(Toughness / 10, 0, 0);
+                    }
+                    Head = new Head((Toughness / 10) - 2, 0, 0);
+                    Core = new Core((Toughness / 10) + rnd.Next(1, 11), 0, 0);
+                    Torso = new Torso(Toughness / 10 * 2, 0, 0);
+                    RightLeg = new RightLeg(Toughness / 10, 0, 0);
+                    LeftLeg = new LeftLeg(Toughness / 10, 0, 0);
+                    break;
+                case "Orbital":
+                    Core = new Core((Toughness / 10) + rnd.Next(1, 11), 0, 0);
+                    Torso = new Torso((Toughness / 10 * 3) + rnd.Next(1, 11), 0, 0);
+                    break;
+                case "Bestial":
+                    Head = new Head((Toughness / 10) - 2, 0, 0);
+                    LeftArm = new LeftArm(Toughness / 10, 0, 0);
+                    RightArm = new RightArm(Toughness / 10, 0, 0);
+                    Core = new Core((Toughness / 10) + rnd.Next(1, 11), 0, 0);
+                    Torso = new Torso((Toughness / 10 * 2) + rnd.Next(1, 6), 0, 0);
+                    RightLeg = new RightLeg(Toughness / 10, 0, 0);
+                    LeftLeg = new LeftLeg(Toughness / 10, 0, 0);
+                    break;
+                case "Artificial":
+                    if (rnd.Next(1,11) != 7 || rnd.Next(1, 11) != 8 || rnd.Next(1, 11) != 9)
+                    {
+                        Head = new Head((Toughness / 10) - 2, 0, 0);
+                    }
+                    Core = new Core((Toughness / 10) + rnd.Next(1, 11), 0, 0);
+                    Torso = new Torso((Toughness / 10 * 2) + rnd.Next(1, 6), 0, 0);
+                    RightLeg = new RightLeg(Toughness / 10, 0, 0);
+                    LeftLeg = new LeftLeg(Toughness / 10, 0, 0);
+                    break;
+                case "Amorphous":
+                    Torso = new Torso((Toughness / 10 * 3) + rnd.Next(1, 11), 0, 0);
                     break;
                 case "Pilot":
                     break;
@@ -45,6 +91,10 @@ namespace AdeptusEvangelionGmTools.Objects
         #endregion
 
         #region public methods
+        public void armorHandling(Head head, Torso torso)
+        {
+
+        }
         public void woundIncrease(String BodyType, int mod)
         {
             switch (BodyType)

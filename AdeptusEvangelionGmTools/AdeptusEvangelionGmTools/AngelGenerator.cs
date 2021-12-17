@@ -30,12 +30,14 @@ namespace AdeptusEvangelionGmTools
         }
         private void GenButton_Click(object sender, EventArgs e)
         {
-            verifyEmptyComboBoxes();
-            Angel generatedAngel = new Angel(SelectedBodyType, SelectedDifficulty, SelectedLocomotion, SelectedBodySize, SelectedSpecialization, decimalToInt(BSValue.Value),
-                                             decimalToInt(WSValue.Value), decimalToInt(StrengthValue.Value), decimalToInt(ToughnessValue.Value),
-                                             decimalToInt(AgilityValue.Value), decimalToInt(IntValue.Value), decimalToInt(PerValue.Value),
-                                             decimalToInt(WPValue.Value), decimalToInt(FelValue.Value), decimalToInt(SRValue.Value));
-            
+            if (verifyEmptyComboBoxes())
+            {
+                Angel generatedAngel = new Angel(SelectedBodyType, SelectedDifficulty, SelectedLocomotion, SelectedBodySize, SelectedSpecialization, decimalToInt(BSValue.Value),
+                                                 decimalToInt(WSValue.Value), decimalToInt(StrengthValue.Value), decimalToInt(ToughnessValue.Value),
+                                                 decimalToInt(AgilityValue.Value), decimalToInt(IntValue.Value), decimalToInt(PerValue.Value),
+                                                 decimalToInt(WPValue.Value), decimalToInt(FelValue.Value), decimalToInt(SRValue.Value));
+
+            }
 
         }
 
@@ -315,7 +317,7 @@ namespace AdeptusEvangelionGmTools
             }
             
         }
-        private void verifyEmptyComboBoxes()
+        private bool verifyEmptyComboBoxes()
         {
             if ((!rndBodyTypeChkBox.Checked && BodyTypeCombo.SelectedItem == null) ||
                 (!rndLocomotionChkBox.Checked && LocomotionCombo.SelectedItem == null) ||
@@ -328,8 +330,9 @@ namespace AdeptusEvangelionGmTools
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
 
                 MessageBox.Show(message, caption, buttons);
-                return;
+                return false;
             }
+            return true;
         }
         private void reloadComboBoxes()
         {

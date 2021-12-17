@@ -166,22 +166,23 @@ namespace AdeptusEvangelionGmTools
 
         private void button1_Click(object sender, EventArgs e)
         {
-            verifyEmptyComboBoxes();
-
-            Evangelion evangelion = new Evangelion(
-                selectedSoul,
-                selectedMutation,
-                selectedConstruction,
-                selectedHistory,
-                selectedColorDescription1 + selectedColor1,
-                selectedColorDescription2 + selectedColor2
-                );
-            displayText(evangelion);
+            if (verifyEmptyComboBoxes())
+            {
+                Evangelion evangelion = new Evangelion(
+                    selectedSoul,
+                    selectedMutation,
+                    selectedConstruction,
+                    selectedHistory,
+                    selectedColorDescription1 + selectedColor1,
+                    selectedColorDescription2 + selectedColor2
+                    );
+                displayText(evangelion);
+            }
         }
         #endregion
 
         #region PrivateMethods
-        private void verifyEmptyComboBoxes()
+        private bool verifyEmptyComboBoxes()
         {
             if ((selectedConstruction == null && !RandConstruction.Checked) ||
                 (selectedHistory == null && !RandHistory.Checked) ||
@@ -196,8 +197,9 @@ namespace AdeptusEvangelionGmTools
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
 
                 MessageBox.Show(message, caption, buttons);
-                return;
+                return false;
             }
+           return true;
         }
         private void displayText(Evangelion evangelion)
         {

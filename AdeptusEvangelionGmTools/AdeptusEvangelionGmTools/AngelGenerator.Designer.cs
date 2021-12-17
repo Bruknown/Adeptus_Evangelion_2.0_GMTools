@@ -112,9 +112,9 @@ namespace AdeptusEvangelionGmTools
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.BodyTypeCombo);
             this.groupBox2.Controls.Add(this.SpecializationCombo);
-            this.groupBox2.Location = new System.Drawing.Point(12, 16);
+            this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(227, 324);
+            this.groupBox2.Size = new System.Drawing.Size(227, 328);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Angel Description";
@@ -122,7 +122,7 @@ namespace AdeptusEvangelionGmTools
             // RandomDifficulty
             // 
             this.RandomDifficulty.AutoSize = true;
-            this.RandomDifficulty.Location = new System.Drawing.Point(133, 48);
+            this.RandomDifficulty.Location = new System.Drawing.Point(133, 45);
             this.RandomDifficulty.Name = "RandomDifficulty";
             this.RandomDifficulty.Size = new System.Drawing.Size(83, 21);
             this.RandomDifficulty.TabIndex = 14;
@@ -133,7 +133,7 @@ namespace AdeptusEvangelionGmTools
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 25);
+            this.label15.Location = new System.Drawing.Point(9, 24);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(65, 17);
             this.label15.TabIndex = 13;
@@ -143,7 +143,7 @@ namespace AdeptusEvangelionGmTools
             // 
             this.DifficultyBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DifficultyBox.FormattingEnabled = true;
-            this.DifficultyBox.Location = new System.Drawing.Point(5, 45);
+            this.DifficultyBox.Location = new System.Drawing.Point(6, 45);
             this.DifficultyBox.Name = "DifficultyBox";
             this.DifficultyBox.Size = new System.Drawing.Size(121, 24);
             this.DifficultyBox.TabIndex = 12;
@@ -152,7 +152,7 @@ namespace AdeptusEvangelionGmTools
             // rndSizeChkBox
             // 
             this.rndSizeChkBox.AutoSize = true;
-            this.rndSizeChkBox.Location = new System.Drawing.Point(133, 235);
+            this.rndSizeChkBox.Location = new System.Drawing.Point(133, 275);
             this.rndSizeChkBox.Name = "rndSizeChkBox";
             this.rndSizeChkBox.Size = new System.Drawing.Size(83, 21);
             this.rndSizeChkBox.TabIndex = 11;
@@ -163,7 +163,7 @@ namespace AdeptusEvangelionGmTools
             // rndLocomotionChkBox
             // 
             this.rndLocomotionChkBox.AutoSize = true;
-            this.rndLocomotionChkBox.Location = new System.Drawing.Point(133, 187);
+            this.rndLocomotionChkBox.Location = new System.Drawing.Point(133, 218);
             this.rndLocomotionChkBox.Name = "rndLocomotionChkBox";
             this.rndLocomotionChkBox.Size = new System.Drawing.Size(83, 21);
             this.rndLocomotionChkBox.TabIndex = 10;
@@ -174,7 +174,7 @@ namespace AdeptusEvangelionGmTools
             // rndBodyTypeChkBox
             // 
             this.rndBodyTypeChkBox.AutoSize = true;
-            this.rndBodyTypeChkBox.Location = new System.Drawing.Point(132, 141);
+            this.rndBodyTypeChkBox.Location = new System.Drawing.Point(132, 159);
             this.rndBodyTypeChkBox.Name = "rndBodyTypeChkBox";
             this.rndBodyTypeChkBox.Size = new System.Drawing.Size(83, 21);
             this.rndBodyTypeChkBox.TabIndex = 9;
@@ -185,7 +185,7 @@ namespace AdeptusEvangelionGmTools
             // rndSpecializationChkBox
             // 
             this.rndSpecializationChkBox.AutoSize = true;
-            this.rndSpecializationChkBox.Location = new System.Drawing.Point(132, 94);
+            this.rndSpecializationChkBox.Location = new System.Drawing.Point(134, 103);
             this.rndSpecializationChkBox.Name = "rndSpecializationChkBox";
             this.rndSpecializationChkBox.Size = new System.Drawing.Size(83, 21);
             this.rndSpecializationChkBox.TabIndex = 8;
@@ -196,7 +196,7 @@ namespace AdeptusEvangelionGmTools
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 212);
+            this.label4.Location = new System.Drawing.Point(8, 253);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(39, 17);
             this.label4.TabIndex = 7;
@@ -206,7 +206,7 @@ namespace AdeptusEvangelionGmTools
             // 
             this.SizeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SizeCombo.FormattingEnabled = true;
-            this.SizeCombo.Location = new System.Drawing.Point(5, 232);
+            this.SizeCombo.Location = new System.Drawing.Point(5, 274);
             this.SizeCombo.Name = "SizeCombo";
             this.SizeCombo.Size = new System.Drawing.Size(121, 24);
             this.SizeCombo.TabIndex = 6;
@@ -215,7 +215,7 @@ namespace AdeptusEvangelionGmTools
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 165);
+            this.label3.Location = new System.Drawing.Point(9, 197);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 17);
             this.label3.TabIndex = 5;
@@ -225,7 +225,7 @@ namespace AdeptusEvangelionGmTools
             // 
             this.LocomotionCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LocomotionCombo.FormattingEnabled = true;
-            this.LocomotionCombo.Location = new System.Drawing.Point(6, 185);
+            this.LocomotionCombo.Location = new System.Drawing.Point(6, 218);
             this.LocomotionCombo.Name = "LocomotionCombo";
             this.LocomotionCombo.Size = new System.Drawing.Size(121, 24);
             this.LocomotionCombo.TabIndex = 4;
@@ -234,7 +234,7 @@ namespace AdeptusEvangelionGmTools
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 118);
+            this.label2.Location = new System.Drawing.Point(9, 137);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 17);
             this.label2.TabIndex = 3;
@@ -243,7 +243,7 @@ namespace AdeptusEvangelionGmTools
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 71);
+            this.label1.Location = new System.Drawing.Point(9, 79);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 17);
             this.label1.TabIndex = 2;
@@ -253,7 +253,7 @@ namespace AdeptusEvangelionGmTools
             // 
             this.BodyTypeCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BodyTypeCombo.FormattingEnabled = true;
-            this.BodyTypeCombo.Location = new System.Drawing.Point(6, 138);
+            this.BodyTypeCombo.Location = new System.Drawing.Point(6, 159);
             this.BodyTypeCombo.Name = "BodyTypeCombo";
             this.BodyTypeCombo.Size = new System.Drawing.Size(121, 24);
             this.BodyTypeCombo.TabIndex = 1;
@@ -263,7 +263,7 @@ namespace AdeptusEvangelionGmTools
             // 
             this.SpecializationCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SpecializationCombo.FormattingEnabled = true;
-            this.SpecializationCombo.Location = new System.Drawing.Point(5, 91);
+            this.SpecializationCombo.Location = new System.Drawing.Point(6, 100);
             this.SpecializationCombo.Name = "SpecializationCombo";
             this.SpecializationCombo.Size = new System.Drawing.Size(121, 24);
             this.SpecializationCombo.TabIndex = 0;
@@ -285,13 +285,13 @@ namespace AdeptusEvangelionGmTools
             this.groupBox4.Size = new System.Drawing.Size(289, 398);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "groupBox4";
+            this.groupBox4.Text = "Angel";
             // 
             // groupBox5
             // 
-            this.groupBox5.Location = new System.Drawing.Point(493, 16);
+            this.groupBox5.Location = new System.Drawing.Point(493, 12);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(255, 324);
+            this.groupBox5.Size = new System.Drawing.Size(255, 328);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Attacks";
@@ -329,7 +329,7 @@ namespace AdeptusEvangelionGmTools
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 55);
+            this.label6.Location = new System.Drawing.Point(10, 57);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(26, 17);
             this.label6.TabIndex = 3;
@@ -349,7 +349,7 @@ namespace AdeptusEvangelionGmTools
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 81);
+            this.label7.Location = new System.Drawing.Point(14, 85);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(17, 17);
             this.label7.TabIndex = 6;
@@ -369,7 +369,7 @@ namespace AdeptusEvangelionGmTools
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 111);
+            this.label8.Location = new System.Drawing.Point(14, 115);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(17, 17);
             this.label8.TabIndex = 9;
@@ -389,7 +389,7 @@ namespace AdeptusEvangelionGmTools
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 141);
+            this.label9.Location = new System.Drawing.Point(14, 143);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(17, 17);
             this.label9.TabIndex = 12;
@@ -409,7 +409,7 @@ namespace AdeptusEvangelionGmTools
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 169);
+            this.label10.Location = new System.Drawing.Point(10, 171);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(23, 17);
             this.label10.TabIndex = 15;
@@ -429,7 +429,7 @@ namespace AdeptusEvangelionGmTools
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 196);
+            this.label14.Location = new System.Drawing.Point(6, 200);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(30, 17);
             this.label14.TabIndex = 18;
@@ -449,7 +449,7 @@ namespace AdeptusEvangelionGmTools
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 227);
+            this.label13.Location = new System.Drawing.Point(6, 228);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(30, 17);
             this.label13.TabIndex = 21;
@@ -469,7 +469,7 @@ namespace AdeptusEvangelionGmTools
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(8, 253);
+            this.label12.Location = new System.Drawing.Point(8, 255);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(27, 17);
             this.label12.TabIndex = 24;
@@ -478,7 +478,7 @@ namespace AdeptusEvangelionGmTools
             // RandomFel
             // 
             this.RandomFel.AutoSize = true;
-            this.RandomFel.Location = new System.Drawing.Point(148, 254);
+            this.RandomFel.Location = new System.Drawing.Point(148, 253);
             this.RandomFel.Name = "RandomFel";
             this.RandomFel.Size = new System.Drawing.Size(83, 21);
             this.RandomFel.TabIndex = 26;
@@ -489,7 +489,7 @@ namespace AdeptusEvangelionGmTools
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(8, 279);
+            this.label11.Location = new System.Drawing.Point(8, 283);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(27, 17);
             this.label11.TabIndex = 27;
@@ -498,7 +498,7 @@ namespace AdeptusEvangelionGmTools
             // RandomSR
             // 
             this.RandomSR.AutoSize = true;
-            this.RandomSR.Location = new System.Drawing.Point(147, 282);
+            this.RandomSR.Location = new System.Drawing.Point(147, 281);
             this.RandomSR.Name = "RandomSR";
             this.RandomSR.Size = new System.Drawing.Size(83, 21);
             this.RandomSR.TabIndex = 29;
@@ -548,6 +548,11 @@ namespace AdeptusEvangelionGmTools
             // SRValue
             // 
             this.SRValue.Location = new System.Drawing.Point(42, 281);
+            this.SRValue.Maximum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
             this.SRValue.Name = "SRValue";
             this.SRValue.Size = new System.Drawing.Size(99, 22);
             this.SRValue.TabIndex = 39;
