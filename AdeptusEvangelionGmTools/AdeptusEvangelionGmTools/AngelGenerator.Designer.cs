@@ -80,6 +80,7 @@ namespace AdeptusEvangelionGmTools
             this.StrengthValue = new System.Windows.Forms.NumericUpDown();
             this.BSValue = new System.Windows.Forms.NumericUpDown();
             this.WSValue = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -620,11 +621,21 @@ namespace AdeptusEvangelionGmTools
             this.WSValue.Size = new System.Drawing.Size(99, 22);
             this.WSValue.TabIndex = 30;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Location = new System.Drawing.Point(12, 346);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(736, 156);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Specials";
+            // 
             // AngelGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1101, 514);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.GenButton);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -703,5 +714,6 @@ namespace AdeptusEvangelionGmTools
         private System.Windows.Forms.NumericUpDown StrengthValue;
         private System.Windows.Forms.NumericUpDown BSValue;
         private System.Windows.Forms.NumericUpDown WSValue;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

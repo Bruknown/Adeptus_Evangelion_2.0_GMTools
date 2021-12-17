@@ -32,7 +32,7 @@ namespace AdeptusEvangelionGmTools
         {
             if (verifyEmptyComboBoxes())
             {
-                Angel generatedAngel = new Angel(SelectedBodyType, SelectedDifficulty, SelectedLocomotion, SelectedBodySize, SelectedSpecialization, decimalToInt(BSValue.Value),
+                Angel generatedAngel = new Angel(SelectedBodyType, SelectedDifficulty, SelectedLocomotion, SelectedBodySize, SelectedSpecialization,  decimalToInt(BSValue.Value),
                                                  decimalToInt(WSValue.Value), decimalToInt(StrengthValue.Value), decimalToInt(ToughnessValue.Value),
                                                  decimalToInt(AgilityValue.Value), decimalToInt(IntValue.Value), decimalToInt(PerValue.Value),
                                                  decimalToInt(WPValue.Value), decimalToInt(FelValue.Value), decimalToInt(SRValue.Value));

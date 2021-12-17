@@ -68,7 +68,8 @@ namespace AdeptusEvangelionGmTools.Objects
             Fellowship      = (Fellowship == 0)     ? Fellowship        = RandomFel(rnd.Next(1, 101), this.specialization)   : Fellowship = fellowship;
             SynchRatio      = (SynchRatio == 0)     ? SynchRatio        = RandomSR(rnd.Next(1, 101), this.specialization)    : SynchRatio = synchRatio;
 
-            body = new Body(Toughness, bodyType.Name);
+            body = new Body(Toughness, this.bodyType.Name);
+            ArmorHandling(rnd.Next(1,101), this.specialization);
 
         }
 
@@ -124,54 +125,176 @@ namespace AdeptusEvangelionGmTools.Objects
                 case "Frontal Assault":
                     if (randomArmor >= 11 || randomArmor <= 25)
                     {
-                        body.Head.Armor = 2;
-                        body.Torso.Armor = 2;
+                        if (body.Head != null)
+                            body.Head.Armor = 2;
+                        if (body.Torso != null)
+                            body.Torso.Armor = 2;
                     }
                     else if (randomArmor >= 26 || randomArmor <= 60)
                     {
                         int armor = rnd.Next(1, 6);
-                        body.Head.Armor = armor;
-                        body.Torso.Armor = armor;
+                        if (body.Head != null)
+                            body.Head.Armor = armor;
+                        if (body.Torso != null)
+                            body.Torso.Armor = armor;
                     }
                     else if (randomArmor >= 61 || randomArmor <= 85)
                     {
                         int armor = rnd.Next(1, 6)+2;
-                        body.Head.Armor = armor;
-                        body.Torso.Armor = armor;
-                        body.Core.Armor = armor;
-                        body.LeftArm.Armor = 2;
-                        body.RightArm.Armor = 2;
-                        body.RightLeg.Armor = 2;
-                        body.LeftLeg.Armor = 2;
+                        if (body.Head != null)
+                            body.Head.Armor = armor;
+                        if (body.Torso != null)
+                            body.Torso.Armor = armor;
+                        if (body.Core != null)
+                            body.Core.Armor = armor;
+                        if (body.LeftArm != null)
+                            body.LeftArm.Armor = 2;
+                        if (body.RightArm != null)
+                            body.RightArm.Armor = 2;
+                        if (body.RightLeg != null)
+                            body.RightLeg.Armor = 2;
+                        if (body.LeftLeg != null)
+                            body.LeftLeg.Armor = 2;
                     }
                     else if (randomArmor >= 86 || randomArmor <= 95)
                     {
                         int armor = rnd.Next(1, 6) + 4;
                         int armorlimb = rnd.Next(1, 6);
-                        body.Head.Armor = armor;
-                        body.Torso.Armor = armor;
-                        body.Core.Armor = armor;
-                        body.LeftArm.Armor = armorlimb;
-                        body.RightArm.Armor = armorlimb;
-                        body.RightLeg.Armor = armorlimb;
-                        body.LeftLeg.Armor = armorlimb;
+                        if (body.Head != null)
+                            body.Head.Armor = armor;
+                        if (body.Torso != null)
+                            body.Torso.Armor = armor;
+                        if (body.Core != null)
+                            body.Core.Armor = armor;
+                        if (body.LeftArm != null)
+                            body.LeftArm.Armor = armorlimb;
+                        if (body.RightArm != null)
+                            body.RightArm.Armor = armorlimb;
+                        if (body.RightLeg != null)
+                            body.RightLeg.Armor = armorlimb;
+                        if (body.LeftLeg != null)
+                            body.LeftLeg.Armor = armorlimb;
                     }
                     else if (randomArmor >= 96 || randomArmor <= 100)
                     {
                         int armor = rnd.Next(1, 11) + 5;
                         int armorlimb = rnd.Next(1, 6) +2;
-                        body.Head.Armor = armor;
-                        body.Torso.Armor = armor;
-                        body.Core.Armor = armor;
-                        body.LeftArm.Armor = armorlimb;
-                        body.RightArm.Armor = armorlimb;
-                        body.RightLeg.Armor = armorlimb;
-                        body.LeftLeg.Armor = armorlimb;
+                        if (body.Head != null)
+                            body.Head.Armor = armor;
+                        if (body.Torso != null)
+                            body.Torso.Armor = armor;
+                        if (body.Core != null)
+                            body.Core.Armor = armor;
+                        if (body.LeftArm != null)
+                            body.LeftArm.Armor = armorlimb;
+                        if (body.RightArm != null)
+                            body.RightArm.Armor = armorlimb;
+                        if (body.RightLeg != null)
+                            body.RightLeg.Armor = armorlimb;
+                        if (body.LeftLeg != null)
+                            body.LeftLeg.Armor = armorlimb;
                     }
                     break;
                 case "Distance Fighting":
+                    if (randomArmor >= 01 || randomArmor <= 40)
+                    {
+                        int armor = rnd.Next(1, 6);
+                        if (body.Head != null)
+                            body.Head.Armor = armor;
+                        if (body.Torso != null)
+                            body.Torso.Armor = armor;
+                    }
+                    else if (randomArmor >= 41 || randomArmor <= 70)
+                    {
+                        int armor = rnd.Next(1, 6) + 2;
+                        if (body.Head != null)
+                            body.Head.Armor = armor;
+                        if (body.Torso != null)
+                            body.Torso.Armor = armor;
+                        if (body.Core != null)
+                            body.Core.Armor = armor;
+                        if (body.LeftArm != null)
+                            body.LeftArm.Armor = 2;
+                        if (body.RightArm != null)
+                            body.RightArm.Armor = 2;
+                        if (body.RightLeg != null)
+                            body.RightLeg.Armor = 2;
+                        if (body.LeftLeg != null)
+                            body.LeftLeg.Armor = 2;
+                    }
+                    else if (randomArmor >= 71 || randomArmor <= 90)
+                    {
+                        int armor = rnd.Next(1, 6) + 4;
+                        int armorlimb = rnd.Next(1, 6);
+                        if (body.Head != null)
+                            body.Head.Armor = armor;
+                        if (body.Torso != null)
+                            body.Torso.Armor = armor;
+                        if (body.Core != null)
+                            body.Core.Armor = armor;
+                        if (body.LeftArm != null)
+                            body.LeftArm.Armor = armorlimb;
+                        if (body.RightArm != null)
+                            body.RightArm.Armor = armorlimb;
+                        if (body.RightLeg != null)
+                            body.RightLeg.Armor = armorlimb;
+                        if (body.LeftLeg != null)
+                            body.LeftLeg.Armor = armorlimb;
+                    }
+                    else if (randomArmor >= 91 || randomArmor <= 100)
+                    {
+                        int armor = rnd.Next(1, 11) + 5;
+                        int armorlimb = rnd.Next(1, 6) + 2;
+                        if (body.Head != null)
+                            body.Head.Armor = armor;
+                        if (body.Torso != null)
+                            body.Torso.Armor = armor;
+                        if (body.Core != null)
+                            body.Core.Armor = armor;
+                        if (body.LeftArm != null)
+                            body.LeftArm.Armor = armorlimb;
+                        if (body.RightArm != null)
+                            body.RightArm.Armor = armorlimb;
+                        if (body.RightLeg != null)
+                            body.RightLeg.Armor = armorlimb;
+                        if (body.LeftLeg != null)
+                            body.LeftLeg.Armor = armorlimb;
+                    }
                     break;
                 case "Encroacher":
+                    if (randomArmor >= 41 || randomArmor <= 80)
+                    {
+                        if (body.Head != null)
+                            body.Head.Armor = 2;
+                        if (body.Torso != null)
+                            body.Torso.Armor = 2;
+                    }
+                    else if (randomArmor >= 81 || randomArmor <= 95)
+                    {
+                        int armor = rnd.Next(1, 6);
+                        if (body.Head != null)
+                            body.Head.Armor = armor;
+                        if (body.Torso != null)
+                            body.Torso.Armor = armor;
+                    }
+                    else if (randomArmor >= 96 || randomArmor <= 100)
+                    {
+                        int armor = rnd.Next(1, 6) + 2;
+                        if (body.Head != null)
+                            body.Head.Armor = armor;
+                        if (body.Torso != null)
+                            body.Torso.Armor = armor;
+                        if (body.Core != null)
+                            body.Core.Armor = armor;
+                        if (body.LeftArm != null)
+                            body.LeftArm.Armor = 2;
+                        if (body.RightArm != null)
+                            body.RightArm.Armor = 2;
+                        if (body.RightLeg != null)
+                            body.RightLeg.Armor = 2;
+                        if (body.LeftLeg != null)
+                            body.LeftLeg.Armor = 2;
+                    }
                     break;
             }
         }
