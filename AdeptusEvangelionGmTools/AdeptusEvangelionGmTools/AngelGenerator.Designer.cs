@@ -81,8 +81,19 @@ namespace AdeptusEvangelionGmTools
             this.BSValue = new System.Windows.Forms.NumericUpDown();
             this.WSValue = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CreateWeaponOne = new System.Windows.Forms.Button();
+            this.RandomChkBoxWeaponOne = new System.Windows.Forms.CheckBox();
+            this.EmptyChkBoxWeaponOne = new System.Windows.Forms.CheckBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.WeaponOneDescription = new System.Windows.Forms.Label();
+            this.WeaponTwoDescription = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.EmptyChkBoxWeaponTwo = new System.Windows.Forms.CheckBox();
+            this.RandomChkBoxWeaponTwo = new System.Windows.Forms.CheckBox();
+            this.CreateWeaponTwo = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SRValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FelValue)).BeginInit();
@@ -291,6 +302,16 @@ namespace AdeptusEvangelionGmTools
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.WeaponTwoDescription);
+            this.groupBox5.Controls.Add(this.label18);
+            this.groupBox5.Controls.Add(this.EmptyChkBoxWeaponTwo);
+            this.groupBox5.Controls.Add(this.RandomChkBoxWeaponTwo);
+            this.groupBox5.Controls.Add(this.CreateWeaponTwo);
+            this.groupBox5.Controls.Add(this.WeaponOneDescription);
+            this.groupBox5.Controls.Add(this.label16);
+            this.groupBox5.Controls.Add(this.EmptyChkBoxWeaponOne);
+            this.groupBox5.Controls.Add(this.RandomChkBoxWeaponOne);
+            this.groupBox5.Controls.Add(this.CreateWeaponOne);
             this.groupBox5.Location = new System.Drawing.Point(493, 12);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(255, 328);
@@ -631,6 +652,106 @@ namespace AdeptusEvangelionGmTools
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Specials";
             // 
+            // CreateWeaponOne
+            // 
+            this.CreateWeaponOne.Location = new System.Drawing.Point(15, 28);
+            this.CreateWeaponOne.Name = "CreateWeaponOne";
+            this.CreateWeaponOne.Size = new System.Drawing.Size(112, 57);
+            this.CreateWeaponOne.TabIndex = 0;
+            this.CreateWeaponOne.Text = "Create Weapon 1";
+            this.CreateWeaponOne.UseVisualStyleBackColor = true;
+            this.CreateWeaponOne.Click += new System.EventHandler(this.CreateWeaponOne_Click);
+            // 
+            // RandomChkBoxWeaponOne
+            // 
+            this.RandomChkBoxWeaponOne.AutoSize = true;
+            this.RandomChkBoxWeaponOne.Location = new System.Drawing.Point(133, 28);
+            this.RandomChkBoxWeaponOne.Name = "RandomChkBoxWeaponOne";
+            this.RandomChkBoxWeaponOne.Size = new System.Drawing.Size(83, 21);
+            this.RandomChkBoxWeaponOne.TabIndex = 1;
+            this.RandomChkBoxWeaponOne.Text = "Random";
+            this.RandomChkBoxWeaponOne.UseVisualStyleBackColor = true;
+            this.RandomChkBoxWeaponOne.CheckedChanged += new System.EventHandler(this.RandomChkBoxWeaponOne_CheckedChanged);
+            // 
+            // EmptyChkBoxWeaponOne
+            // 
+            this.EmptyChkBoxWeaponOne.AutoSize = true;
+            this.EmptyChkBoxWeaponOne.Location = new System.Drawing.Point(133, 64);
+            this.EmptyChkBoxWeaponOne.Name = "EmptyChkBoxWeaponOne";
+            this.EmptyChkBoxWeaponOne.Size = new System.Drawing.Size(69, 21);
+            this.EmptyChkBoxWeaponOne.TabIndex = 2;
+            this.EmptyChkBoxWeaponOne.Text = "Empty";
+            this.EmptyChkBoxWeaponOne.UseVisualStyleBackColor = true;
+            this.EmptyChkBoxWeaponOne.CheckedChanged += new System.EventHandler(this.EmptyChkBoxWeaponOne_CheckedChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(12, 88);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(83, 17);
+            this.label16.TabIndex = 3;
+            this.label16.Text = "Description:";
+            // 
+            // WeaponOneDescription
+            // 
+            this.WeaponOneDescription.AutoSize = true;
+            this.WeaponOneDescription.Location = new System.Drawing.Point(12, 107);
+            this.WeaponOneDescription.Name = "WeaponOneDescription";
+            this.WeaponOneDescription.Size = new System.Drawing.Size(13, 17);
+            this.WeaponOneDescription.TabIndex = 4;
+            this.WeaponOneDescription.Text = "-";
+            // 
+            // WeaponTwoDescription
+            // 
+            this.WeaponTwoDescription.AutoSize = true;
+            this.WeaponTwoDescription.Location = new System.Drawing.Point(12, 250);
+            this.WeaponTwoDescription.Name = "WeaponTwoDescription";
+            this.WeaponTwoDescription.Size = new System.Drawing.Size(13, 17);
+            this.WeaponTwoDescription.TabIndex = 9;
+            this.WeaponTwoDescription.Text = "-";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(12, 231);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(83, 17);
+            this.label18.TabIndex = 8;
+            this.label18.Text = "Description:";
+            // 
+            // EmptyChkBoxWeaponTwo
+            // 
+            this.EmptyChkBoxWeaponTwo.AutoSize = true;
+            this.EmptyChkBoxWeaponTwo.Location = new System.Drawing.Point(133, 207);
+            this.EmptyChkBoxWeaponTwo.Name = "EmptyChkBoxWeaponTwo";
+            this.EmptyChkBoxWeaponTwo.Size = new System.Drawing.Size(69, 21);
+            this.EmptyChkBoxWeaponTwo.TabIndex = 7;
+            this.EmptyChkBoxWeaponTwo.Text = "Empty";
+            this.EmptyChkBoxWeaponTwo.UseVisualStyleBackColor = true;
+            this.EmptyChkBoxWeaponTwo.CheckedChanged += new System.EventHandler(this.EmptyChkBoxWeaponTwo_CheckedChanged);
+            // 
+            // RandomChkBoxWeaponTwo
+            // 
+            this.RandomChkBoxWeaponTwo.AutoSize = true;
+            this.RandomChkBoxWeaponTwo.Location = new System.Drawing.Point(133, 171);
+            this.RandomChkBoxWeaponTwo.Name = "RandomChkBoxWeaponTwo";
+            this.RandomChkBoxWeaponTwo.Size = new System.Drawing.Size(83, 21);
+            this.RandomChkBoxWeaponTwo.TabIndex = 6;
+            this.RandomChkBoxWeaponTwo.Text = "Random";
+            this.RandomChkBoxWeaponTwo.UseVisualStyleBackColor = true;
+            this.RandomChkBoxWeaponTwo.CheckedChanged += new System.EventHandler(this.RandomChkBoxWeaponTwo_CheckedChanged);
+            // 
+            // CreateWeaponTwo
+            // 
+            this.CreateWeaponTwo.Location = new System.Drawing.Point(15, 171);
+            this.CreateWeaponTwo.Name = "CreateWeaponTwo";
+            this.CreateWeaponTwo.Size = new System.Drawing.Size(112, 57);
+            this.CreateWeaponTwo.TabIndex = 5;
+            this.CreateWeaponTwo.Text = "Create Weapon 2";
+            this.CreateWeaponTwo.UseVisualStyleBackColor = true;
+            this.CreateWeaponTwo.Click += new System.EventHandler(this.CreateWeaponTwo_Click);
+            // 
             // AngelGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -647,6 +768,8 @@ namespace AdeptusEvangelionGmTools
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SRValue)).EndInit();
@@ -716,5 +839,15 @@ namespace AdeptusEvangelionGmTools
         private System.Windows.Forms.NumericUpDown BSValue;
         private System.Windows.Forms.NumericUpDown WSValue;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label WeaponTwoDescription;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.CheckBox EmptyChkBoxWeaponTwo;
+        private System.Windows.Forms.CheckBox RandomChkBoxWeaponTwo;
+        private System.Windows.Forms.Button CreateWeaponTwo;
+        private System.Windows.Forms.Label WeaponOneDescription;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox EmptyChkBoxWeaponOne;
+        private System.Windows.Forms.CheckBox RandomChkBoxWeaponOne;
+        private System.Windows.Forms.Button CreateWeaponOne;
     }
 }

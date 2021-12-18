@@ -28,6 +28,36 @@ namespace AdeptusEvangelionGmTools
             InitializeComponent();
             InitiateComboBox();
         }
+        private void CreateWeaponOne_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RandomChkBoxWeaponOne_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EmptyChkBoxWeaponOne_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreateWeaponTwo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RandomChkBoxWeaponTwo_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EmptyChkBoxWeaponTwo_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void GenButton_Click(object sender, EventArgs e)
         {
             if (verifyEmptyComboBoxes())

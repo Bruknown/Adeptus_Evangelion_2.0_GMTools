@@ -1,4 +1,5 @@
 ﻿using AdeptusEvangelionGmTools.Objects.AngelProperties;
+using AdeptusEvangelionGmTools.Objects.Weapons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,15 @@ namespace AdeptusEvangelionGmTools.Objects
         public List<Locomotion> ComboBoxLocomotion = new List<Locomotion>();
         public List<BodySize> ComboBoxSize = new List<BodySize>();
         public List<Specialization> ComboBoxSpecialization = new List<Specialization>();
-
         
+
         public BodyType bodyType { get; set; }
         public Difficulty difficulty { get; set; }
         public Locomotion locomotion { get; set; }
         public BodySize size { get; set; }
         public Specialization specialization { get; set; }
         public Body body { get; set; }
+        public List<AngelAttack> Attacks { get; set; }
 
         public int BallisticSkill { get; set; }
         public int WeaponSkill { get; set; }
