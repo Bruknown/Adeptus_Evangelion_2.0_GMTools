@@ -51,30 +51,29 @@ namespace AdeptusEvangelionGmTools.Objects
         {
             InitiateComponents();
 
-            this.difficulty     = (this.difficulty == null)     ? this.difficulty       = RandomDifficulty() : this.difficulty = difficulty;
-            this.specialization = (this.specialization == null) ? this.specialization   = RandomSpecialization(rnd.Next(1, 101)) : this.specialization = specialization;
-            this.bodyType       = (this.bodyType == null)       ? this.bodyType         = RandomBodyType(rnd.Next(1, 101)) : this.bodyType = bodyType;
-            this.locomotion     = (this.locomotion == null)     ? this.locomotion       = RandomLocomotion(rnd.Next(1, 101), this.bodyType) : this.locomotion = locomotion;
-            this.size           = (this.size == null)           ? this.size             = RandomSize(rnd.Next(1, 101), this.bodyType) : this.size = size;
+            this.difficulty     = (difficulty == null)     ? this.difficulty       = RandomDifficulty() : this.difficulty = difficulty;
+            this.specialization = (specialization == null) ? this.specialization   = RandomSpecialization(rnd.Next(1, 101)) : this.specialization = specialization;
+            this.bodyType       = (bodyType == null)       ? this.bodyType         = RandomBodyType(rnd.Next(1, 101)) : this.bodyType = bodyType;
+            this.locomotion     = (locomotion == null)     ? this.locomotion       = RandomLocomotion(rnd.Next(1, 101), this.bodyType) : this.locomotion = locomotion;
+            this.size           = (size == null)           ? this.size             = RandomSize(rnd.Next(1, 101), this.bodyType) : this.size = size;
 
             List<int> randomValues = randomSeeds(this.bodyType);
 
-            BallisticSkill  = (BallisticSkill == 0) ? BallisticSkill    = RandomBS(randomValues[0], this.specialization)    : BallisticSkill = ballisticSkill;
-            WeaponSkill     = (WeaponSkill == 0)    ? WeaponSkill       = RandomWS(randomValues[1], this.specialization)    : WeaponSkill = weaponSkill;
-            Strength        = (Strength == 0)       ? Strength          = RandomStr(randomValues[2], this.specialization)   : Strength = strength;
-            Toughness       = (Toughness == 0)      ? Toughness         = RandomTough(randomValues[3], this.specialization) : Toughness = toughness;
-            Agility         = (Agility == 0)        ? Agility           = RandomAgi(randomValues[4], this.specialization)   : Agility = agility;
-            Intelligence    = (Intelligence == 0)   ? Intelligence      = RandomInt(randomValues[5], this.specialization)   : Intelligence = intelligence;
-            Perception      = (Perception == 0)     ? Perception        = RandomPer(randomValues[6], this.specialization)   : Perception = perception;
-            Willpower       = (Willpower == 0)      ? Willpower         = RandomWP(randomValues[7], this.specialization)    : Willpower = willpower;
-            Fellowship      = (Fellowship == 0)     ? Fellowship        = RandomFel(randomValues[8], this.specialization)   : Fellowship = fellowship;
-            SynchRatio      = (SynchRatio == 0)     ? SynchRatio        = RandomSR(randomValues[9], this.specialization)    : SynchRatio = synchRatio;
+            BallisticSkill  = (ballisticSkill == 0) ? BallisticSkill    = RandomBS(randomValues[0], this.specialization)    : BallisticSkill = ballisticSkill;
+            WeaponSkill     = (weaponSkill == 0)    ? WeaponSkill       = RandomWS(randomValues[1], this.specialization)    : WeaponSkill = weaponSkill;
+            Strength        = (strength == 0)       ? Strength          = RandomStr(randomValues[2], this.specialization)   : Strength = strength;
+            Toughness       = (toughness == 0)      ? Toughness         = RandomTough(randomValues[3], this.specialization) : Toughness = toughness;
+            Agility         = (agility == 0)        ? Agility           = RandomAgi(randomValues[4], this.specialization)   : Agility = agility;
+            Intelligence    = (intelligence == 0)   ? Intelligence      = RandomInt(randomValues[5], this.specialization)   : Intelligence = intelligence;
+            Perception      = (perception == 0)     ? Perception        = RandomPer(randomValues[6], this.specialization)   : Perception = perception;
+            Willpower       = (willpower == 0)      ? Willpower         = RandomWP(randomValues[7], this.specialization)    : Willpower = willpower;
+            Fellowship      = (fellowship == 0)     ? Fellowship        = RandomFel(randomValues[8], this.specialization)   : Fellowship = fellowship;
+            SynchRatio      = (synchRatio == 0)     ? SynchRatio        = RandomSR(randomValues[9], this.specialization)    : SynchRatio = synchRatio;
 
             body = new Body(Toughness, this.bodyType.Name);
-            finalModifications(this.difficulty, this.specialization, this.bodyType, this.size);
-            body = updateWounds(this.bodyType);
             ArmorHandling(randomValues[10], this.specialization);
-
+            finalModifications(this.difficulty, this.specialization, this.bodyType, this.size);
+            updateWounds();
         }
 
         #endregion
@@ -187,11 +186,10 @@ namespace AdeptusEvangelionGmTools.Objects
             };
             return randomValues;
         }
-        private Body updateWounds(BodyType bodyType)
+        private void updateWounds()
         {
             int difference = (Toughness - body.BaseToughness) / 10;
-            Body newBody = new Body(Toughness + difference, bodyType.Name);
-            return newBody;
+            WoundAdding(difference, false);
         }
         private void finalModifications(Difficulty difficulty, Specialization specialization, BodyType bodyType, BodySize size)
         {
@@ -224,19 +222,19 @@ namespace AdeptusEvangelionGmTools.Objects
                     switch (difficulty.Name)
                     {
                         case "Introductory":
-                            WoundAdding(1);
+                            WoundAdding(1, true);
                             break;
                         case "Easy":
-                            WoundAdding(3);
+                            WoundAdding(3, true);
                             break;
                         case "Medium":
-                            WoundAdding(5);
+                            WoundAdding(5, true);
                             break;
                         case "Hard":
-                            WoundAdding(8);
+                            WoundAdding(8, true);
                             break;
                         case "Apocalyptic":
-                            WoundAdding(10);
+                            WoundAdding(10, true);
                             break;
                     }
                     break;
@@ -279,34 +277,55 @@ namespace AdeptusEvangelionGmTools.Objects
                 case "Scrawny":
                     WeaponSkill -= 5;
                     Strength -= 5;
-                    WoundAdding(-2);
+                    WoundAdding(-2, true);
                     break;
                 case "Hulking":
                     WeaponSkill += 5;
                     Strength += 5;
                     Toughness += 5;
-                    WoundAdding(2);
+                    WoundAdding(2, true);
                     break;
                 case "Enormous":
                     WeaponSkill += 10;
                     Strength += 10;
                     Toughness += 10;
-                    WoundAdding(4);
+                    WoundAdding(4, true);
                     break;
                 case "Massive":
                     WeaponSkill += 15;
                     Strength += 15;
                     Toughness += 15;
-                    WoundAdding(6);
+                    WoundAdding(6, true);
                     break;
             }
         }
-        private void WoundAdding(int extra)
+        private void WoundAdding(int extra, bool flatBonus)
         {
             if (body.Head != null)
                 body.Head.Wounds += extra;
             if (body.Torso != null)
-                body.Torso.Wounds += extra;
+            {
+                if (!flatBonus)
+                {
+                    switch (bodyType.Name)
+                    {
+                        case "Bipedal":
+                        case "Insectile":
+                        case "Bestial":
+                        case "Artificial":
+                            body.Torso.Wounds += extra * 2;
+                            break;
+                        case "Orbital":
+                        case "Amorphous":
+                            body.Torso.Wounds += extra * 3;
+                            break;
+                    }
+                }
+                else
+                {
+                    body.Torso.Wounds += extra;
+                }
+            }
             if (body.Core != null)
                 body.Core.Wounds += extra;
             if (body.LeftArm != null)
@@ -317,20 +336,22 @@ namespace AdeptusEvangelionGmTools.Objects
                 body.RightLeg.Wounds += extra;
             if (body.LeftLeg != null)
                 body.LeftLeg.Wounds += extra;
+
+            body.woundPreventNegative();
         }
         private void ArmorHandling(int randomArmor, Specialization specialization)
         {
             switch(specialization.Name)
             {
                 case "Frontal Assault":
-                    if (randomArmor >= 11 || randomArmor <= 25)
+                    if (randomArmor >= 11 && randomArmor <= 25)
                     {
                         if (body.Head != null)
                             body.Head.Armor = 2;
                         if (body.Torso != null)
                             body.Torso.Armor = 2;
                     }
-                    else if (randomArmor >= 26 || randomArmor <= 60)
+                    else if (randomArmor >= 26 && randomArmor <= 60)
                     {
                         int armor = rnd.Next(1, 6);
                         if (body.Head != null)
@@ -338,7 +359,7 @@ namespace AdeptusEvangelionGmTools.Objects
                         if (body.Torso != null)
                             body.Torso.Armor = armor;
                     }
-                    else if (randomArmor >= 61 || randomArmor <= 85)
+                    else if (randomArmor >= 61 && randomArmor <= 85)
                     {
                         int armor = rnd.Next(1, 6)+2;
                         if (body.Head != null)
@@ -356,7 +377,7 @@ namespace AdeptusEvangelionGmTools.Objects
                         if (body.LeftLeg != null)
                             body.LeftLeg.Armor = 2;
                     }
-                    else if (randomArmor >= 86 || randomArmor <= 95)
+                    else if (randomArmor >= 86 && randomArmor <= 95)
                     {
                         int armor = rnd.Next(1, 6) + 4;
                         int armorlimb = rnd.Next(1, 6);
@@ -375,7 +396,7 @@ namespace AdeptusEvangelionGmTools.Objects
                         if (body.LeftLeg != null)
                             body.LeftLeg.Armor = armorlimb;
                     }
-                    else if (randomArmor >= 96 || randomArmor <= 100)
+                    else if (randomArmor >= 96 && randomArmor <= 100)
                     {
                         int armor = rnd.Next(1, 11) + 5;
                         int armorlimb = rnd.Next(1, 6) +2;
@@ -396,7 +417,7 @@ namespace AdeptusEvangelionGmTools.Objects
                     }
                     break;
                 case "Distance Fighting":
-                    if (randomArmor >= 01 || randomArmor <= 40)
+                    if (randomArmor >= 01 && randomArmor <= 40)
                     {
                         int armor = rnd.Next(1, 6);
                         if (body.Head != null)
@@ -404,7 +425,7 @@ namespace AdeptusEvangelionGmTools.Objects
                         if (body.Torso != null)
                             body.Torso.Armor = armor;
                     }
-                    else if (randomArmor >= 41 || randomArmor <= 70)
+                    else if (randomArmor >= 41 && randomArmor <= 70)
                     {
                         int armor = rnd.Next(1, 6) + 2;
                         if (body.Head != null)
@@ -422,7 +443,7 @@ namespace AdeptusEvangelionGmTools.Objects
                         if (body.LeftLeg != null)
                             body.LeftLeg.Armor = 2;
                     }
-                    else if (randomArmor >= 71 || randomArmor <= 90)
+                    else if (randomArmor >= 71 && randomArmor <= 90)
                     {
                         int armor = rnd.Next(1, 6) + 4;
                         int armorlimb = rnd.Next(1, 6);
@@ -441,7 +462,7 @@ namespace AdeptusEvangelionGmTools.Objects
                         if (body.LeftLeg != null)
                             body.LeftLeg.Armor = armorlimb;
                     }
-                    else if (randomArmor >= 91 || randomArmor <= 100)
+                    else if (randomArmor >= 91 && randomArmor <= 100)
                     {
                         int armor = rnd.Next(1, 11) + 5;
                         int armorlimb = rnd.Next(1, 6) + 2;
@@ -462,14 +483,14 @@ namespace AdeptusEvangelionGmTools.Objects
                     }
                     break;
                 case "Encroacher":
-                    if (randomArmor >= 41 || randomArmor <= 80)
+                    if (randomArmor >= 41 && randomArmor <= 80)
                     {
                         if (body.Head != null)
                             body.Head.Armor = 2;
                         if (body.Torso != null)
                             body.Torso.Armor = 2;
                     }
-                    else if (randomArmor >= 81 || randomArmor <= 95)
+                    else if (randomArmor >= 81 && randomArmor <= 95)
                     {
                         int armor = rnd.Next(1, 6);
                         if (body.Head != null)
@@ -477,7 +498,7 @@ namespace AdeptusEvangelionGmTools.Objects
                         if (body.Torso != null)
                             body.Torso.Armor = armor;
                     }
-                    else if (randomArmor >= 96 || randomArmor <= 100)
+                    else if (randomArmor >= 96 && randomArmor <= 100)
                     {
                         int armor = rnd.Next(1, 6) + 2;
                         if (body.Head != null)

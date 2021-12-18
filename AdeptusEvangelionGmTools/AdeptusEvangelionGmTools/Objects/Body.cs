@@ -87,6 +87,7 @@ namespace AdeptusEvangelionGmTools.Objects
                 case "Pilot":
                     break;
             }
+            woundPreventNegative();
         }
         #endregion
 
@@ -123,6 +124,33 @@ namespace AdeptusEvangelionGmTools.Objects
                     break;
             }
         }
+        public void woundPreventNegative()
+        {
+            if (Head != null)
+                if (Head.Wounds <= 0)
+                    Head.Wounds = 1;
+            if (Torso != null)
+                if (Torso.Wounds <= 0)
+                    Torso.Wounds = 1;
+            if (Core != null)
+                if (Core.Wounds <= 0)
+                    Core.Wounds = 1;
+            if (LeftArm != null)
+                if (LeftArm.Wounds <= 0)
+                    LeftArm.Wounds = 1;
+            if (RightArm != null)
+                if (RightArm.Wounds <= 0)
+                    RightArm.Wounds = 1;
+            if (RightLeg != null)
+                if (RightLeg.Wounds <= 0)
+                    RightLeg.Wounds = 1;
+            if (LeftLeg != null)
+                if (LeftLeg.Wounds <= 0)
+                    LeftLeg.Wounds = 1;
+        }
+        #endregion
+        #region private methods
+
         #endregion
     }
 }

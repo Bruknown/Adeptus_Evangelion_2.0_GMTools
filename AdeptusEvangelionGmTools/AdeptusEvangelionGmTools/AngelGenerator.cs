@@ -47,6 +47,7 @@ namespace AdeptusEvangelionGmTools
             {
                 DifficultyBox.SelectedItem = null;
                 DifficultyBox.Enabled = false;
+                SelectedDifficulty = null;
             }
             else
             {
@@ -60,6 +61,7 @@ namespace AdeptusEvangelionGmTools
             {
                 SpecializationCombo.SelectedItem = null;
                 SpecializationCombo.Enabled = false;
+                SelectedSpecialization = null;
             }
             else
             {
@@ -73,6 +75,7 @@ namespace AdeptusEvangelionGmTools
             {
                 BodyTypeCombo.SelectedItem = null;
                 BodyTypeCombo.Enabled = false;
+                SelectedSpecialization = null;
             }
             else
             {
@@ -86,6 +89,7 @@ namespace AdeptusEvangelionGmTools
             {
                 LocomotionCombo.SelectedItem = null;
                 LocomotionCombo.Enabled = false;
+                SelectedLocomotion = null;
             }
             else
             {
@@ -99,6 +103,7 @@ namespace AdeptusEvangelionGmTools
             {
                 SizeCombo.SelectedItem = null;
                 SizeCombo.Enabled = false;
+                SelectedBodySize = null;
             }
             else
             {
