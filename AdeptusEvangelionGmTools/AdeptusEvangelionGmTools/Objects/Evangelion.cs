@@ -50,23 +50,12 @@ namespace AdeptusEvangelionGmTools.Objects
             WeaponSkill += 15;
             BallisticSkill += 15;
             OperationalTime = 5;
-            Body = new Body(Toughness, "Evangelion");
-            if (soul == null)
-                Soul = randomSoul(rnd.Next(1, 101));
-            else
-                Soul = soul;
-            if (mutation == null)
-                Mutations = randomMutations(rnd.Next(1, 101));
-            else
-                Mutations = new List<Mutation> { mutation };
-            if (construction == null)
-                Construction = RandomConstruction(rnd.Next(1, 101));
-            else
-                Construction = new List<Construction> { construction };
-            if (history == null)
-                History = randomHistory(rnd.Next(1, 101));
-            else
-                History = history;
+            Body            = new Body(Toughness, "Evangelion");
+            Soul            = (soul == null)            ? Soul          = randomSoul(rnd.Next(1, 101)) : Soul = soul;
+            Mutations       = (mutation == null)        ? Mutations     = randomMutations(rnd.Next(1, 101)) : Mutations = new List<Mutation> { mutation };
+            Construction    = (construction == null)    ? Construction  = RandomConstruction(rnd.Next(1, 101)) : Construction = new List<Construction> { construction };
+            History         = (history == null)         ? History       = randomHistory(rnd.Next(1, 101)) : History = history;
+            
             if (selectedMainColor.Equals(null) || SelectedSecondColor.Equals(null))
             {
                 primaryColor = randomColor(rnd.Next(1, 101), rnd.Next(1, 101));

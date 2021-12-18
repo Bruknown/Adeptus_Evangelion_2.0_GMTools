@@ -56,20 +56,24 @@ namespace AdeptusEvangelionGmTools.Objects
             this.bodyType       = (this.bodyType == null)       ? this.bodyType         = RandomBodyType(rnd.Next(1, 101)) : this.bodyType = bodyType;
             this.locomotion     = (this.locomotion == null)     ? this.locomotion       = RandomLocomotion(rnd.Next(1, 101), this.bodyType) : this.locomotion = locomotion;
             this.size           = (this.size == null)           ? this.size             = RandomSize(rnd.Next(1, 101), this.bodyType) : this.size = size;
-            
-            BallisticSkill  = (BallisticSkill == 0) ? BallisticSkill    = RandomBS(rnd.Next(1, 101), this.specialization)    : BallisticSkill = ballisticSkill;
-            WeaponSkill     = (WeaponSkill == 0)    ? WeaponSkill       = RandomWS(rnd.Next(1, 101), this.specialization)    : WeaponSkill = weaponSkill;
-            Strength        = (Strength == 0)       ? Strength          = RandomStr(rnd.Next(1, 101), this.specialization)   : Strength = strength;
-            Toughness       = (Toughness == 0)      ? Toughness         = RandomTough(rnd.Next(1, 101), this.specialization) : Toughness = toughness;
-            Agility         = (Agility == 0)        ? Agility           = RandomAgi(rnd.Next(1, 101), this.specialization)   : Agility = agility;
-            Intelligence    = (Intelligence == 0)   ? Intelligence      = RandomInt(rnd.Next(1, 101), this.specialization)   : Intelligence = intelligence;
-            Perception      = (Perception == 0)     ? Perception        = RandomPer(rnd.Next(1, 101), this.specialization)   : Perception = perception;
-            Willpower       = (Willpower == 0)      ? Willpower         = RandomWP(rnd.Next(1, 101), this.specialization)    : Willpower = willpower;
-            Fellowship      = (Fellowship == 0)     ? Fellowship        = RandomFel(rnd.Next(1, 101), this.specialization)   : Fellowship = fellowship;
-            SynchRatio      = (SynchRatio == 0)     ? SynchRatio        = RandomSR(rnd.Next(1, 101), this.specialization)    : SynchRatio = synchRatio;
+
+            List<int> randomValues = randomSeeds(this.bodyType);
+
+            BallisticSkill  = (BallisticSkill == 0) ? BallisticSkill    = RandomBS(randomValues[0], this.specialization)    : BallisticSkill = ballisticSkill;
+            WeaponSkill     = (WeaponSkill == 0)    ? WeaponSkill       = RandomWS(randomValues[1], this.specialization)    : WeaponSkill = weaponSkill;
+            Strength        = (Strength == 0)       ? Strength          = RandomStr(randomValues[2], this.specialization)   : Strength = strength;
+            Toughness       = (Toughness == 0)      ? Toughness         = RandomTough(randomValues[3], this.specialization) : Toughness = toughness;
+            Agility         = (Agility == 0)        ? Agility           = RandomAgi(randomValues[4], this.specialization)   : Agility = agility;
+            Intelligence    = (Intelligence == 0)   ? Intelligence      = RandomInt(randomValues[5], this.specialization)   : Intelligence = intelligence;
+            Perception      = (Perception == 0)     ? Perception        = RandomPer(randomValues[6], this.specialization)   : Perception = perception;
+            Willpower       = (Willpower == 0)      ? Willpower         = RandomWP(randomValues[7], this.specialization)    : Willpower = willpower;
+            Fellowship      = (Fellowship == 0)     ? Fellowship        = RandomFel(randomValues[8], this.specialization)   : Fellowship = fellowship;
+            SynchRatio      = (SynchRatio == 0)     ? SynchRatio        = RandomSR(randomValues[9], this.specialization)    : SynchRatio = synchRatio;
 
             body = new Body(Toughness, this.bodyType.Name);
-            ArmorHandling(rnd.Next(1,101), this.specialization);
+            finalModifications(this.difficulty, this.specialization, this.bodyType, this.size);
+            body = updateWounds(this.bodyType);
+            ArmorHandling(randomValues[10], this.specialization);
 
         }
 
@@ -117,6 +121,202 @@ namespace AdeptusEvangelionGmTools.Objects
                 new Specialization("Distance Fighting","Distance Fighting angels have dedicated tools for keeping enemies at distance and dealing massive damage, usually squishy in close quarters"),
                 new Specialization("Encroachment","Encroachment angels have specialized tools for dealing with pilots, attacking them directly"),
             };
+        }
+        private List<int> randomSeeds(BodyType bodyType)
+        {
+            int randomBS = rnd.Next(1,101);
+            int randomWS = rnd.Next(1, 101); 
+            int randomStrength = rnd.Next(1, 101); 
+            int randomToughness = rnd.Next(1, 101); 
+            int randomAgility = rnd.Next(1, 101); 
+            int randomInt = rnd.Next(1, 101); 
+            int randomPer = rnd.Next(1, 101); 
+            int randomWP = rnd.Next(1, 101); 
+            int randomFel = rnd.Next(1, 101); 
+            int randomSynch = rnd.Next(1, 101);
+            int randomArmor = rnd.Next(1, 101);
+            switch (bodyType.Name)
+            {
+                case "Bipedal":
+                    randomWS = (randomWS > 80) ? randomWS = 100 : randomWS += 20;
+                    randomToughness = (randomToughness > 80) ? randomToughness = 100 : randomToughness += 20;
+                    break;
+                case "Insectile":
+                    randomArmor = (randomArmor > 70) ? randomArmor = 100 : randomArmor += 30;
+                    randomAgility = (randomArmor > 80) ? randomAgility = 100 : randomAgility += 20;
+                    randomToughness = (randomArmor < 20) ? randomToughness = 1 : randomToughness -= 20;
+                    break;
+                case "Orbital":
+                    randomBS = (randomBS > 70) ? randomBS = 100 : randomBS += 30;
+                    randomStrength = (randomStrength < 20) ? randomStrength = 1 : randomStrength -= 20;
+                    randomToughness = (randomToughness < 20) ? randomToughness = 1 : randomToughness -= 20;
+                    break;
+                case "Bestial":
+                    randomWS = (randomWS > 80) ? randomWS = 100 : randomWS += 20;
+                    randomStrength = (randomStrength > 80) ? randomStrength = 100 : randomStrength += 20;
+                    randomToughness = (randomToughness > 80) ? randomToughness = 100 : randomToughness += 20;
+                    randomSynch = (randomSynch < 20) ? randomSynch = 1 : randomSynch -= 20;
+                    break;
+                case "Artificial":
+                    randomBS = (randomBS > 80) ? randomBS = 100 : randomBS += 20;
+                    randomSynch = (randomSynch > 80) ? randomSynch = 100 : randomSynch += 20;
+                    randomArmor = (randomArmor > 80) ? randomArmor = 100 : randomArmor += 20;
+                    randomWS = (randomWS < 10) ? randomWS = 1 : randomWS -= 10;
+                    randomStrength = (randomStrength < 10) ? randomStrength = 1 : randomStrength -= 10;
+                    randomAgility = (randomAgility < 10) ? randomAgility = 1 : randomAgility -= 10;
+                    break;
+                case "Amorphous":
+                    randomArmor = (randomArmor < 20) ? randomArmor = 1 : randomArmor -= 20;
+                    randomToughness = (randomToughness > 80) ? randomToughness = 100 : randomToughness += 20;
+                    randomSynch = (randomSynch > 80) ? randomSynch = 100 : randomSynch += 20;
+                    break;
+            }
+            List<int> randomValues = new List<int>
+            {
+                randomBS,
+                randomWS,
+                randomStrength,
+                randomToughness,
+                randomAgility,
+                randomInt,
+                randomPer,
+                randomWP,
+                randomFel,
+                randomSynch,
+                randomArmor
+            };
+            return randomValues;
+        }
+        private Body updateWounds(BodyType bodyType)
+        {
+            int difference = (Toughness - body.BaseToughness) / 10;
+            Body newBody = new Body(Toughness + difference, bodyType.Name);
+            return newBody;
+        }
+        private void finalModifications(Difficulty difficulty, Specialization specialization, BodyType bodyType, BodySize size)
+        {
+            switch (difficulty.Name)
+            {
+                case "Introductory":
+                    Toughness = (Toughness <= 20) ? Toughness = 1 : Toughness -= 20;
+                    SynchRatio = (SynchRatio > 100) ? SynchRatio = 100 : SynchRatio = SynchRatio;
+                    break;
+                case "Easy":
+                    Toughness = (Toughness <= 20) ? Toughness = 1 : Toughness -= 20;
+                    SynchRatio = (SynchRatio > 160) ? SynchRatio = 160 : SynchRatio = SynchRatio;
+                    break;
+                case "Hard":
+                    WeaponSkill += 10;
+                    BallisticSkill += 10;
+                    SynchRatio = (SynchRatio > 160) ? SynchRatio = 200 : SynchRatio += 40;
+                    break;
+                case "Apocalyptic":
+                    WeaponSkill += 20;
+                    BallisticSkill += 20;
+                    Strength += 20;
+                    Toughness += 20;
+                    SynchRatio = 200;
+                    break;
+            }
+            switch (specialization.Name)
+            {
+                case "Frontal Assault":
+                    switch (difficulty.Name)
+                    {
+                        case "Introductory":
+                            WoundAdding(1);
+                            break;
+                        case "Easy":
+                            WoundAdding(3);
+                            break;
+                        case "Medium":
+                            WoundAdding(5);
+                            break;
+                        case "Hard":
+                            WoundAdding(8);
+                            break;
+                        case "Apocalyptic":
+                            WoundAdding(10);
+                            break;
+                    }
+                    break;
+                case "Distance Fighting":
+                    break;
+                case "Encroachment":
+                        switch (difficulty.Name)
+                        {
+                            case "Medium":
+                            if (WeaponSkill > BallisticSkill)
+                                WeaponSkill += 30;
+                            else
+                                BallisticSkill += 30;
+                                break;
+
+                            case "Hard":
+                            if (WeaponSkill > BallisticSkill)
+                                WeaponSkill += 40;
+                            else
+                                BallisticSkill += 40;
+                            break;
+
+                            case "Apocalyptic":
+                            if (WeaponSkill > BallisticSkill)
+                                WeaponSkill += 50;
+                            else
+                                BallisticSkill += 50;
+                            break;
+                        }
+                    break;
+            }
+            switch (bodyType.Name)
+            {
+                case "Orbital":
+                    WeaponSkill = 0;
+                    break;
+            }
+            switch (size.Name)
+            {
+                case "Scrawny":
+                    WeaponSkill -= 5;
+                    Strength -= 5;
+                    WoundAdding(-2);
+                    break;
+                case "Hulking":
+                    WeaponSkill += 5;
+                    Strength += 5;
+                    Toughness += 5;
+                    WoundAdding(2);
+                    break;
+                case "Enormous":
+                    WeaponSkill += 10;
+                    Strength += 10;
+                    Toughness += 10;
+                    WoundAdding(4);
+                    break;
+                case "Massive":
+                    WeaponSkill += 15;
+                    Strength += 15;
+                    Toughness += 15;
+                    WoundAdding(6);
+                    break;
+            }
+        }
+        private void WoundAdding(int extra)
+        {
+            if (body.Head != null)
+                body.Head.Wounds += extra;
+            if (body.Torso != null)
+                body.Torso.Wounds += extra;
+            if (body.Core != null)
+                body.Core.Wounds += extra;
+            if (body.LeftArm != null)
+                body.LeftArm.Wounds += extra;
+            if (body.RightArm != null)
+                body.RightArm.Wounds += extra;
+            if (body.RightLeg != null)
+                body.RightLeg.Wounds += extra;
+            if (body.LeftLeg != null)
+                body.LeftLeg.Wounds += extra;
         }
         private void ArmorHandling(int randomArmor, Specialization specialization)
         {

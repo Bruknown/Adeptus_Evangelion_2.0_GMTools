@@ -91,10 +91,6 @@ namespace AdeptusEvangelionGmTools.Objects
         #endregion
 
         #region public methods
-        public void armorHandling(Head head, Torso torso)
-        {
-
-        }
         public void woundIncrease(String BodyType, int mod)
         {
             switch (BodyType)
@@ -106,10 +102,6 @@ namespace AdeptusEvangelionGmTools.Objects
                     LeftLeg.Wounds += mod;
                     RightArm.Wounds += mod;
                     RightLeg.Wounds += mod;
-                    break;
-                case "Angel":
-                    break;
-                case "Pilot":
                     break;
             }
         }

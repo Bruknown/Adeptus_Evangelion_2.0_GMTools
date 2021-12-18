@@ -45,7 +45,7 @@ namespace AdeptusEvangelionGmTools
             this.label1 = new System.Windows.Forms.Label();
             this.BodyTypeCombo = new System.Windows.Forms.ComboBox();
             this.SpecializationCombo = new System.Windows.Forms.ComboBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.AngelOutPutText = new System.Windows.Forms.RichTextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.GenButton = new System.Windows.Forms.Button();
@@ -270,17 +270,18 @@ namespace AdeptusEvangelionGmTools
             this.SpecializationCombo.TabIndex = 0;
             this.SpecializationCombo.TextChanged += new System.EventHandler(this.SpecializationCombo_TextChanged);
             // 
-            // richTextBox1
+            // AngelOutPutText
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(6, 21);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(277, 371);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
+            this.AngelOutPutText.Location = new System.Drawing.Point(6, 21);
+            this.AngelOutPutText.Name = "AngelOutPutText";
+            this.AngelOutPutText.ReadOnly = true;
+            this.AngelOutPutText.Size = new System.Drawing.Size(277, 371);
+            this.AngelOutPutText.TabIndex = 3;
+            this.AngelOutPutText.Text = "";
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.richTextBox1);
+            this.groupBox4.Controls.Add(this.AngelOutPutText);
             this.groupBox4.Location = new System.Drawing.Point(800, 12);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(289, 398);
@@ -676,7 +677,7 @@ namespace AdeptusEvangelionGmTools
         private System.Windows.Forms.ComboBox BodyTypeCombo;
         private System.Windows.Forms.ComboBox SpecializationCombo;
         private System.Windows.Forms.CheckBox rndSpecializationChkBox;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox AngelOutPutText;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button GenButton;

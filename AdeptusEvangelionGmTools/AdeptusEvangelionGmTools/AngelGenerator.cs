@@ -36,7 +36,7 @@ namespace AdeptusEvangelionGmTools
                                                  decimalToInt(WSValue.Value), decimalToInt(StrengthValue.Value), decimalToInt(ToughnessValue.Value),
                                                  decimalToInt(AgilityValue.Value), decimalToInt(IntValue.Value), decimalToInt(PerValue.Value),
                                                  decimalToInt(WPValue.Value), decimalToInt(FelValue.Value), decimalToInt(SRValue.Value));
-
+                displayText(generatedAngel);
             }
 
         }
@@ -285,6 +285,46 @@ namespace AdeptusEvangelionGmTools
         #endregion
 
         #region Private Methods
+        private void displayText(Angel angel)
+        {
+            AngelOutPutText.Text =
+                "Difficulty: " + angel.difficulty.Name + Environment.NewLine +
+                "Specialization: " + angel.specialization.Name + Environment.NewLine +
+                "Body Type: " + angel.bodyType.Name + Environment.NewLine +
+                "Locomotion: " + angel.locomotion.Name + Environment.NewLine +
+                "Size: " + angel.size.Name + Environment.NewLine +
+                "Ballistic Skill: " + angel.BallisticSkill + Environment.NewLine +
+                "Weapon Skill: " + angel.WeaponSkill + Environment.NewLine +
+                "Strength: " + angel.Strength + Environment.NewLine +
+                "Toughness: " + angel.Toughness + Environment.NewLine +
+                "Agility: " + angel.Agility + Environment.NewLine +
+                "Intelligence: " + angel.Intelligence + Environment.NewLine +
+                "Perception: " + angel.Perception + Environment.NewLine +
+                "Willpower: " + angel.Willpower + Environment.NewLine +
+                "Fellowship: " + angel.Fellowship + Environment.NewLine +
+                "Synch Ratio: " + angel.SynchRatio + Environment.NewLine +
+                "-------------------------------" + Environment.NewLine +
+                bodyPrint(angel.body);
+        }
+        private String bodyPrint(Body body)
+        {
+            String bodychart = "Body Part|Wounds|Armor" + Environment.NewLine;
+            if (body.Head != null)
+                bodychart += "      Head:     " + body.Head.Wounds + "       |   " + body.Head.Armor + Environment.NewLine;
+            if (body.Torso != null)
+                bodychart += "     Torso:     " + body.Torso.Wounds + "       |   " + body.Torso.Armor + Environment.NewLine;
+            if (body.Core != null)
+                bodychart += "     Core:     " + body.Core.Wounds + "       |   " + body.Core.Armor + Environment.NewLine;
+            if (body.LeftArm != null)
+                bodychart += "     L.Arm:     " + body.LeftArm.Wounds + "       |   " + body.LeftArm.Armor + Environment.NewLine;
+            if (body.RightArm != null)
+                bodychart += "     R.Arm:     " + body.RightArm.Wounds + "       |   " + body.RightArm.Armor + Environment.NewLine;
+            if (body.LeftLeg != null)
+                bodychart += "     L.Leg:     " + body.LeftLeg.Wounds + "       |   " + body.LeftLeg.Armor + Environment.NewLine;
+            if (body.RightLeg != null)
+                bodychart += "     L.Leg:     " + body.RightLeg.Wounds + "       |   " + body.RightLeg.Armor + Environment.NewLine;
+            return bodychart;
+        }
         private int decimalToInt(decimal dec)
         {
             return Convert.ToInt32(dec);
