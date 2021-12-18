@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdeptusEvangelionGmTools.Objects.AngelProperties
 {
-    class BodySize
+    public class BodySize
     {
         public String Name { get; set; }
         public String Effect { get; set; }

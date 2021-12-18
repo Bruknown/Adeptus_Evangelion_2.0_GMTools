@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdeptusEvangelionGmTools.Objects
 {
-    class Angel
+    public class Angel
     {
         #region Properties
         Random rnd = new Random();
@@ -47,7 +47,7 @@ namespace AdeptusEvangelionGmTools.Objects
             InitiateComponents();
         }
         public Angel(BodyType bodyType, Difficulty difficulty, Locomotion locomotion,
-                    BodySize size, Specialization specialization, int ballisticSkill,
+                    BodySize size, Specialization specialization, List<AngelAttack> angelAttacks, int ballisticSkill,
                     int weaponSkill, int strength, int toughness, int agility,
                     int intelligence, int perception, int willpower, int fellowship, int synchRatio)
         {
@@ -75,6 +75,7 @@ namespace AdeptusEvangelionGmTools.Objects
             body = new Body(Toughness, this.bodyType.Name);
             ArmorHandling(randomValues[10], this.specialization);
             finalModifications(this.difficulty, this.specialization, this.bodyType, this.size);
+            //Attacks.AddRange(angelAttacks.ToArray());
             updateWounds();
         }
 

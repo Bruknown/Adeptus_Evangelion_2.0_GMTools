@@ -1,5 +1,6 @@
 ﻿using AdeptusEvangelionGmTools.Objects;
 using AdeptusEvangelionGmTools.Objects.AngelProperties;
+using AdeptusEvangelionGmTools.Objects.Weapons;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,7 @@ namespace AdeptusEvangelionGmTools
         BodyType SelectedBodyType { get; set; }
         Locomotion SelectedLocomotion { get; set; }
         Specialization SelectedSpecialization { get; set; }
+        List<AngelAttack> angelAttacks { get; set; }
         #endregion
 
         #region Events
@@ -30,7 +32,9 @@ namespace AdeptusEvangelionGmTools
         }
         private void CreateWeaponOne_Click(object sender, EventArgs e)
         {
-
+            angelAttacks = new List<AngelAttack>();
+            FormWeaponCreation form = new FormWeaponCreation(this);
+            form.Show();
         }
 
         private void RandomChkBoxWeaponOne_CheckedChanged(object sender, EventArgs e)
@@ -62,7 +66,7 @@ namespace AdeptusEvangelionGmTools
         {
             if (verifyEmptyComboBoxes())
             {
-                Angel generatedAngel = new Angel(SelectedBodyType, SelectedDifficulty, SelectedLocomotion, SelectedBodySize, SelectedSpecialization,  decimalToInt(BSValue.Value),
+                Angel generatedAngel = new Angel(SelectedBodyType, SelectedDifficulty, SelectedLocomotion, SelectedBodySize, SelectedSpecialization, angelAttacks,  decimalToInt(BSValue.Value),
                                                  decimalToInt(WSValue.Value), decimalToInt(StrengthValue.Value), decimalToInt(ToughnessValue.Value),
                                                  decimalToInt(AgilityValue.Value), decimalToInt(IntValue.Value), decimalToInt(PerValue.Value),
                                                  decimalToInt(WPValue.Value), decimalToInt(FelValue.Value), decimalToInt(SRValue.Value));
@@ -424,5 +428,13 @@ namespace AdeptusEvangelionGmTools
         }
         #endregion
 
+        #region Public Methods
+        public void setAttacks(AngelAttack angelAttack, String Description)
+        {
+            angelAttacks.Add(angelAttack);
+            if (WeaponOneDescription.Text.Equals(""))
+                WeaponOneDescription.Text = Description;
+        }
+        #endregion
     }
 }
