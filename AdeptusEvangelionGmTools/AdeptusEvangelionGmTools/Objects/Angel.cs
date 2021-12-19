@@ -52,6 +52,7 @@ namespace AdeptusEvangelionGmTools.Objects
                     int intelligence, int perception, int willpower, int fellowship, int synchRatio)
         {
             InitiateComponents();
+            Attacks = new List<AngelAttack>();
 
             this.difficulty     = (difficulty == null)     ? this.difficulty       = RandomDifficulty() : this.difficulty = difficulty;
             this.specialization = (specialization == null) ? this.specialization   = RandomSpecialization(rnd.Next(1, 101)) : this.specialization = specialization;
@@ -75,7 +76,7 @@ namespace AdeptusEvangelionGmTools.Objects
             body = new Body(Toughness, this.bodyType.Name);
             ArmorHandling(randomValues[10], this.specialization);
             finalModifications(this.difficulty, this.specialization, this.bodyType, this.size);
-            //Attacks.AddRange(angelAttacks.ToArray());
+            Attacks.AddRange(angelAttacks.ToArray());
             updateWounds();
         }
 

@@ -33,7 +33,7 @@ namespace AdeptusEvangelionGmTools
         private void CreateWeaponOne_Click(object sender, EventArgs e)
         {
             angelAttacks = new List<AngelAttack>();
-            FormWeaponCreation form = new FormWeaponCreation(this);
+            FormWeaponCreation form = new FormWeaponCreation(this, 1);
             form.Show();
         }
 
@@ -44,12 +44,30 @@ namespace AdeptusEvangelionGmTools
 
         private void EmptyChkBoxWeaponOne_CheckedChanged(object sender, EventArgs e)
         {
+            if (EmptyChkBoxWeaponOne.Checked)
+            {
+                WeaponOneDescription.Text = "None";
+                RandomChkBoxWeaponOne.Enabled = false;
+                CreateWeaponOne.Enabled = false;
+                if (angelAttacks != null)
+                {
+                    angelAttacks.Remove(angelAttacks.Where(x => x.WeaponIndex == 1).FirstOrDefault());
+                }
+            }
+            else
+            {
+                WeaponOneDescription.Text = "";
+                RandomChkBoxWeaponOne.Enabled = true;
+                CreateWeaponOne.Enabled = true;
+            }
 
         }
 
         private void CreateWeaponTwo_Click(object sender, EventArgs e)
         {
-
+            angelAttacks = new List<AngelAttack>();
+            FormWeaponCreation form = new FormWeaponCreation(this, 2);
+            form.Show();
         }
 
         private void RandomChkBoxWeaponTwo_CheckedChanged(object sender, EventArgs e)
@@ -59,7 +77,22 @@ namespace AdeptusEvangelionGmTools
 
         private void EmptyChkBoxWeaponTwo_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (EmptyChkBoxWeaponTwo.Checked)
+            {
+                WeaponTwoDescription.Text = "None";
+                RandomChkBoxWeaponTwo.Enabled = false;
+                CreateWeaponTwo.Enabled = false;
+                if (angelAttacks != null)
+                {
+                    angelAttacks.Remove(angelAttacks.Where(x => x.WeaponIndex == 2).FirstOrDefault());
+                }
+            }
+            else
+            {
+                WeaponTwoDescription.Text = "";
+                RandomChkBoxWeaponTwo.Enabled = true;
+                CreateWeaponTwo.Enabled = true;
+            }
         }
 
         private void GenButton_Click(object sender, EventArgs e)
@@ -429,11 +462,18 @@ namespace AdeptusEvangelionGmTools
         #endregion
 
         #region Public Methods
-        public void setAttacks(AngelAttack angelAttack, String Description)
+        public void setAttacks(AngelAttack angelAttack, String Description, int weaponSlot)
         {
             angelAttacks.Add(angelAttack);
-            if (WeaponOneDescription.Text.Equals(""))
-                WeaponOneDescription.Text = Description;
+            switch (weaponSlot)
+            {
+                case 1:
+                    WeaponOneDescription.Text = Description;
+                    break;
+                case 2:
+                    WeaponTwoDescription.Text = Description;
+                    break;
+            }
         }
         #endregion
     }

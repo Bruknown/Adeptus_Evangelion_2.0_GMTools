@@ -17,9 +17,10 @@ namespace AdeptusEvangelionGmTools.Objects.Weapons
         public String DamageTypeTwo { get; set; }
         public int Penetration { get; set; }
         public bool ATPenetration { get; set; }
-
-        public AngelAttack(string name, string weaponType, string damageOne, string damageTypeOne, int penetration, bool aTPenetration)
+        public int WeaponIndex { get; set; }
+        public AngelAttack(int weaponIndex, string name, string weaponType, string damageOne, string damageTypeOne, int penetration, bool aTPenetration)
         {
+            WeaponIndex = weaponIndex;
             Name = name;
             WeaponType = weaponType;
             DamageOne = damageOne;
@@ -28,8 +29,9 @@ namespace AdeptusEvangelionGmTools.Objects.Weapons
             ATPenetration = aTPenetration;
         }
 
-        public AngelAttack(string name, string weaponType, string damageOne, string damageTypeOne, string damageTwo, string damageTypeTwo, int penetration, bool aTPenetration)
+        public AngelAttack(int weaponIndex, string name, string weaponType, string damageOne, string damageTypeOne, string damageTwo, string damageTypeTwo, int penetration, bool aTPenetration)
         {
+            WeaponIndex = weaponIndex;
             Name = name;
             WeaponType = weaponType;
             DamageOne = damageOne;

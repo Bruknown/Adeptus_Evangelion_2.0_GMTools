@@ -35,7 +35,7 @@ namespace AdeptusEvangelionGmTools
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.WeaponTypeCombo = new System.Windows.Forms.ComboBox();
-            this.WeaponPropertyOneCombo = new System.Windows.Forms.ComboBox();
+            this.WeaponPropertyCombo = new System.Windows.Forms.ComboBox();
             this.typeOfDiceOneCombo = new System.Windows.Forms.ComboBox();
             this.damageBonusOne = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
@@ -46,7 +46,6 @@ namespace AdeptusEvangelionGmTools
             this.typeOfDiceTwoCombo = new System.Windows.Forms.ComboBox();
             this.diceQuantityTwo = new System.Windows.Forms.NumericUpDown();
             this.diceQuantityOne = new System.Windows.Forms.NumericUpDown();
-            this.WeaponPropertyTwoCombo = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -92,7 +91,7 @@ namespace AdeptusEvangelionGmTools
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(244, 55);
+            this.label4.Location = new System.Drawing.Point(393, 71);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(123, 17);
             this.label4.TabIndex = 3;
@@ -101,7 +100,7 @@ namespace AdeptusEvangelionGmTools
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(378, 56);
+            this.label5.Location = new System.Drawing.Point(236, 56);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(158, 17);
             this.label5.TabIndex = 4;
@@ -115,15 +114,16 @@ namespace AdeptusEvangelionGmTools
             this.WeaponTypeCombo.Name = "WeaponTypeCombo";
             this.WeaponTypeCombo.Size = new System.Drawing.Size(121, 24);
             this.WeaponTypeCombo.TabIndex = 5;
+            this.WeaponTypeCombo.SelectedIndexChanged += new System.EventHandler(this.WeaponTypeCombo_SelectedIndexChanged);
             // 
-            // WeaponPropertyOneCombo
+            // WeaponPropertyCombo
             // 
-            this.WeaponPropertyOneCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.WeaponPropertyOneCombo.FormattingEnabled = true;
-            this.WeaponPropertyOneCombo.Location = new System.Drawing.Point(244, 75);
-            this.WeaponPropertyOneCombo.Name = "WeaponPropertyOneCombo";
-            this.WeaponPropertyOneCombo.Size = new System.Drawing.Size(121, 24);
-            this.WeaponPropertyOneCombo.TabIndex = 6;
+            this.WeaponPropertyCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.WeaponPropertyCombo.FormattingEnabled = true;
+            this.WeaponPropertyCombo.Location = new System.Drawing.Point(393, 91);
+            this.WeaponPropertyCombo.Name = "WeaponPropertyCombo";
+            this.WeaponPropertyCombo.Size = new System.Drawing.Size(121, 24);
+            this.WeaponPropertyCombo.TabIndex = 6;
             // 
             // typeOfDiceOneCombo
             // 
@@ -161,7 +161,7 @@ namespace AdeptusEvangelionGmTools
             // 
             this.WeaponDamageTypeOneCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.WeaponDamageTypeOneCombo.FormattingEnabled = true;
-            this.WeaponDamageTypeOneCombo.Location = new System.Drawing.Point(384, 75);
+            this.WeaponDamageTypeOneCombo.Location = new System.Drawing.Point(242, 75);
             this.WeaponDamageTypeOneCombo.Name = "WeaponDamageTypeOneCombo";
             this.WeaponDamageTypeOneCombo.Size = new System.Drawing.Size(121, 24);
             this.WeaponDamageTypeOneCombo.TabIndex = 11;
@@ -205,15 +205,6 @@ namespace AdeptusEvangelionGmTools
             this.diceQuantityOne.Size = new System.Drawing.Size(41, 22);
             this.diceQuantityOne.TabIndex = 16;
             // 
-            // WeaponPropertyTwoCombo
-            // 
-            this.WeaponPropertyTwoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.WeaponPropertyTwoCombo.FormattingEnabled = true;
-            this.WeaponPropertyTwoCombo.Location = new System.Drawing.Point(244, 105);
-            this.WeaponPropertyTwoCombo.Name = "WeaponPropertyTwoCombo";
-            this.WeaponPropertyTwoCombo.Size = new System.Drawing.Size(121, 24);
-            this.WeaponPropertyTwoCombo.TabIndex = 17;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(12, 285);
@@ -246,7 +237,7 @@ namespace AdeptusEvangelionGmTools
             // 
             this.WeaponDamageTypeTwoCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.WeaponDamageTypeTwoCombo.FormattingEnabled = true;
-            this.WeaponDamageTypeTwoCombo.Location = new System.Drawing.Point(384, 105);
+            this.WeaponDamageTypeTwoCombo.Location = new System.Drawing.Point(242, 105);
             this.WeaponDamageTypeTwoCombo.Name = "WeaponDamageTypeTwoCombo";
             this.WeaponDamageTypeTwoCombo.Size = new System.Drawing.Size(121, 24);
             this.WeaponDamageTypeTwoCombo.TabIndex = 21;
@@ -300,7 +291,6 @@ namespace AdeptusEvangelionGmTools
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.WeaponPropertyTwoCombo);
             this.Controls.Add(this.diceQuantityOne);
             this.Controls.Add(this.diceQuantityTwo);
             this.Controls.Add(this.label7);
@@ -311,7 +301,7 @@ namespace AdeptusEvangelionGmTools
             this.Controls.Add(this.label6);
             this.Controls.Add(this.damageBonusOne);
             this.Controls.Add(this.typeOfDiceOneCombo);
-            this.Controls.Add(this.WeaponPropertyOneCombo);
+            this.Controls.Add(this.WeaponPropertyCombo);
             this.Controls.Add(this.WeaponTypeCombo);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -338,7 +328,7 @@ namespace AdeptusEvangelionGmTools
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox WeaponTypeCombo;
-        private System.Windows.Forms.ComboBox WeaponPropertyOneCombo;
+        private System.Windows.Forms.ComboBox WeaponPropertyCombo;
         private System.Windows.Forms.ComboBox typeOfDiceOneCombo;
         private System.Windows.Forms.NumericUpDown damageBonusOne;
         private System.Windows.Forms.Label label6;
@@ -349,7 +339,6 @@ namespace AdeptusEvangelionGmTools
         private System.Windows.Forms.ComboBox typeOfDiceTwoCombo;
         private System.Windows.Forms.NumericUpDown diceQuantityTwo;
         private System.Windows.Forms.NumericUpDown diceQuantityOne;
-        private System.Windows.Forms.ComboBox WeaponPropertyTwoCombo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox1;
